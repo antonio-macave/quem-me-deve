@@ -43,7 +43,8 @@ class CreateDebtorActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
 
-                        
+                        CreateDebtorContent()
+
                     }
                 }
             }
