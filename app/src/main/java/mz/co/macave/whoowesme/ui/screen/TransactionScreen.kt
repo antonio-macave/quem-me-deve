@@ -1,7 +1,10 @@
 package mz.co.macave.whoowesme.ui.screen
 
+import android.os.Build
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.layout.Arrangement
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Today
 import androidx.compose.material3.Card
@@ -23,10 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.model.Transaction
+import mz.co.macave.whoowesme.util.formatDate
+import java.time.LocalDate
 
 @Composable
 fun TransactionItem(transaction: Transaction) {
@@ -38,27 +44,34 @@ fun TransactionItem(transaction: Transaction) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterEnd
             ) {
-                Icon(
-                    modifier = Modifier.size(16.dp),
-                    imageVector = Icons.Default.Today,
-                    contentDescription = null
-                )
-                Spacer(Modifier.width(6.dp))
-                Text(
-                    text = transaction.date.toString(),
-                    style = MaterialTheme.typography.bodySmall
-                )
+                Row(
+                    modifier = Modifier
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(14.dp)
+                        )
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                ) {
+                    Icon(
+                        modifier = Modifier.size(16.dp),
+                        imageVector = Icons.Default.Today,
+                        contentDescription = null
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = formatDate(transaction.date.toString()),
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
             }
 
             IconAndDescription(R.drawable.outline_money_24, transaction.amount.toString())
             Spacer(Modifier.height(4.dp))
             IconAndDescription(R.drawable.description_24, transaction.description)
-
         }
     }
 }
