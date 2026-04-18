@@ -56,7 +56,7 @@ fun CreateDebt(viewModel: CreateDebtViewModel = viewModel()) {
     //NameFields()
     AmountField(viewModel)
     DueDate(viewModel) {  }
-    DebtorSituationSelector() { index ->
+    DebtorSituationSelector {
 
     }
     DescriptionField(viewModel)
