@@ -1,5 +1,6 @@
 package mz.co.macave.whoowesme.ui.screen
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -90,7 +91,7 @@ fun DebtorSituationSelector(viewModel: CreateDebtViewModel = viewModel(), onOpti
                     else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
                 }
             ) {
-                if (index == selectedIndex) {
+                AnimatedVisibility(index == selectedIndex) {
                     Icon(
                         imageVector = Icons.Default.Check,
                         contentDescription = null
