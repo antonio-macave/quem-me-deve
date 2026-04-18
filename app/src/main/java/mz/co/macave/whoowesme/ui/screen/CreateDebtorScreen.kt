@@ -20,6 +20,28 @@ fun CreateDebtorContent() {
 }
 
 @Composable
+fun ContactField() {
+    var number by remember { mutableStateOf("") }
+
+    TextField(
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .fillMaxWidth(),
+        value = number,
+        onValueChange = {
+            number = it
+        },
+        supportingText = { Text(text = stringResource(R.string.optional)) },
+        label = { Text(text = stringResource(R.string.contact_number)) },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Phone,
+            imeAction = ImeAction.Done
+        )
+    )
+
+}
+
+@Composable
 fun NameAndSurnameFields() {
 
     Column {
