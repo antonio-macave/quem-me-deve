@@ -31,6 +31,7 @@ fun CreateDebtorContent() {
     Column() {
         TopIcon()
         NameAndSurnameFields()
+        Spacer(Modifier.height(16.dp))
         ContactField()
     }
 }
