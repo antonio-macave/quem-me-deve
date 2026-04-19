@@ -20,14 +20,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import mz.co.macave.whoowesme.R
+import mz.co.macave.whoowesme.data.DatabaseProvider
+import mz.co.macave.whoowesme.data.repository.DebtorRepository
 import mz.co.macave.whoowesme.ui.activities.ui.theme.WhoOwesMeTheme
 import mz.co.macave.whoowesme.ui.screen.CreateDebtorContent
+import mz.co.macave.whoowesme.viewmodel.CreateDebtorViewModel
+import mz.co.macave.whoowesme.viewmodel.ViewModelFactory
 
 class CreateDebtorActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+
+            val db = DatabaseProvider.getDatabase(applicationContext)
+            val dao = db.debtorDao()
+            val repository = DebtorRepository(dao)
+            val factory = ViewModelFactory { CreateDebtorViewModel(repository) }
+            val viewModel: CreateDebtorViewModel by viewModels { factory }
+
             WhoOwesMeTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
