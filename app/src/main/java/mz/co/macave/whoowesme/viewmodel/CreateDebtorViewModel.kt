@@ -28,4 +28,18 @@ class CreateDebtorViewModel : ViewModel() {
         _contactNumber.value = newContactNumber
     }
 
+    fun validateData(name: String, surname: String, contactNumber: String): Boolean {
+        return name.isNotEmpty() && surname.isNotEmpty() && contactNumber.isNotEmpty()
+    }
+
+    fun saveDebtor(name: String, surname: String, contactNumber: String) {
+        if (validateData(name, surname, contactNumber)) {
+            val debtor = Debtor(name = name, surname = surname, contactNumber = contactNumber)
+            viewModelScope.launch {
+                debtorRepository.saveDebtor(debtor)
+                println("Debtor saved: $debtor")
+            }
+
+        }
+    }
 }
