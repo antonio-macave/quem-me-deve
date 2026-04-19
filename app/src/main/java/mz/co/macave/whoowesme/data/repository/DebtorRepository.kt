@@ -22,7 +22,7 @@ class DebtorRepository(private val debtorDao: DebtorDao) {
         return debtorDao.getDebtorWithDebts(debtorId)
     }
 
-    suspend fun getAllDebtors(): List<Debtor> {
+    fun getAllDebtors(): Flow<List<Debtor>> {
         return debtorDao.getAllDebtors()
     }
 
