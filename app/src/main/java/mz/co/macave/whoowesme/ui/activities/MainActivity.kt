@@ -56,6 +56,17 @@ class MainActivity : ComponentActivity() {
 
                 val context = LocalContext.current
                 val viewModel: MainActivityViewModel = viewModel()
+                val snackBarHost = remember { SnackbarHostState() }
+
+                val launcher = rememberLauncherForActivityResult(
+                    contract = ActivityResultContracts.StartActivityForResult()
+                ) { result ->
+                    if (result.resultCode == RESULT_OK) {
+                        scope.launch {
+                            snackBarHost.showSnackbar(context.getString(R.string.debtor_created))
+                        }
+                    }
+                }
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
