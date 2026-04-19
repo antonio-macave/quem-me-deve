@@ -16,4 +16,16 @@ class CreateDebtorViewModel : ViewModel() {
     private val _contactNumber = MutableStateFlow("")
     val contactNumber: StateFlow<String> = _contactNumber.asStateFlow()
 
+    fun updateName(newName: String) {
+        _name.value = newName
+    }
+
+    fun updateSurname(newSurname: String) {
+        _surname.value = newSurname
+    }
+
+    fun updateContactNumber(newContactNumber: String) {
+        _contactNumber.value = newContactNumber
+    }
+
 }
