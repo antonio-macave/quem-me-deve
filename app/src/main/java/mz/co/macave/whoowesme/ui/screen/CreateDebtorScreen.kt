@@ -135,11 +135,7 @@ fun NameAndSurnameFields(viewModel: CreateDebtorViewModel = viewModel()) {
 
 @Composable
 fun FieldIcon(imageVector: ImageVector?) {
-    Box(
-//        modifier = Modifier
-//            .padding(top = 16.dp),
-        contentAlignment = Alignment.Center
-    ) {
+    Box(contentAlignment = Alignment.Center) {
         if (imageVector != null) {
             Icon(
                 imageVector = imageVector,
