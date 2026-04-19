@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -46,7 +47,15 @@ class CreateDebtorActivity : ComponentActivity() {
                         CreateDebtorTopBar(
                             title = stringResource(R.string.title_activity_create_debtor),
                             onCancelListener = { finish() },
-                            onOkListener = {  }
+                            onOkListener = {
+                                viewModel.saveDebtor(
+                                    name = viewModel.name.value,
+                                    surname = viewModel.surname.value,
+                                    contactNumber = viewModel.contactNumber.value
+                                )
+                                setResult(RESULT_OK)
+                                finish()
+                            }
                         )
                     }
                 ) { innerPadding ->
