@@ -18,9 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -29,20 +26,23 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import mz.co.macave.whoowesme.R
+import mz.co.macave.whoowesme.viewmodel.CreateDebtorViewModel
 
 @Composable
-fun CreateDebtorContent() {
+fun CreateDebtorContent(viewModel: CreateDebtorViewModel = viewModel()) {
     Column {
-        NameAndSurnameFields()
+        NameAndSurnameFields(viewModel = viewModel)
         Spacer(Modifier.height(16.dp))
-        ContactField()
+        ContactField(viewModel = viewModel)
     }
 }
 
 @Composable
-fun ContactField() {
-    var number by remember { mutableStateOf("") }
+fun ContactField(viewModel: CreateDebtorViewModel = viewModel()) {
+    val number by viewModel.contactNumber.collectAsStateWithLifecycle()
 
     Row(
         modifier = Modifier
@@ -59,7 +59,7 @@ fun ContactField() {
             modifier = Modifier.weight(1f),
             value = number,
             onValueChange = {
-                number = it
+                viewModel.updateContactNumber(it)
             },
             label = { Text(text = stringResource(R.string.contact_number)) },
             keyboardOptions = KeyboardOptions(
@@ -71,11 +71,11 @@ fun ContactField() {
 }
 
 @Composable
-fun NameAndSurnameFields() {
+fun NameAndSurnameFields(viewModel: CreateDebtorViewModel = viewModel()) {
 
     Column {
-        var name by remember { mutableStateOf("") }
-        var surname by remember { mutableStateOf("") }
+        val name by viewModel.name.collectAsStateWithLifecycle()
+        val surname by viewModel.surname.collectAsStateWithLifecycle()
 
         Row(
             modifier = Modifier
@@ -92,7 +92,7 @@ fun NameAndSurnameFields() {
                 modifier = Modifier.weight(1f),
                 value = name,
                 onValueChange = {
-                    name = it
+                    viewModel.updateName(it)
                 },
                 label = { Text(text = stringResource(R.string.name)) },
                 singleLine = true,
@@ -119,7 +119,7 @@ fun NameAndSurnameFields() {
                 modifier = Modifier.weight(1f),
                 value = surname,
                 onValueChange = {
-                    surname = it
+                    viewModel.updateSurname(it)
                 },
                 label = { Text(text = stringResource(R.string.surname)) },
                 singleLine = true,
