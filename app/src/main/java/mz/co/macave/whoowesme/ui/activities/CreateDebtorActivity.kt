@@ -24,6 +24,7 @@ import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.data.DatabaseProvider
 import mz.co.macave.whoowesme.data.repository.DebtorRepository
 import mz.co.macave.whoowesme.ui.activities.ui.theme.WhoOwesMeTheme
+import mz.co.macave.whoowesme.ui.screen.AppBar
 import mz.co.macave.whoowesme.ui.screen.CreateDebtorContent
 import mz.co.macave.whoowesme.viewmodel.CreateDebtorViewModel
 import mz.co.macave.whoowesme.viewmodel.ViewModelFactory
@@ -44,7 +45,7 @@ class CreateDebtorActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        CreateDebtorTopBar(
+                        AppBar(
                             title = stringResource(R.string.title_activity_create_debtor),
                             onCancelListener = { finish() },
                             onOkListener = {
@@ -68,31 +69,4 @@ class CreateDebtorActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun CreateDebtorTopBar(title: String, onCancelListener: () -> Unit, onOkListener: () -> Unit) {
-    CenterAlignedTopAppBar(
-        title = {
-            Text(text = title)
-        },
-        navigationIcon = {
-            IconButton(
-                onClick = { onCancelListener() }
-            ) {
-                Icon(imageVector = Icons.Default.Close, contentDescription = null)
-            }
-        },
-        actions = {
-            IconButton(
-                onClick = { onOkListener() }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Done,
-                    contentDescription = null
-                )
-            }
-        }
-    )
 }
