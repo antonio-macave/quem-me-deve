@@ -53,7 +53,7 @@ import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.viewmodel.CreateDebtViewModel
 
 @Composable
-fun CreateDebt(viewModel: CreateDebtViewModel = viewModel()) {
+fun CreateDebt(viewModel: CreateDebtViewModel) {
     //NameFields()
     AmountField(viewModel)
     DueDate(viewModel) {  }
@@ -103,17 +103,17 @@ fun DebtorSituationSelector(viewModel: CreateDebtViewModel = viewModel(), onOpti
         }
     }
     when (selectedIndex) {
-        0 -> ExistingDebtorSelector {  }
+        0 -> ExistingDebtorSelector(viewModel = viewModel) {  }
         1 -> NameFields()
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExistingDebtorSelector(onItemClick: (String) -> Unit) {
+fun ExistingDebtorSelector(viewModel: CreateDebtViewModel, onItemClick: (String) -> Unit) {
 
     var text by remember { mutableStateOf("") }
-    val suggestions = listOf("António", "Elias", "Shelton", "Isildo", "Arsénio")
+    val suggestions by viewModel.debtors.collectAsStateWithLifecycle()
     var expanded by remember { mutableStateOf(false) }
 
     Column {
