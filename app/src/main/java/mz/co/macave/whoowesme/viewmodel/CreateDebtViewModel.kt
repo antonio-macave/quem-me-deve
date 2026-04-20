@@ -5,7 +5,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class CreateDebtViewModel : ViewModel() {
+class CreateDebtViewModel(
+    val debtRepository: DebtRepository,
+    debtorsRepository: DebtorRepository,
+) : ViewModel() {
 
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> get() = _name.asStateFlow()
