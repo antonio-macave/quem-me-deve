@@ -179,6 +179,33 @@ fun TopBar(onActionClick: () -> Unit) {
 
 }
 
+@Composable
+fun TopBarOverFlow(viewModel: MainActivityViewModel = viewModel()) {
+    val context = LocalContext.current
+    val expanded by viewModel.overflowMenuExpanded.collectAsStateWithLifecycle()
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = { viewModel.updateOverflowMenuExpanded(false) }
+    ) {
+
+        DropdownMenuItem(
+            onClick = {
+                viewModel.updateOverflowMenuExpanded(false)
+                val intent = Intent(context, DebtorsActivity::class.java)
+                context.startActivity(intent)
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.People,
+                    contentDescription = null
+                )
+            },
+            text = { Text(stringResource(R.string.debtors)) }
+        )
+
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
