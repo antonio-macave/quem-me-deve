@@ -1,9 +1,16 @@
 package mz.co.macave.whoowesme.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import mz.co.macave.whoowesme.data.repository.DebtRepository
+import mz.co.macave.whoowesme.data.repository.DebtorRepository
+import mz.co.macave.whoowesme.model.Debt
 
 class CreateDebtViewModel(
     val debtRepository: DebtRepository,
