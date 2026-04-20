@@ -91,14 +91,14 @@ fun SortByContent(onDismiss: () -> Unit, onConfirmation: (Int) -> Unit) {
             ) {
                 TextButton(
                     onClick = { onDismiss() }
-                ) { Text(text = stringResource(android.R.string.ok)) }
+                ) { Text(text = stringResource(android.R.string.cancel)) }
                 Spacer(Modifier.width(8.dp))
                 TextButton(
                     onClick = {
                         onConfirmation(selectedOption.option)
                         onDismiss()
                     }
-                ) { Text(text = stringResource(android.R.string.cancel)) }
+                ) { Text(text = stringResource(android.R.string.ok)) }
             }
         }
     }
