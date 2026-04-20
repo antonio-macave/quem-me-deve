@@ -35,6 +35,14 @@ class CreateDebtViewModel(
     private val _showDueDateDialog = MutableStateFlow(false)
     val showDueDateDialog: StateFlow<Boolean> get() = _showDueDateDialog.asStateFlow()
 
+    val debtors = debtorsRepository.getAllDebtors()
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            emptyList()
+        )
+
+
     fun areAllFieldsFilled(): Boolean {
         return false
     }
