@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class CreateDebtorViewModel : ViewModel() {
+class CreateDebtorViewModel(val debtorRepository: DebtorRepository) : ViewModel() {
 
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> = _name.asStateFlow()
@@ -16,6 +16,13 @@ class CreateDebtorViewModel : ViewModel() {
     private val _contactNumber = MutableStateFlow("")
     val contactNumber: StateFlow<String> = _contactNumber.asStateFlow()
 
+
+    val debtors = debtorRepository.getAllDebtors()
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            emptyList()
+        )
     fun updateName(newName: String) {
         _name.value = newName
     }
@@ -39,7 +46,6 @@ class CreateDebtorViewModel : ViewModel() {
                 debtorRepository.saveDebtor(debtor)
                 println("Debtor saved: $debtor")
             }
-
         }
     }
 }
