@@ -1,4 +1,4 @@
-package mz.co.macave.whoowesme.data.dao
+package mz.co.macave.whoowesme.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
