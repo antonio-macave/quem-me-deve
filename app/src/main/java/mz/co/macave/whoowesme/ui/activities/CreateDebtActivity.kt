@@ -24,7 +24,15 @@ class CreateDebtActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
-            val viewModel: CreateDebtViewModel = viewModel()
+            val db = DatabaseProvider.getDatabase(applicationContext)
+            val debtDao = db.debtDao()
+            val debtorDao = db.debtorDao()
+            val debtRepository = DebtRepository(debtDao)
+            val debtorRepository = DebtorRepository(debtorDao)
+            val factory = ViewModelFactory {
+                CreateDebtViewModel(debtRepository, debtorRepository)
+            }
+            val viewModel: CreateDebtViewModel by viewModels { factory }
 
             WhoOwesMeTheme {
                 Scaffold(
