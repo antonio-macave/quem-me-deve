@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -53,9 +54,9 @@ fun DebtItem(debt: Debt, onClick: (Debt) -> Unit) {
                 .fillMaxWidth()
                 .padding(8.dp)
         ) {
-            Column(
+            Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.End
+                horizontalArrangement = Arrangement.End
             ) {
                 DebtStatus(debt.status)
             }
