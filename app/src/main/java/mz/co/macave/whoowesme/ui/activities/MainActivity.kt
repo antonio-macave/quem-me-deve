@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -55,6 +57,7 @@ class MainActivity : ComponentActivity() {
             WhoOwesMeTheme {
 
                 val context = LocalContext.current
+                val scope = rememberCoroutineScope()
                 val viewModel: MainActivityViewModel = viewModel()
                 val snackBarHost = remember { SnackbarHostState() }
 
@@ -81,6 +84,9 @@ class MainActivity : ComponentActivity() {
                             if (index == 1) {
                                 val intent = Intent(context, CreateDebtActivity::class.java)
                                 context.startActivity(intent)
+                            } else if (index == 0) {
+                                val intent = Intent(context, CreateDebtorActivity::class.java)
+                                launcher.launch(intent)
                             }
                         }
                     },
