@@ -70,10 +70,12 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    topBar = { TopBar() {
-                        val secondActivity = Intent(context, CreateDebtActivity::class.java)
-                        context.startActivity(secondActivity)
-                    } },
+                    snackbarHost = { SnackbarHost(hostState = snackBarHost) },
+                    topBar = {
+                        TopBar {
+                            viewModel.updateOverflowMenuExpanded(true)
+                        }
+                    },
                     floatingActionButton = {
                         FabMenu(viewModel) { index ->
                             if (index == 1) {
