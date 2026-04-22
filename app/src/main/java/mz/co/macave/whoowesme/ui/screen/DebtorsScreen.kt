@@ -50,7 +50,7 @@ import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.model.Debt
 import mz.co.macave.whoowesme.model.Debtor
 import mz.co.macave.whoowesme.ui.activities.TransactionsActivity
-import mz.co.macave.whoowesme.viewmodel.MainActivityViewModel
+import mz.co.macave.whoowesme.viewmodel.DebtorsActivityViewModel
 import java.time.LocalDate
 
 
@@ -128,7 +128,7 @@ fun DebtorsList(
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun DebtorItem(
-    viewModel: MainActivityViewModel = viewModel(),
+    viewModel: DebtorsActivityViewModel = viewModel(),
     debtor: Debtor
 ) {
 
