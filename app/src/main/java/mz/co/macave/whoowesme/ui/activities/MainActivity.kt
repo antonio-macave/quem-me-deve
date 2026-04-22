@@ -178,6 +178,8 @@ fun TopBar(onActionClick: () -> Unit) {
                     contentDescription = stringResource(R.string.more_options)
                 )
             }
+
+            TopBarOverFlow(viewModel)
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
