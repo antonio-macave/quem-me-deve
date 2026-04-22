@@ -109,6 +109,22 @@ fun Header(debtorName: String) {
     }
 }
 
+
+@Composable
+fun DebtorsList(
+    viewModel: DebtorsActivityViewModel = viewModel(),
+    debtors: List<Debtor>
+) {
+    LazyColumn {
+        itemsIndexed(items = debtors) { index, item ->
+            DebtorItem(
+                viewModel = viewModel,
+                debtor = item
+            )
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun DebtorItem(
