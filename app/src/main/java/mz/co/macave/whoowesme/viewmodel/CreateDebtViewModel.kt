@@ -23,9 +23,6 @@ class CreateDebtViewModel(
     private val _surname = MutableStateFlow("")
     val surname: StateFlow<String> get() = _surname.asStateFlow()
 
-    private val _dueDate = MutableStateFlow("")
-    val dueDate: StateFlow<String> get() = _dueDate.asStateFlow()
-
     private val _description = MutableStateFlow("")
     val description: StateFlow<String> get() = _description.asStateFlow()
 
@@ -60,10 +57,6 @@ class CreateDebtViewModel(
 
     fun updateSurname(newValue: String) {
         _surname.value = newValue
-    }
-
-    fun updateDueDate(newValue: String) {
-        _dueDate.value = newValue
     }
 
     fun updateDescription(newValue: String) {
