@@ -172,6 +172,12 @@ fun TopBar(onActionClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = stringResource(R.string.app_name)) },
         actions = {
+            IconButton(onClick = { viewModel.updateShowSortDebtsDialog(true) }) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.Sort,
+                    contentDescription = null
+                )
+            }
             IconButton(onClick = onActionClick) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
