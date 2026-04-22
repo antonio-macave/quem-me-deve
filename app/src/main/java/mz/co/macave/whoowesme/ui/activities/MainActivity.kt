@@ -168,7 +168,7 @@ fun FabMenu(viewModel: MainActivityViewModel = viewModel(), onClick: (index: Int
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(onActionClick: () -> Unit) {
+fun TopBar(viewModel: MainActivityViewModel = viewModel(), onActionClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = stringResource(R.string.app_name)) },
         actions = {
