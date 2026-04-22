@@ -162,7 +162,7 @@ fun DebtorItem(
                         )
 
                         Text(
-                            text = /* "${debt.status}  MZN"*/  "20.000 MZN",
+                            text = debtor.contactNumber,
                             style = MaterialTheme.typography.bodyMedium,
                             //color = if (debt.amount >= 0) GoodSituation else RedSituation
                         )
