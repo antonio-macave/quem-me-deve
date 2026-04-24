@@ -75,4 +75,24 @@ class CreateDebtViewModel(
         _amount.value = amount
     }
 
+    fun updateSelectedDebtor(debtor: Debtor) {
+        _selectedDebtor.value = debtor
+    }
+
+    fun isDueDateSelected(): Boolean {
+        return _dueToDate.value != null
+    }
+
+    fun isDebtorSelected(): Boolean {
+        return _selectedDebtor.value != null
+    }
+
+    fun saveDebt(debt: Debt) {
+        if (isDebtorSelected() && isDueDateSelected()) {
+            viewModelScope.launch {
+                debtRepository.saveDebt(debt)
+            }
+        }
+    }
+
 }
