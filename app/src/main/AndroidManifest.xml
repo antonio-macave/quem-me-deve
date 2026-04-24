@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhoOwesMe">
         <activity
+            android:name=".ui.activities.DebtorsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_debtors"
+            android:theme="@style/Theme.WhoOwesMe" />
+        <activity
             android:name=".ui.activities.CreateDebtorActivity"
             android:exported="false"
             android:label="@string/title_activity_create_debtor"
