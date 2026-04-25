@@ -61,7 +61,9 @@ fun TransactionTypeSelector() {
                     else -> ButtonGroupDefaults.connectedTrailingButtonShapes()
                 }
             ) {
-                AnimatedVisibility(visible = index == selectedOption) {
+                AnimatedVisibility(
+                    visible = index == selectedOption
+                ) {
                     Icon(
                         imageVector = Icons.Default.Check,
                         contentDescription = null
