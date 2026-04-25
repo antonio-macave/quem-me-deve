@@ -70,9 +70,9 @@ fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit)
                 }
                 Spacer(modifier = Modifier.width(ToggleButtonDefaults.IconSpacing))
                 Text(
-                    text = when(item) {
-                        TransactionType.DEBIT -> stringResource(R.string.transaction_type_debit)
-                        TransactionType.CREDIT -> stringResource(R.string.transaction_type_credit)
+                    text = when (item) {
+                        TransactionType.DEBIT -> stringResource(R.string.payment)
+                        TransactionType.CREDIT -> stringResource(R.string.addition)
                     }
                 )
             }
