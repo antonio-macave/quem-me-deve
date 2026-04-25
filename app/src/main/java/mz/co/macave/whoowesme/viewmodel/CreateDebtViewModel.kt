@@ -32,6 +32,13 @@ class CreateDebtViewModel(
     private val _showDueDateDialog = MutableStateFlow(false)
     val showDueDateDialog: StateFlow<Boolean> get() = _showDueDateDialog.asStateFlow()
 
+    private val _dueToDate = MutableStateFlow<Long?>(null)
+    val dueToDate: StateFlow<Long?> get() = _dueToDate.asStateFlow()
+
+    private val _selectedDebtor = MutableStateFlow<Debtor?>(null)
+    val selectedDebtor: StateFlow<Debtor?> get() = _selectedDebtor.asStateFlow()
+
+
     val debtors = debtorsRepository.getAllDebtors()
         .stateIn(
             viewModelScope,
