@@ -42,9 +42,8 @@ import mz.co.macave.whoowesme.util.TransactionType
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun TransactionTypeSelector() {
+fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit) {
     val options = TransactionType.entries
-    var selectedOption by remember { mutableIntStateOf(0) }
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -55,7 +54,7 @@ fun TransactionTypeSelector() {
             ToggleButton(
                 modifier = modifiers[index].semantics { role = Role.RadioButton },
                 checked = index == selectedOption,
-                onCheckedChange = { selectedOption = index },
+                onCheckedChange = { onSelectedIndex(index) },
                 shapes = when (index) {
                     0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
                     else -> ButtonGroupDefaults.connectedTrailingButtonShapes()
