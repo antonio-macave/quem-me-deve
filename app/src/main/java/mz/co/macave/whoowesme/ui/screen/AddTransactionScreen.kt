@@ -81,13 +81,12 @@ fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit)
 }
 
 @Composable
-fun TotalPaymentSwitch() {
-    var selected by remember { mutableStateOf(false) }
+fun TotalPaymentSwitch(isTotalPayment: Boolean, onSwitchChecked: () -> Unit) {
     Row(
         modifier = Modifier
             .selectable(
-                selected = selected,
-                onClick = { selected = !selected },
+                selected = isTotalPayment,
+                onClick = { onSwitchChecked() },
                 role = Role.RadioButton
             )
             .fillMaxWidth(),
@@ -99,8 +98,8 @@ fun TotalPaymentSwitch() {
         )
         Spacer(Modifier.weight(1f))
         Switch(
-            checked = selected,
-            onCheckedChange = { selected = !selected }
+            checked = isTotalPayment,
+            onCheckedChange = { onSwitchChecked() }
         )
     }
 }
