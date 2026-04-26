@@ -58,11 +58,11 @@ import mz.co.macave.whoowesme.viewmodel.AddTransactionViewModel
 
 
 @Composable
-fun AddTransactionContent() {
-    var selectedOption by remember { mutableIntStateOf(0) }
-    var isTotalPayment by remember { mutableStateOf(false) }
+fun AddTransactionContent(viewModel: AddTransactionViewModel = viewModel()) {
+    val selectedOption by viewModel.selectedOption.collectAsStateWithLifecycle()
+    val isTotalPayment by viewModel.isTotalPayment.collectAsStateWithLifecycle()
     TransactionTypeSelector(selectedOption) {
-        selectedOption = it
+        viewModel.updateSelectedOption(it)
     }
     Spacer(Modifier.height(16.dp))
     AnimatedVisibility(
@@ -71,7 +71,7 @@ fun AddTransactionContent() {
         exit = fadeOut() + shrinkVertically()
     ) {
         TotalPaymentSwitch(isTotalPayment) {
-            isTotalPayment = !isTotalPayment
+            viewModel.updateIsTotalPayment(!isTotalPayment)
         }
     }
     Spacer(Modifier.height(16.dp))
