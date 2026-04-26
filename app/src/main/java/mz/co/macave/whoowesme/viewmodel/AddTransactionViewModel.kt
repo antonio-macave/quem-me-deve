@@ -13,8 +13,8 @@ class AddTransactionViewModel : ViewModel() {
     private val _description = MutableStateFlow("")
     val description: StateFlow<String> get() = _description.asStateFlow()
 
-    private val _selectedOption = MutableStateFlow<Int?>(null)
-    val selectedOption: StateFlow<Int?> get() = _selectedOption.asStateFlow()
+    private val _selectedOption = MutableStateFlow(0)
+    val selectedOption: StateFlow<Int> get() = _selectedOption.asStateFlow()
 
     private val _isTotalPayment = MutableStateFlow(false)
     val isTotalPayment: StateFlow<Boolean> get() = _isTotalPayment.asStateFlow()
