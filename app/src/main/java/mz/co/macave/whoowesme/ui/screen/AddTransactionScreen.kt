@@ -86,37 +86,41 @@ fun AddTransactionContent(viewModel: AddTransactionViewModel = viewModel()) {
 @Composable
 fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit) {
     val options = TransactionType.entries
-    Row(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween)
-    ) {
-        val modifiers = listOf(Modifier.weight(1f), Modifier.weight(1f))
-        options.fastForEachIndexed { index, item ->
-            ToggleButton(
-                modifier = modifiers[index].semantics { role = Role.RadioButton },
-                checked = index == selectedOption,
-                onCheckedChange = { onSelectedIndex(index) },
-                shapes = when (index) {
-                    0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
-                    else -> ButtonGroupDefaults.connectedTrailingButtonShapes()
-                }
-            ) {
-                AnimatedVisibility(
-                    visible = index == selectedOption
+    Column() {
+        Text(text = stringResource(R.string.transaction_type))
+        Spacer(Modifier.height(16.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween)
+        ) {
+            val modifiers = listOf(Modifier.weight(1f), Modifier.weight(1f))
+            options.fastForEachIndexed { index, item ->
+                ToggleButton(
+                    modifier = modifiers[index].semantics { role = Role.RadioButton },
+                    checked = index == selectedOption,
+                    onCheckedChange = { onSelectedIndex(index) },
+                    shapes = when (index) {
+                        0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
+                        else -> ButtonGroupDefaults.connectedTrailingButtonShapes()
+                    }
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Check,
-                        contentDescription = null
+                    AnimatedVisibility(
+                        visible = index == selectedOption
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Check,
+                            contentDescription = null
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(ToggleButtonDefaults.IconSpacing))
+                    Text(
+                        text = when (item) {
+                            TransactionType.DEBIT -> stringResource(R.string.payment)
+                            TransactionType.CREDIT -> stringResource(R.string.addition)
+                        }
                     )
                 }
-                Spacer(modifier = Modifier.width(ToggleButtonDefaults.IconSpacing))
-                Text(
-                    text = when (item) {
-                        TransactionType.DEBIT -> stringResource(R.string.payment)
-                        TransactionType.CREDIT -> stringResource(R.string.addition)
-                    }
-                )
             }
         }
     }
