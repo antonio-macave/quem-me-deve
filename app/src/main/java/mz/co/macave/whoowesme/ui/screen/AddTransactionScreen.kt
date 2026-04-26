@@ -81,6 +81,23 @@ fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit)
 }
 
 @Composable
+fun TransactionAmount(isFullPayment: Boolean) {
+    var amount by remember { mutableStateOf("") }
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = amount,
+        readOnly = isFullPayment, //If full payment, read-only
+        onValueChange = { amount = it },
+        label = { Text(text = stringResource(R.string.amount)) },
+        singleLine = true,
+        suffix = { Text( text = "MZN") },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Decimal
+        )
+    )
+}
+
+@Composable
 fun TotalPaymentSwitch(isTotalPayment: Boolean, onSwitchChecked: () -> Unit) {
     Row(
         modifier = Modifier
