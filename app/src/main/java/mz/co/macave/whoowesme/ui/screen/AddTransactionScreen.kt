@@ -40,6 +40,31 @@ import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.util.TransactionType
 
 
+@Composable
+fun AddTransactionContent() {
+    var selectedOption by remember { mutableIntStateOf(0) }
+    var isTotalPayment by remember { mutableStateOf(false) }
+    TransactionTypeSelector(selectedOption) {
+        selectedOption = it
+    }
+    Spacer(Modifier.height(16.dp))
+    AnimatedVisibility(
+        visible = selectedOption == 0,
+        enter = fadeIn() + expandVertically(),
+        exit = fadeOut() + shrinkVertically()
+    ) {
+        TotalPaymentSwitch(isTotalPayment) {
+            isTotalPayment = !isTotalPayment
+        }
+    }
+    Spacer(Modifier.height(16.dp))
+    TransactionAmount(isTotalPayment)
+    Spacer(Modifier.height(16.dp))
+    SelectTransactionDate()
+    Spacer(Modifier.height(16.dp))
+    TransactionDescription()
+}
+
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit) {
