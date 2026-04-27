@@ -103,14 +103,14 @@ fun DebtorSituationSelector(viewModel: CreateDebtViewModel = viewModel(), onOpti
         }
     }
     when (selectedIndex) {
-        0 -> ExistingDebtorSelector(viewModel = viewModel) {  }
+        0 -> ExistingDebtorSelector(viewModel = viewModel)
         1 -> NameFields()
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExistingDebtorSelector(viewModel: CreateDebtViewModel, onItemClick: (String) -> Unit) {
+fun ExistingDebtorSelector(viewModel: CreateDebtViewModel) {
 
     var text by remember { mutableStateOf("") }
     val suggestions by viewModel.debtors.collectAsStateWithLifecycle()
@@ -145,8 +145,8 @@ fun ExistingDebtorSelector(viewModel: CreateDebtViewModel, onItemClick: (String)
                         text = { Text(text = item) },
                         leadingIcon = { if (item == text) { Icon(imageVector = Icons.Default.Check, contentDescription = null) } },
                         onClick = {
-                            text = item
-                            onItemClick(item)
+                            text = "${item.name} ${item.surname}"
+                            viewModel.updateSelectedDebtor(item)
                             expanded = false
                         }
                     )
@@ -157,7 +157,7 @@ fun ExistingDebtorSelector(viewModel: CreateDebtViewModel, onItemClick: (String)
 }
 
 @Composable
-fun AmountField(viewModel: CreateDebtViewModel = viewModel()) {
+fun AmountField(viewModel: CreateDebtViewModel) {
     Row(
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -182,8 +182,8 @@ fun AmountField(viewModel: CreateDebtViewModel = viewModel()) {
 }
 
 @Composable
-fun DueDate(viewModel: CreateDebtViewModel = viewModel(), onDialogRequestListener: () -> Unit) {
-    var date by remember { mutableStateOf("") }
+fun DueDate(viewModel: CreateDebtViewModel, onDialogRequestListener: () -> Unit) {
+    val date by viewModel.dueToDate.collectAsStateWithLifecycle()
     val showDialog by viewModel.showDueDateDialog.collectAsStateWithLifecycle()
 
     if (showDialog) {
@@ -193,6 +193,7 @@ fun DueDate(viewModel: CreateDebtViewModel = viewModel(), onDialogRequestListene
             confirmButton = {
                 TextButton(
                     onClick = {
+                        viewModel.pickDate(datePickerState.selectedDateMillis)
                         viewModel.updateShowDueDateDialog(false)
                         datePickerState.selectedDateMillis
                     }
@@ -279,7 +280,7 @@ fun NameFields() {
 }
 
 @Composable
-fun DescriptionField(viewModel: CreateDebtViewModel = viewModel()) {
+fun DescriptionField(viewModel: CreateDebtViewModel) {
     val description by viewModel.description.collectAsStateWithLifecycle()
     TextField(
         modifier = Modifier
@@ -294,7 +295,7 @@ fun DescriptionField(viewModel: CreateDebtViewModel = viewModel()) {
 }
 
 @Composable
-fun AdditionalNotesField(viewModel: CreateDebtViewModel = viewModel()) {
+fun AdditionalNotesField(viewModel: CreateDebtViewModel) {
     val additionalNotes by viewModel.additionalNotes.collectAsStateWithLifecycle()
     TextField(
         modifier = Modifier
