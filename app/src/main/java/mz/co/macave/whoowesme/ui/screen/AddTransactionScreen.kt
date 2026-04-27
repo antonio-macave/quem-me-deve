@@ -59,14 +59,14 @@ import mz.co.macave.whoowesme.viewmodel.AddTransactionViewModel
 
 @Composable
 fun AddTransactionContent(viewModel: AddTransactionViewModel) {
-    val selectedOption by viewModel.selectedOption.collectAsStateWithLifecycle()
+    val transactionType by viewModel.transactionType.collectAsStateWithLifecycle()
     val isTotalPayment by viewModel.isTotalPayment.collectAsStateWithLifecycle()
-    TransactionTypeSelector(selectedOption) {
-        viewModel.updateSelectedOption(it)
+    TransactionTypeSelector(viewModel, transactionType) {
+        viewModel.updateTransactionType(it)
     }
     Spacer(Modifier.height(16.dp))
     AnimatedVisibility(
-        visible = selectedOption == 0,
+        visible = transactionType == 0,
         enter = fadeIn() + expandVertically(),
         exit = fadeOut() + shrinkVertically()
     ) {
@@ -84,7 +84,7 @@ fun AddTransactionContent(viewModel: AddTransactionViewModel) {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit) {
+fun TransactionTypeSelector(viewModel: AddTransactionViewModel, selectedOption: Int, onSelectedIndex: (Int) -> Unit) {
     val options = TransactionType.entries
     Column() {
         Text(text = stringResource(R.string.transaction_type))
@@ -99,7 +99,7 @@ fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit)
                 ToggleButton(
                     modifier = modifiers[index].semantics { role = Role.RadioButton },
                     checked = index == selectedOption,
-                    onCheckedChange = { onSelectedIndex(index) },
+                    onCheckedChange = { viewModel.updateTransactionType(index) },
                     shapes = when (index) {
                         0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
                         else -> ButtonGroupDefaults.connectedTrailingButtonShapes()
