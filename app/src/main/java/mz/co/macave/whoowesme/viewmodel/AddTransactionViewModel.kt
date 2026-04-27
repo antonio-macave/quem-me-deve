@@ -10,6 +10,9 @@ class AddTransactionViewModel : ViewModel() {
     private val _transactionType = MutableStateFlow<Int?>(null)
     val transactionType: StateFlow<Int?> get() = _transactionType.asStateFlow()
 
+    private val _debtorId = MutableStateFlow<Int?>(null)
+    val debtorId: StateFlow<Int?> get() = _debtorId.asStateFlow()
+
     private val _description = MutableStateFlow("")
     val description: StateFlow<String> get() = _description.asStateFlow()
 
@@ -30,6 +33,11 @@ class AddTransactionViewModel : ViewModel() {
     fun updateTransactionType(value: Int) {
         _transactionType.value = value
     }
+
+    fun updateDebtorId(value: Int) {
+        _debtorId.value = value
+    }
+
 
     fun updateDescription(value: String) {
         _description.value = value
