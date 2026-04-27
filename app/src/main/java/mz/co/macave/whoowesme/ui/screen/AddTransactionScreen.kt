@@ -58,7 +58,7 @@ import mz.co.macave.whoowesme.viewmodel.AddTransactionViewModel
 
 
 @Composable
-fun AddTransactionContent(viewModel: AddTransactionViewModel = viewModel()) {
+fun AddTransactionContent(viewModel: AddTransactionViewModel) {
     val selectedOption by viewModel.selectedOption.collectAsStateWithLifecycle()
     val isTotalPayment by viewModel.isTotalPayment.collectAsStateWithLifecycle()
     TransactionTypeSelector(selectedOption) {
