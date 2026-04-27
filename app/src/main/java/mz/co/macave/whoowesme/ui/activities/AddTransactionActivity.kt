@@ -14,6 +14,13 @@ class AddTransactionActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+
+            val db = DatabaseProvider.getDatabase(applicationContext)
+            val dao = db.transactionDao()
+            val repository = TransactionRepository(dao)
+            val factory = ViewModelFactory { AddTransactionViewModel(repository) }
+            val viewModel: AddTransactionViewModel by viewModels { factory }
+
             WhoOwesMeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 

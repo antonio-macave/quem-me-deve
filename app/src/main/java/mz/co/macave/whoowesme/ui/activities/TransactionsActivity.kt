@@ -47,6 +47,7 @@ class TransactionsActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun TransactionsTopAppBar(title: String?, onNavigationButtonClick: () -> Unit) {
+    val context = LocalContext.current
     TopAppBar(
         title = {
             if (title != null) {
