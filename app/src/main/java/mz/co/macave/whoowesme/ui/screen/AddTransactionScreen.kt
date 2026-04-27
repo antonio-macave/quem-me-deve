@@ -150,6 +150,23 @@ fun TransactionAmount(isFullPayment: Boolean) {
 }
 
 @Composable
+fun TransactionDescription(viewModel: AddTransactionViewModel = viewModel()) {
+    val description by viewModel.description.collectAsStateWithLifecycle()
+    TextField(
+        modifier = Modifier
+            .fillMaxWidth(),
+        value = description,
+        onValueChange = { viewModel.updateDescription(it) },
+        label = { Text(text = stringResource(R.string.description)) },
+        maxLines = 3,
+        minLines = 3,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Text
+        )
+    )
+}
+
+@Composable
 fun TotalPaymentSwitch(isTotalPayment: Boolean, onSwitchChecked: () -> Unit) {
     Row(
         modifier = Modifier
