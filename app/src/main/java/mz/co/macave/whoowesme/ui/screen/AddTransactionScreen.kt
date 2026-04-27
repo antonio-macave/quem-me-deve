@@ -136,6 +136,12 @@ fun TransactionAmount(isFullPayment: Boolean) {
         onValueChange = { amount = it },
         label = { Text(text = stringResource(R.string.amount)) },
         singleLine = true,
+        leadingIcon = {
+            Icon(
+                imageVector = ImageVector.vectorResource(R.drawable.outline_money_24),
+                contentDescription = null
+            )
+        },
         suffix = { Text( text = "MZN") },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Decimal
