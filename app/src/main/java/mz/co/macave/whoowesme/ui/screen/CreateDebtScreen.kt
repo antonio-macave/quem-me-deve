@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import mz.co.macave.whoowesme.R
+import mz.co.macave.whoowesme.util.formatDateFromMillis
 import mz.co.macave.whoowesme.viewmodel.CreateDebtViewModel
 
 @Composable
