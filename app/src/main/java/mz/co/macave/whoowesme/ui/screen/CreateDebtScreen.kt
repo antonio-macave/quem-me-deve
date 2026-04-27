@@ -142,9 +142,9 @@ fun ExistingDebtorSelector(viewModel: CreateDebtViewModel) {
             ) {
                 suggestions.forEach { item ->
                     DropdownMenuItem(
-                        modifier = Modifier.background(color = if (item == text) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) else MaterialTheme.colorScheme.background),
-                        text = { Text(text = item) },
-                        leadingIcon = { if (item == text) { Icon(imageVector = Icons.Default.Check, contentDescription = null) } },
+                        modifier = Modifier.background(color = if ("${item.name} ${item.surname}" == text) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) else MaterialTheme.colorScheme.background),
+                        text = { Text(text = "${item.name} ${item.surname}") },
+                        leadingIcon = { if ("${item.name} ${item.surname}" == text) { Icon(imageVector = Icons.Default.Check, contentDescription = null) } },
                         onClick = {
                             text = "${item.name} ${item.surname}"
                             viewModel.updateSelectedDebtor(item)
