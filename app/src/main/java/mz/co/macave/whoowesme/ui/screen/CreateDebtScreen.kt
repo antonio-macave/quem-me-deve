@@ -196,7 +196,6 @@ fun DueDate(viewModel: CreateDebtViewModel, onDialogRequestListener: () -> Unit)
                     onClick = {
                         viewModel.pickDate(datePickerState.selectedDateMillis)
                         viewModel.updateShowDueDateDialog(false)
-                        datePickerState.selectedDateMillis
                     }
                 ) {
                     Text(text = stringResource(android.R.string.ok))
