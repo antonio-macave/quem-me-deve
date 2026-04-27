@@ -173,6 +173,12 @@ fun AmountField(viewModel: CreateDebtViewModel) {
                 val filteredValue = text.replace(".",",")
                 viewModel.updateAmount(filteredValue)
             },
+            leadingIcon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.outline_money_24),
+                    contentDescription = null
+                )
+            },
             value = amountText,
             singleLine = true,
             label = { Text(text = stringResource(R.string.amount)) },
