@@ -6,9 +6,16 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import mz.co.macave.whoowesme.data.repository.DebtRepository
+import mz.co.macave.whoowesme.data.repository.DebtorRepository
+import mz.co.macave.whoowesme.data.repository.TransactionRepository
 import mz.co.macave.whoowesme.util.formatDate
 
-class TransactionsActivityViewModel : ViewModel() {
+class TransactionsActivityViewModel(
+    val transactionRepository: TransactionRepository,
+    val debtRepository: DebtRepository,
+    val debtorRepository: DebtorRepository
+) : ViewModel() {
 
     private val _date = MutableStateFlow("")
     val date: StateFlow<String> get() = _date.asStateFlow()
