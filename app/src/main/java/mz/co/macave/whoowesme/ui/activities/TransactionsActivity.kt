@@ -32,6 +32,25 @@ class TransactionsActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
+            val debtId = intent.getIntExtra("debtId",0)
+            val debtorId = intent.getIntExtra("debtorId", 0)
+
+            val db = DatabaseProvider.getDatabase(applicationContext)
+            val transactionDao = db.transactionDao()
+            val debtorDao = db.debtorDao()
+            val debtDao = db.debtDao()
+            val transactionRepository = TransactionRepository(transactionDao)
+            val debtorRepository = DebtorRepository(debtorDao)
+            val debtRepository = DebtRepository(debtDao)
+            val factory = ViewModelFactory {
+                TransactionsActivityViewModel(
+                    transactionRepository,
+                    debtRepository,
+                    debtorRepository
+                )
+            }
+            val viewModel: TransactionsActivityViewModel by viewModels { factory }
+
             WhoOwesMeTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
