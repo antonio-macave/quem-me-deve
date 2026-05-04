@@ -26,6 +26,23 @@ fun formatDate(date: String): String {
     }
 }
 
+fun Long.toLocalDate(): LocalDate {
+    return Instant.ofEpochMilli(this)
+        .atZone(ZoneId.systemDefault())
+        .toLocalDate()
+}
+
+fun LocalDate.formatLocalDate(): String {
+    val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.getDefault())
+    return this.format(formatter)
+}
+
+fun formatDateFromMillis(millis: Long): String {
+    val sdf = SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault())
+    sdf.timeZone = TimeZone.getDefault()
+    return sdf.format(Date(millis))
+}
+
 fun Double.toMzn(): String {
     val numberFormat = NumberFormat.getNumberInstance(Locale.forLanguageTag("pt")).apply {
         maximumFractionDigits = 2
