@@ -190,6 +190,70 @@ fun TotalPaymentSwitch(isTotalPayment: Boolean, onSwitchChecked: () -> Unit) {
     }
 }
 
+@Composable
+fun SelectTransactionDate(viewModel: AddTransactionViewModel = viewModel()) {
+
+    val date by viewModel.transactionDate.collectAsStateWithLifecycle()
+    val showDialog by viewModel.showDatePicker.collectAsStateWithLifecycle()
+    val datePickerState = rememberDatePickerState()
+
+    if (showDialog) {
+
+        DatePickerDialog(
+            onDismissRequest = { viewModel.updateShowDatePicker(false) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        viewModel.updateSelectedDate(datePickerState.selectedDateMillis!!)
+                        viewModel.updateShowDatePicker(false)
+                    }
+                ) {
+                    Text(text = stringResource(android.R.string.ok))
+                }
+            },
+            dismissButton = {
+                TextButton( onClick = { viewModel.updateShowDatePicker(false) } ) {
+                    Text(text = stringResource(android.R.string.cancel))
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+    Box(
+        modifier = Modifier.clickable {
+            viewModel.updateShowDatePicker(true)
+        }
+    ) {
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .onFocusEvent {
+                    if (it.isFocused) {
+                        viewModel.updateShowDatePicker(true)
+                    }
+                },
+            value = date?.let { formatDateFromMillis(it) } ?: "",
+            onValueChange = {  },
+            label = { Text(text = stringResource(R.string.transaction_date)) },
+            readOnly = true,
+            enabled = true,
+            singleLine = true,
+            leadingIcon = {
+                IconButton(
+                    onClick = {  }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.CalendarToday,
+                        contentDescription = null
+                    )
+                }
+            }
+        )
+    }
+
+}
+
 @Preview
 @Composable
 fun TransactionTypePreview() {
