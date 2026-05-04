@@ -26,6 +26,13 @@ class TransactionsActivityViewModel(
     private val _debtId = MutableStateFlow(0)
     val debtId: StateFlow<Int> get() = _debtId.asStateFlow()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val transactions: Flow<List<Transaction>> = _debtId
+        .flatMapLatest { id ->
+            if (id == 0) flowOf(emptyList())
+            else transactionRepository.getTransactionsByDebtId(id)
+        }
+
 
     fun updateDate(newDate: String) {
         _date.value = formatDate(newDate)
