@@ -14,6 +14,15 @@
     <string name="debt">Dívida</string>
     <string name="more_options">Mais opções</string>
     <string name="history">Histórico</string>
+    <string name="profile">Perfil</string>
+    <string name="debtors">Devedores</string>
+    <string name="transaction_type">Tipo de transação</string>
+    <string name="transaction_type_debit">Débito</string>
+    <string name="transaction_type_credit">Crédito</string>
+    <string name="payment">Pagamento</string>
+    <string name="addition">Acréscimo</string>
+    <string name="transaction_date">Data da transação</string>
+    <string name="full_payment">Pagamento total</string>
     <string name="see_debts">Ver Dívidas</string>
     <string name="debt_status_overdue">Em atraso</string>
     <string name="debt_status_pending">Em dia</string>
@@ -25,4 +34,9 @@
     <string name="sort_by_option_name">Nome</string>
     <string name="sort_by_option_date">Data</string>
     <string name="sort_by_option_amount">Valor</string>
+    <string name="title_activity_create_debtor">Registar Devedor</string>
+    <string name="optional">Opcional</string>
+    <string name="contact_number">Contacto</string>
+    <string name="debtor_created">Devedor criado.</string>
+    <string name="title_activity_add_transaction">Adicionar Transação</string>
 </resources>
