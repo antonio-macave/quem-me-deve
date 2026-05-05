@@ -20,6 +20,12 @@ class MainActivityViewModel(debtRepository: DebtRepository): ViewModel() {
     private val _showSortDebtsDialog = MutableStateFlow(false)
     val showSortDebtsDialog: StateFlow<Boolean> get() = _showSortDebtsDialog.asStateFlow()
 
+    private val _overflowMenuExpanded = MutableStateFlow(false)
+    val overflowMenuExpanded: StateFlow<Boolean> get() = _overflowMenuExpanded.asStateFlow()
+
+    val debts = debtRepository.getAllDebts()
+
+
     fun sortDebts(debts: List<Debt>, sortBy: Int): List<Debt> {
         return when (sortBy) {
             SortOption.NAME.option -> debts.sortedBy { it.description }
@@ -51,5 +57,9 @@ class MainActivityViewModel(debtRepository: DebtRepository): ViewModel() {
 
     fun updateCardExpanded(id: Int) {
         _cardExpanded.value = if (_cardExpanded.value == id) null else id
+    }
+
+    fun updateOverflowMenuExpanded(expanded: Boolean) {
+        _overflowMenuExpanded.value = expanded
     }
 }
