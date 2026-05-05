@@ -4,11 +4,12 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.model.Debt
 import mz.co.macave.whoowesme.util.DebtStatus
 import mz.co.macave.whoowesme.util.SortOption
 
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel(debtRepository: DebtRepository): ViewModel() {
 
     private val _fabMenuExpanded = MutableStateFlow(false)
     val fabMenuExpanded: StateFlow<Boolean> get() = _fabMenuExpanded.asStateFlow()
