@@ -30,11 +30,13 @@ class CreateDebtorActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
+            val scope = rememberCoroutineScope()
             val db = DatabaseProvider.getDatabase(applicationContext)
             val dao = db.debtorDao()
             val repository = DebtorRepository(dao)
             val factory = ViewModelFactory { CreateDebtorViewModel(repository) }
             val viewModel: CreateDebtorViewModel by viewModels { factory }
+            val snackbarHost = remember { SnackbarHostState() }
 
             WhoOwesMeTheme {
                 Scaffold(
@@ -53,7 +55,8 @@ class CreateDebtorActivity : ComponentActivity() {
                                 finish()
                             }
                         )
-                    }
+                    },
+                    snackbarHost = { SnackbarHost(hostState = snackbarHost) }
                 ) { innerPadding ->
                     Column(
                         modifier = Modifier.padding(innerPadding)
