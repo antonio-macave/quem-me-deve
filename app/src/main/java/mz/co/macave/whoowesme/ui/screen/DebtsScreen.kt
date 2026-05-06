@@ -40,14 +40,14 @@ import mz.co.macave.whoowesme.util.toMzn
 import mz.co.macave.whoowesme.viewmodel.MainActivityViewModel
 
 @Composable
-fun DebtItem(debt: Debt, onClick: (Debt) -> Unit) {
+fun DebtItem(debt: Debt, onDebtClick: (Debt) -> Unit) {
     Card(
         modifier = Modifier
             .padding(
                 horizontal = 16.dp,
                 vertical = 8.dp
             )
-            .clickable(enabled = true, onClick = { onClick(debt) })
+            .clickable(enabled = true, onClick = { onDebtClick(debt) })
     ) {
         Column(
             modifier = Modifier
