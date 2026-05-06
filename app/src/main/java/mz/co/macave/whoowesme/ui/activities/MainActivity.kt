@@ -62,10 +62,9 @@ import mz.co.macave.whoowesme.ui.screen.SortByDialog
 import mz.co.macave.whoowesme.ui.theme.WhoOwesMeTheme
 import mz.co.macave.whoowesme.viewmodel.MainActivityViewModel
 import mz.co.macave.whoowesme.viewmodel.ViewModelFactory
-import java.time.LocalDate
 
 class MainActivity : ComponentActivity() {
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
