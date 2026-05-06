@@ -12,7 +12,7 @@ import mz.co.macave.whoowesme.model.DebtorWithDebts
 interface DebtorDao {
 
     @Query("SELECT * FROM debtors")
-    suspend fun getAllDebtors(): List<Debtor>
+    fun getAllDebtors(): Flow<List<Debtor>>
 
     @Query("SELECT * FROM debtors WHERE id IN (:debtorIds)")
     suspend fun loadAllByIds(debtorIds: IntArray): List<Debtor>
