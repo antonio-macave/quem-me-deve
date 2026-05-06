@@ -111,34 +111,31 @@ class MainActivity : ComponentActivity() {
                     },
                 ) { innerPadding ->
 
-                    val debt = Debt(
-                        id = 1,
-                        status = 0,
-                        amount = 20000.0,
-                        description = "Hello",
-                        additionalNotes = "World",
-                        debtorId = 1,
-                        dueTo = LocalDate.now()
-                    )
+                    val showSortDialog by viewModel.showSortDebtsDialog.collectAsStateWithLifecycle()
+                    val debts by viewModel.debts.collectAsStateWithLifecycle(initialValue = emptyList())
 
-                    val debtor = Debtor(
-                        id = 2,
-                        name = "Name",
-                        surname = "Surname",
-                        contactNumber = "821234567",
-                        //debts = listOf(debt)
-                    )
+                    var filteredList by remember { mutableStateOf(debts) }
 
-                    val list = listOf(debt)
-                    DueDate {  }
+                    SortByDialog(showSortDialog, onDismiss = { viewModel.updateShowSortDebtsDialog(false) }) { option ->
+                        filteredList = viewModel.sortDebts(debts = filteredList, sortBy = option)
+                    }
                     Column(
                         modifier = Modifier
                             .padding(innerPadding)
                             .fillMaxHeight()
                     ) {
-                        DebtsList(list)
+                        DebtFilter(debts) {
+                            filteredList = it
+                        }
+                        Spacer(Modifier.height(8.dp))
+                        DebtsList(filteredList) { item ->
+                            val intent = Intent(context, TransactionsActivity::class.java).apply {
+                                putExtra("debtId", item.id)
+                                putExtra("debtorId", item.debtorId)
+                            }
+                            context.startActivity(intent)
+                        }
                     }
-
                 }
             }
         }
