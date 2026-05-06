@@ -146,14 +146,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun FabMenu(viewModel: MainActivityViewModel = viewModel(), onClick: (index: Int) -> Unit) {
@@ -239,13 +231,5 @@ fun TopBarOverFlow(viewModel: MainActivityViewModel = viewModel()) {
             text = { Text(stringResource(R.string.debtors)) }
         )
 
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    WhoOwesMeTheme {
-        Greeting("Android")
     }
 }
