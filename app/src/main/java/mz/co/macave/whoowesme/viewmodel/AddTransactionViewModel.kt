@@ -61,5 +61,10 @@ class AddTransactionViewModel : ViewModel() {
     fun updateDescription(value: String) {
         _description.value = value
     }
+    fun saveTransaction(transaction: Transaction) {
+        viewModelScope.launch {
+            transactionRepository.saveTransaction(transaction)
+        }
+    }
 
 }
