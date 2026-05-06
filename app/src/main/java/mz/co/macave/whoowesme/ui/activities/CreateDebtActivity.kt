@@ -51,7 +51,18 @@ class CreateDebtActivity : ComponentActivity() {
                         AppBar(
                             title = stringResource(R.string.title_activity_create_debt),
                             onCancelListener = { finish() },
-                            onOkListener = {  }
+                            onOkListener = {
+
+                                val debt = Debt(
+                                    status = DebtStatus.PENDING.code,
+                                    description = viewModel.description.value,
+                                    additionalNotes = viewModel.additionalNotes.value,
+                                    amount = viewModel.amount.value.toDouble(),
+                                    dueTo = date!!.toLocalDate(),
+                                    debtorId = viewModel.selectedDebtor.value?.id ?: 0
+                                )
+                                viewModel.saveDebt(debt)
+                            }
                         )
                     }
                 ) { innerPadding ->
