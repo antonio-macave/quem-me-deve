@@ -41,6 +41,8 @@ class CreateDebtActivity : ComponentActivity() {
                 CreateDebtViewModel(debtRepository, debtorRepository)
             }
             val viewModel: CreateDebtViewModel by viewModels { factory }
+            val date by viewModel.dueToDate.collectAsStateWithLifecycle()
+
 
             WhoOwesMeTheme {
                 Scaffold(
