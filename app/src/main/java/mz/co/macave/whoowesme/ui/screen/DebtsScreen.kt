@@ -62,7 +62,6 @@ fun DebtItem(debt: Debt, onClick: (Debt) -> Unit) {
             }
             Text(text = debt.amount.toMzn())
             Text(text = debt.description)
-            Text(text = debt.amount.toMzn())
             Text(text = debt.status.toString())
         }
     }
