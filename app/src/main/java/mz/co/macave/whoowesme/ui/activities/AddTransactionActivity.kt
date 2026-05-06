@@ -15,9 +15,11 @@ import androidx.compose.ui.unit.dp
 import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.data.DatabaseProvider
 import mz.co.macave.whoowesme.data.repository.TransactionRepository
+import mz.co.macave.whoowesme.model.Transaction
 import mz.co.macave.whoowesme.ui.activities.ui.theme.WhoOwesMeTheme
 import mz.co.macave.whoowesme.ui.screen.AddTransactionContent
 import mz.co.macave.whoowesme.ui.screen.AppBar
+import mz.co.macave.whoowesme.util.toLocalDate
 import mz.co.macave.whoowesme.viewmodel.AddTransactionViewModel
 import mz.co.macave.whoowesme.viewmodel.ViewModelFactory
 
@@ -41,7 +43,14 @@ class AddTransactionActivity : ComponentActivity() {
                             title = stringResource(R.string.title_activity_add_transaction),
                             onCancelListener = { finish() },
                             onOkListener = {
-
+                                val transaction = Transaction(
+                                    description = viewModel.description.value,
+                                    amount = viewModel.amount.value.toDouble(),
+                                    type = viewModel.transactionType.value,
+                                    debtId = viewModel.debtId.value!!,
+                                    date = viewModel.transactionDate.value!!.toLocalDate()
+                                )
+                                viewModel.saveTransaction(transaction)
                             }
                         )
                     }
