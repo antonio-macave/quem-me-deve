@@ -57,6 +57,15 @@ class TransactionsActivity : ComponentActivity() {
                     topBar = { TransactionsTopAppBar(stringResource(R.string.title_activity_transactions)) { finish() } }
                 ) { innerPadding ->
 
+                    LaunchedEffect(debtId, debtorId)  {
+                        viewModel.updateDebtId(debtId)
+                        viewModel.updateDebtorId(debtorId)
+                    }
+
+                    Column(Modifier.padding(innerPadding)) {
+                        TransactionsList(viewModel)
+                    }
+
                 }
             }
         }
