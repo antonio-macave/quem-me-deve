@@ -1,28 +1,24 @@
 package mz.co.macave.whoowesme.util
 
-import android.os.Build
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
-fun formatDate(date: String): String {
-
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-        val inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.getDefault())
-        val parsedDate = LocalDate.parse(date, inputFormat)
-        parsedDate.format(outputFormat)
-
-    } else {
-
+fun formatDate(inputDate: String): String {
+    return try {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-        val parsedDate = inputFormat.parse(date)
-        outputFormat.format(parsedDate!!)
 
+        val date = inputFormat.parse(inputDate)
+        outputFormat.format(date!!)
+    } catch (e: Exception) {
+        inputDate // retorna original se der erro
     }
 }
 
