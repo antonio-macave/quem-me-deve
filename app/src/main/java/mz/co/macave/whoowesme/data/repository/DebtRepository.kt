@@ -1,5 +1,6 @@
 package mz.co.macave.whoowesme.data.repository
 
+import kotlinx.coroutines.flow.Flow
 import mz.co.macave.whoowesme.data.dao.DebtDao
 import mz.co.macave.whoowesme.model.Debt
 
@@ -9,7 +10,7 @@ class DebtRepository(private val debtDao: DebtDao) {
         debtDao.insertAll(debt)
     }
 
-    suspend fun getAllDebts(): List<Debt> {
+    fun getAllDebts(): Flow<List<Debt>> {
         return debtDao.getAllDebts()
     }
 
