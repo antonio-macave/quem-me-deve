@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import mz.co.macave.whoowesme.data.repository.TransactionRepository
 import mz.co.macave.whoowesme.model.Transaction
 
-class AddTransactionViewModel : ViewModel() {
+class AddTransactionViewModel(val transactionRepository: TransactionRepository) : ViewModel() {
 
     private val _amount = MutableStateFlow("")
     val amount: StateFlow<String> get() = _amount.asStateFlow()
