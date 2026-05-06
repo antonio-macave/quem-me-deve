@@ -94,7 +94,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     snackbarHost = { SnackbarHost(hostState = snackBarHost) },
                     topBar = {
-                        TopBar {
+                        TopBar(viewModel = viewModel) {
                             viewModel.updateOverflowMenuExpanded(true)
                         }
                     },
@@ -176,7 +176,7 @@ fun FabMenu(viewModel: MainActivityViewModel = viewModel(), onClick: (index: Int
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(viewModel: MainActivityViewModel = viewModel(), onActionClick: () -> Unit) {
+fun TopBar(viewModel: MainActivityViewModel, onActionClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = stringResource(R.string.app_name)) },
         actions = {
