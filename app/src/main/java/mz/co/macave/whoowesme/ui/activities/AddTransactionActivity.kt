@@ -29,11 +29,15 @@ class AddTransactionActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
+            val debtId = intent.getIntExtra("debtId", 0)
+
             val db = DatabaseProvider.getDatabase(applicationContext)
             val dao = db.transactionDao()
             val repository = TransactionRepository(dao)
             val factory = ViewModelFactory { AddTransactionViewModel(repository) }
             val viewModel: AddTransactionViewModel by viewModels { factory }
+
+            viewModel.updateDebtId(debtId)
 
             WhoOwesMeTheme {
                 Scaffold(
