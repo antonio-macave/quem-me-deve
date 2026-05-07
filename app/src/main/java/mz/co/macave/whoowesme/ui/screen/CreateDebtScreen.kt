@@ -242,7 +242,7 @@ fun DueDate(viewModel: CreateDebtViewModel, onDialogRequestListener: () -> Unit)
         onValueChange = { },
         label = { Text(text = stringResource(R.string.due_date)) },
         singleLine = true,
-        trailingIcon = {
+        leadingIcon = {
             Icon(
                 imageVector = Icons.Default.DateRange,
                 contentDescription = null
