@@ -67,7 +67,7 @@ fun TransactionItem(transaction: Transaction) {
                     )
                     Spacer(Modifier.width(6.dp))
                     Text(
-                        text = formatDate(transaction.date.toString()),
+                        text = transaction.date.formatLocalDate(),
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
