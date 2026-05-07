@@ -31,9 +31,9 @@ class TransactionsActivityViewModel(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val transactions: Flow<List<Transaction>> = _debtId
-        .flatMapLatest { id ->
-            if (id == 0) flowOf(emptyList())
-            else transactionRepository.getTransactionsByDebtId(id)
+        .flatMapLatest { debtId ->
+            if (debtId == 0) flowOf(emptyList())
+            else transactionRepository.getTransactionsByDebtId(debtId)
         }
 
 
