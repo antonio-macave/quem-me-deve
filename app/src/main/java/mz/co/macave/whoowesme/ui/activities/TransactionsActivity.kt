@@ -1,15 +1,17 @@
 package mz.co.macave.whoowesme.ui.activities
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.PersonOutline
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -20,11 +22,20 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import mz.co.macave.whoowesme.R
+import mz.co.macave.whoowesme.data.DatabaseProvider
+import mz.co.macave.whoowesme.data.repository.DebtRepository
+import mz.co.macave.whoowesme.data.repository.DebtorRepository
+import mz.co.macave.whoowesme.data.repository.TransactionRepository
+import mz.co.macave.whoowesme.ui.screen.TransactionsList
 import mz.co.macave.whoowesme.ui.theme.WhoOwesMeTheme
+import mz.co.macave.whoowesme.viewmodel.TransactionsActivityViewModel
+import mz.co.macave.whoowesme.viewmodel.ViewModelFactory
 
 class TransactionsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
