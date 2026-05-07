@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import kotlinx.coroutines.flow.Flow
 import mz.co.macave.whoowesme.model.Debtor
 import mz.co.macave.whoowesme.model.DebtorWithDebts
 
@@ -21,7 +22,7 @@ interface DebtorDao {
     suspend fun findByName(name: String, surname: String): Debtor
 
     @Transaction
-    @Query("SELECT * FROM debts WHERE debtorId = :debtorId")
+    @Query("SELECT * FROM debtors WHERE id = :debtorId")
     suspend fun getDebtorWithDebts(debtorId: Int): List<DebtorWithDebts>
 
     @Insert
