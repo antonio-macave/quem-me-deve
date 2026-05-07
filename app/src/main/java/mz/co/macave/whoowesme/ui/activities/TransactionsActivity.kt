@@ -66,7 +66,7 @@ class TransactionsActivity : ComponentActivity() {
             WhoOwesMeTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    topBar = { TransactionsTopAppBar(stringResource(R.string.title_activity_transactions)) { finish() } }
+                    topBar = { TransactionsTopAppBar(stringResource(R.string.title_activity_transactions), viewModel) { finish() } }
                 ) { innerPadding ->
 
                     LaunchedEffect(debtId, debtorId)  {
@@ -86,7 +86,7 @@ class TransactionsActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun TransactionsTopAppBar(title: String?, onNavigationButtonClick: () -> Unit) {
+fun TransactionsTopAppBar(title: String?, viewModel: TransactionsActivityViewModel,onNavigationButtonClick: () -> Unit) {
     val context = LocalContext.current
     TopAppBar(
         title = {
