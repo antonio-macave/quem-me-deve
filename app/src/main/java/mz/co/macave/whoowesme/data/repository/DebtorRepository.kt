@@ -1,5 +1,6 @@
 package mz.co.macave.whoowesme.data.repository
 
+import kotlinx.coroutines.flow.Flow
 import mz.co.macave.whoowesme.data.dao.DebtorDao
 import mz.co.macave.whoowesme.model.Debtor
 import mz.co.macave.whoowesme.model.DebtorWithDebts
