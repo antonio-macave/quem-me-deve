@@ -65,8 +65,8 @@ import mz.co.macave.whoowesme.viewmodel.AddTransactionViewModel
 fun AddTransactionContent(viewModel: AddTransactionViewModel) {
     val transactionType by viewModel.transactionType.collectAsStateWithLifecycle()
     val isTotalPayment by viewModel.isTotalPayment.collectAsStateWithLifecycle()
-    TransactionTypeSelector(viewModel, transactionType) {
-        viewModel.updateTransactionType(it)
+    TransactionTypeSelector(selectedOption = transactionType) { index ->
+        viewModel.updateTransactionType(index)
     }
     Spacer(Modifier.height(16.dp))
     AnimatedVisibility(
@@ -79,7 +79,7 @@ fun AddTransactionContent(viewModel: AddTransactionViewModel) {
         }
     }
     Spacer(Modifier.height(16.dp))
-    TransactionAmount(isTotalPayment)
+    TransactionAmount(viewModel = viewModel, isFullPayment = isTotalPayment)
     Spacer(Modifier.height(16.dp))
     SelectTransactionDate()
     Spacer(Modifier.height(16.dp))
@@ -88,7 +88,7 @@ fun AddTransactionContent(viewModel: AddTransactionViewModel) {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun TransactionTypeSelector(viewModel: AddTransactionViewModel, selectedOption: Int, onSelectedIndex: (Int) -> Unit) {
+fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit) {
     val options = TransactionType.entries
     Column() {
         Text(text = stringResource(R.string.transaction_type))
@@ -103,7 +103,7 @@ fun TransactionTypeSelector(viewModel: AddTransactionViewModel, selectedOption: 
                 ToggleButton(
                     modifier = modifiers[index].semantics { role = Role.RadioButton },
                     checked = index == selectedOption,
-                    onCheckedChange = { viewModel.updateTransactionType(index) },
+                    onCheckedChange = { onSelectedIndex(index) },
                     shapes = when (index) {
                         0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
                         else -> ButtonGroupDefaults.connectedTrailingButtonShapes()
