@@ -33,6 +33,12 @@ class CreateDebtViewModel(
     private val _showDueDateDialog = MutableStateFlow(false)
     val showDueDateDialog: StateFlow<Boolean> get() = _showDueDateDialog.asStateFlow()
 
+    private val _showNewDebtorFields = MutableStateFlow(false)
+    val showNewDebtorFields: StateFlow<Boolean> get() = _showNewDebtorFields.asStateFlow()
+
+    private val _amount = MutableStateFlow("")
+    val amount: StateFlow<String> get() = _amount.asStateFlow()
+
     private val _dueToDate = MutableStateFlow<Long?>(null)
     val dueToDate: StateFlow<Long?> get() = _dueToDate.asStateFlow()
 
@@ -62,11 +68,13 @@ class CreateDebtViewModel(
         return name.value.isEmpty() && surname.value.isEmpty()
     }
 
-    private val _amount = MutableStateFlow("")
-    val amount: StateFlow<String> get() = _amount.asStateFlow()
 
     fun updateName(newValue: String) {
         _name.value = newValue
+    }
+
+    fun updateShowNewDebtorFields(newValue: Boolean) {
+        _showNewDebtorFields.value = newValue
     }
 
     fun updateSurname(newValue: String) {
