@@ -230,21 +230,20 @@ fun DueDate(viewModel: CreateDebtViewModel, onDialogRequestListener: () -> Unit)
 
     TextField(
         modifier = Modifier
-            .width(256.dp)
+            .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .clickable {
-                viewModel.updateShowDueDateDialog(true)
+            .onFocusChanged {
+                if (it.isFocused) {
+                    viewModel.updateShowDueDateDialog(true)
+                }
             },
-        value = date,
+        value = date?.let { formatDateFromMillis(it) } ?: "",
         readOnly = true,
         onValueChange = { },
         label = { Text(text = stringResource(R.string.due_date)) },
         singleLine = true,
         trailingIcon = {
             Icon(
-                modifier = Modifier.clickable {
-                    viewModel.updateShowDueDateDialog(true)
-                },
                 imageVector = Icons.Default.DateRange,
                 contentDescription = null
             )
