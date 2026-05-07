@@ -1,7 +1,7 @@
 package mz.co.macave.whoowesme.data.repository
 
+import kotlinx.coroutines.flow.Flow
 import mz.co.macave.whoowesme.data.dao.TransactionDao
-import mz.co.macave.whoowesme.model.DebtWithTransactions
 import mz.co.macave.whoowesme.model.Transaction
 
 class TransactionRepository(private val transactionDao: TransactionDao) {
@@ -14,7 +14,7 @@ class TransactionRepository(private val transactionDao: TransactionDao) {
         transactionDao.delete(transaction)
     }
 
-    suspend fun getTransactionsByDebtId(debtId: Int): List<DebtWithTransactions> {
+    fun getTransactionsByDebtId(debtId: Int): Flow<List<Transaction>> {
         return transactionDao.loadAllTransactionsByDebtId(debtId)
     }
 
