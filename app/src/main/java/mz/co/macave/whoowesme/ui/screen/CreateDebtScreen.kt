@@ -81,7 +81,7 @@ fun DebtorSituationSelector(viewModel: CreateDebtViewModel = viewModel(), onOpti
         horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween)
     ) {
         val modifiers = listOf(Modifier.weight(1f), Modifier.weight(1f))
-        options.forEachIndexed { index, option ->
+        options.forEachIndexed { index, _ ->
             ToggleButton(
                 modifier = modifiers[index].semantics { role = Role.RadioButton },
                 checked = (index == selectedIndex),
