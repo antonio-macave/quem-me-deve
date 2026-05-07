@@ -146,6 +146,5 @@ fun FieldIcon(imageVector: ImageVector?) {
         } else {
             Spacer(Modifier.width(32.dp))
         }
-
     }
 }
