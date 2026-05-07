@@ -51,6 +51,12 @@ class CreateDebtViewModel(
         return false
     }
 
+    fun pickDate(date: Long?) {
+        date?.let {
+            _dueToDate.value = it
+        }
+    }
+
     fun areDebtorDetailsFilled(): Boolean {
         return name.value.isEmpty() && surname.value.isEmpty()
     }
