@@ -55,16 +55,11 @@ import java.time.LocalDate
 
 
 @Composable
-fun DebtsList(debts: List<Debt>) {
+fun DebtsList(debts: List<Debt>, onDebtClick: (Debt) -> Unit) {
     val context = LocalContext.current
     LazyColumn {
         itemsIndexed(items =  debts) { index, item ->
-            DebtItem(debt = debts[index]) {
-                val intent = Intent(context, TransactionsActivity::class.java).apply {
-                    putExtra("debtId", item.id)
-                }
-                context.startActivity(intent)
-            }
+            DebtItem(debt = debts[index]) { onDebtClick(item) }
         }
     }
 }
