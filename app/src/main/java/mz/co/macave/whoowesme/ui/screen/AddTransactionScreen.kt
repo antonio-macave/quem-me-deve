@@ -127,13 +127,13 @@ fun TransactionTypeSelector(viewModel: AddTransactionViewModel, selectedOption: 
 }
 
 @Composable
-fun TransactionAmount(isFullPayment: Boolean) {
-    var amount by remember { mutableStateOf("") }
+fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPayment: Boolean) {
+    val amount by viewModel.amount.collectAsStateWithLifecycle()
     TextField(
         modifier = Modifier.fillMaxWidth(),
         value = amount,
         readOnly = isFullPayment, //If full payment, read-only
-        onValueChange = { amount = it },
+        onValueChange = { viewModel.updateAmount(it) },
         label = { Text(text = stringResource(R.string.amount)) },
         singleLine = true,
         leadingIcon = {
