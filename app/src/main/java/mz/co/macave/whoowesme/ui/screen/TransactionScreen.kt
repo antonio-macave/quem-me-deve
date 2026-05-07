@@ -82,10 +82,23 @@ fun TransactionItem(transaction: Transaction) {
 
 
 @Composable
-fun TransactionsList(transactions: List<Transaction>) {
-    LazyColumn {
-        itemsIndexed(items = transactions) { index, item ->
-            TransactionItem(transaction = item)
+fun TransactionsList(
+    viewModel: TransactionsActivityViewModel,
+) {
+    val transactions by viewModel.transactions.collectAsState(initial = emptyList())
+
+    if (transactions.isNotEmpty()) {
+        LazyColumn {
+            itemsIndexed(items = transactions) { _, item ->
+                TransactionItem(transaction = item)
+            }
+        }
+    } else {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = stringResource(R.string.no_transactions))
         }
     }
 }
