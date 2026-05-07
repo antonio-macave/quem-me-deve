@@ -60,7 +60,8 @@ class TransactionsActivity : ComponentActivity() {
                     debtorRepository
                 )
             }
-            val viewModel: TransactionsActivityViewModel by viewModels { factory }
+            val viewModel: TransactionsActivityViewModel = viewModel(factory = factory)
+
 
             WhoOwesMeTheme {
                 Scaffold(
