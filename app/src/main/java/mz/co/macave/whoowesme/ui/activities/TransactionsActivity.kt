@@ -113,7 +113,9 @@ fun TransactionsTopAppBar(title: String?, onNavigationButtonClick: () -> Unit) {
 
             IconButton(
                 onClick = {
-                    val intent = Intent(context, AddTransactionActivity::class.java)
+                    val intent = Intent(context, AddTransactionActivity::class.java).apply {
+                        putExtra("debtId", viewModel.debtId.value)
+                    }
                     context.startActivity(intent)
                 }
             ) {
