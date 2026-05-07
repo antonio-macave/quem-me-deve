@@ -6,8 +6,8 @@ import java.time.LocalDate
 
 @Entity(tableName = "transactions")
 data class Transaction(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    val type: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val type: Int,
     val description: String,
     val amount: Double,
     val date: LocalDate,
