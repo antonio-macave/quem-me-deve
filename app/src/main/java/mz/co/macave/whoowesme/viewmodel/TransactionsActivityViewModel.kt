@@ -1,14 +1,17 @@
 package mz.co.macave.whoowesme.viewmodel
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.data.repository.DebtorRepository
 import mz.co.macave.whoowesme.data.repository.TransactionRepository
+import mz.co.macave.whoowesme.model.Transaction
 import mz.co.macave.whoowesme.util.formatDate
 
 class TransactionsActivityViewModel(
