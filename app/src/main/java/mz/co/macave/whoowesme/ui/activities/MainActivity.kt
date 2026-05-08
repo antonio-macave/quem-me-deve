@@ -129,6 +129,7 @@ class MainActivity : ComponentActivity() {
                             val intent = Intent(context, TransactionsActivity::class.java).apply {
                                 putExtra("debtId", item.id)
                                 putExtra("debtorId", item.debtorId)
+                                putExtra("debtBalance", item.amount)
                             }
                             context.startActivity(intent)
                         }
