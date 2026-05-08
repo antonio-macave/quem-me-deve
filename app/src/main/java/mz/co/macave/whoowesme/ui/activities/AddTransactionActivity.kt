@@ -30,6 +30,7 @@ class AddTransactionActivity : ComponentActivity() {
         setContent {
 
             val debtId = intent.getIntExtra("debtId", 0)
+            val debtBalance = intent.getDoubleExtra("debtBalance", 0.0)
 
             val db = DatabaseProvider.getDatabase(applicationContext)
             val dao = db.transactionDao()
@@ -38,6 +39,7 @@ class AddTransactionActivity : ComponentActivity() {
             val viewModel: AddTransactionViewModel by viewModels { factory }
 
             viewModel.updateDebtId(debtId)
+            viewModel.updateDebtBalance(debtBalance)
 
             WhoOwesMeTheme {
                 Scaffold(
