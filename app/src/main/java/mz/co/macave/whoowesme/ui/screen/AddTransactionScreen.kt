@@ -170,7 +170,10 @@ fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPa
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun CurrentDebtBalance(viewModel: AddTransactionViewModel) {
-    val balance by viewModel.debtBalance.collectAsState()
+    val debtAmount by viewModel.debtAmount.collectAsState()
+    val paidAmount by viewModel.paidAmount.collectAsState()
+    val balance = debtAmount - paidAmount
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
