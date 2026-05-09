@@ -19,7 +19,7 @@ class AddTransactionViewModel(
     private val _amount = MutableStateFlow("")
     val amount: StateFlow<String> get() = _amount.asStateFlow()
 
-    private val _transactionType = MutableStateFlow<Int>(0)
+    private val _transactionType = MutableStateFlow(0)
     val transactionType: StateFlow<Int> get() = _transactionType.asStateFlow()
 
     private val _debtId = MutableStateFlow<Int?>(null)
