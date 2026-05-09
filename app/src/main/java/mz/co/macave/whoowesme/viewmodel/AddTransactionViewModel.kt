@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.data.repository.TransactionRepository
 import mz.co.macave.whoowesme.model.Transaction
+import mz.co.macave.whoowesme.util.TransactionType
 
 class AddTransactionViewModel(
     val transactionRepository: TransactionRepository,
@@ -70,6 +71,20 @@ class AddTransactionViewModel(
 
     fun updateDescription(value: String) {
         _description.value = value
+    }
+    fun calculateRemainingBalance(amount: Double) {
+        val balance =
+            when (transactionType.value) {
+                TransactionType.CREDIT.type -> {
+                    _remainingBalance.value = debtAmount.value - paidAmount.value - amount
+                }
+                TransactionType.DEBIT.type -> {
+                    _remainingBalance.value = debtAmount.value - paidAmount.value + amount
+                }
+                else -> {
+                    _remainingBalance.value = debtAmount.value - paidAmount.value
+                }
+            }
     }
     fun saveTransaction(transaction: Transaction) {
         val newPaidAmount = when (transaction.type) {
