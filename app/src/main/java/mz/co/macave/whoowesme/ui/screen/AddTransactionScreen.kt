@@ -145,7 +145,12 @@ fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPa
         modifier = Modifier.fillMaxWidth(),
         value = amount,
         readOnly = isFullPayment, //If full payment, read-only
-        onValueChange = { viewModel.updateAmount(it) },
+        onValueChange = {
+            viewModel.updateAmount(it)
+            if (it.isNotEmpty()) {
+                viewModel.calculateRemainingBalance(it.toDouble())
+            }
+        },
         label = { Text(text = stringResource(R.string.amount)) },
         singleLine = true,
         leadingIcon = {
