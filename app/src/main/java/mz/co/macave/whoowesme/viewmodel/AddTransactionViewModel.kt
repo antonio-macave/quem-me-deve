@@ -6,10 +6,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.data.repository.TransactionRepository
 import mz.co.macave.whoowesme.model.Transaction
 
-class AddTransactionViewModel(val transactionRepository: TransactionRepository) : ViewModel() {
+class AddTransactionViewModel(
+    val transactionRepository: TransactionRepository,
+    val debtRepository: DebtRepository
+) : ViewModel() {
 
     private val _amount = MutableStateFlow("")
     val amount: StateFlow<String> get() = _amount.asStateFlow()
