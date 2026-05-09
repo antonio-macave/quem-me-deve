@@ -34,8 +34,9 @@ class AddTransactionViewModel(
     private val _description = MutableStateFlow("")
     val description: StateFlow<String> get() = _description.asStateFlow()
 
-    private val _debtBalance = MutableStateFlow(0.0)
-    val debtBalance: StateFlow<Double> get() = _debtBalance.asStateFlow()
+    private val _debtAmount = MutableStateFlow(0.0)
+    val debtAmount: StateFlow<Double> get() = _debtAmount.asStateFlow()
+
 
     private val _isTotalPayment = MutableStateFlow(false)
     val isTotalPayment: StateFlow<Boolean> get() = _isTotalPayment.asStateFlow()
@@ -45,10 +46,6 @@ class AddTransactionViewModel(
 
     private val _transactionDate = MutableStateFlow<Long?>(null)
     val transactionDate: StateFlow<Long?> get() = _transactionDate.asStateFlow()
-
-    fun updateDebtBalance(value: Double) {
-        _debtBalance.value = value
-    }
 
     fun updateShowDatePicker(value: Boolean) {
         _showDatePicker.value = value
@@ -81,7 +78,9 @@ class AddTransactionViewModel(
     fun updateDebtId(value: Int) {
         _debtId.value = value
     }
-
+    fun updatePaidAmount(paidAmount: Double) {
+        _paidAmount.value = paidAmount
+    }
 
     fun updateDescription(value: String) {
         _description.value = value
