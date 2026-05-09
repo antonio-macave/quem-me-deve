@@ -113,6 +113,10 @@ class MainActivity : ComponentActivity() {
 
                     var filteredList by remember { mutableStateOf(debts) }
 
+                    LaunchedEffect(debts) {
+                        filteredList = debts
+                    }
+
                     SortByDialog(showSortDialog, onDismiss = { viewModel.updateShowSortDebtsDialog(false) }) { option ->
                         filteredList = viewModel.sortDebts(debts = filteredList, sortBy = option)
                     }
