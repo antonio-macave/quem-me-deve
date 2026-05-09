@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.data.DatabaseProvider
+import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.data.repository.TransactionRepository
 import mz.co.macave.whoowesme.model.Transaction
 import mz.co.macave.whoowesme.ui.activities.ui.theme.WhoOwesMeTheme
@@ -30,16 +31,25 @@ class AddTransactionActivity : ComponentActivity() {
         setContent {
 
             val debtId = intent.getIntExtra("debtId", 0)
-            val debtBalance = intent.getDoubleExtra("debtBalance", 0.0)
+            val debtAmount = intent.getDoubleExtra("debtAmount", 0.0)
+            val paidAmount = intent.getDoubleExtra("paidAmount", 0.0)
 
             val db = DatabaseProvider.getDatabase(applicationContext)
-            val dao = db.transactionDao()
-            val repository = TransactionRepository(dao)
-            val factory = ViewModelFactory { AddTransactionViewModel(repository) }
+            val transactionDao = db.transactionDao()
+            val debtDao = db.debtDao()
+            val transactionRepository = TransactionRepository(transactionDao)
+            val debtRepository = DebtRepository(debtDao)
+            val factory = ViewModelFactory {
+                AddTransactionViewModel(
+                    transactionRepository = transactionRepository,
+                    debtRepository = debtRepository
+                )
+            }
             val viewModel: AddTransactionViewModel by viewModels { factory }
 
             viewModel.updateDebtId(debtId)
-            viewModel.updateDebtBalance(debtBalance)
+            viewModel.updateDebtAmount(debtAmount)
+            viewModel.updatePaidAmount(paidAmount)
 
             WhoOwesMeTheme {
                 Scaffold(
