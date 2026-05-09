@@ -45,6 +45,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -142,8 +143,14 @@ fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit)
 fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPayment: Boolean) {
     val amount by viewModel.amount.collectAsStateWithLifecycle()
     val remainingBalance by viewModel.remainingBalance.collectAsStateWithLifecycle()
+    var isFocused by remember { mutableStateOf(false) }
     TextField(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .onFocusChanged {
+                isFocused = it.isFocused
+            }
+        ,
         value = amount,
         readOnly = isFullPayment, //If full payment, read-only
         onValueChange = {
@@ -159,6 +166,17 @@ fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPa
                 imageVector = ImageVector.vectorResource(R.drawable.outline_money_24),
                 contentDescription = null
             )
+        },
+        supportingText = {
+            AnimatedVisibility(visible = isFocused) {
+                Text(
+                    text = "${stringResource(R.string.remaining)}: ${remainingBalance.toMzn()}",
+                    color = if (remainingBalance > 0)
+                        TextFieldDefaults.colors().focusedTextColor
+                    else
+                        TextFieldDefaults.colors().errorSupportingTextColor
+                )
+            }
         },
         suffix = { Text( text = "MZN") },
         keyboardOptions = KeyboardOptions(
