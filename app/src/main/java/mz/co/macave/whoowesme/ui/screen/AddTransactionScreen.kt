@@ -141,6 +141,7 @@ fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit)
 @Composable
 fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPayment: Boolean) {
     val amount by viewModel.amount.collectAsStateWithLifecycle()
+    val remainingBalance by viewModel.remainingBalance.collectAsStateWithLifecycle()
     TextField(
         modifier = Modifier.fillMaxWidth(),
         value = amount,
