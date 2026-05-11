@@ -104,6 +104,30 @@ fun DebtStatus(debtStatus: Int) {
 }
 
 @Composable
+fun PaymentProgressBar(debtAmount: Double, paidAmount: Double) {
+    val progress = (paidAmount / debtAmount).coerceIn(0.0, 1.0).toFloat()
+    var currentProgress by remember { mutableFloatStateOf(progress) }
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        LinearProgressIndicator(
+            progress = { currentProgress },
+            modifier = Modifier.fillMaxWidth(),
+            color = ProgressIndicatorDefaults.linearColor,
+            trackColor = ProgressIndicatorDefaults.linearTrackColor,
+            strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
+        )
+        Spacer(Modifier.height(8.dp))
+        Text(
+            text = "${(progress *100).toInt()}% Pago",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.End,
+            style = MaterialTheme.typography.bodySmall
+        )
+    }
+}
+
+@Composable
 fun DebtFilter(debts: List<Debt>, onClick: (List<Debt>) -> Unit) {
 
     val viewModel: MainActivityViewModel = viewModel()
