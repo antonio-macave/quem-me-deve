@@ -45,6 +45,8 @@ class TransactionsActivity : ComponentActivity() {
 
             val debtId = intent.getIntExtra("debtId",0)
             val debtorId = intent.getIntExtra("debtorId", 0)
+            val debtAmount = intent.getDoubleExtra("debtAmount", 0.0)
+            val paidAmount = intent.getDoubleExtra("paidAmount", 0.0)
 
             val db = DatabaseProvider.getDatabase(applicationContext)
             val transactionDao = db.transactionDao()
@@ -72,6 +74,8 @@ class TransactionsActivity : ComponentActivity() {
                     LaunchedEffect(debtId, debtorId)  {
                         viewModel.updateDebtId(debtId)
                         viewModel.updateDebtorId(debtorId)
+                        viewModel.updateDebtAmount(debtAmount)
+                        viewModel.updatePaidAmount(paidAmount)
                     }
 
                     Column(Modifier.padding(innerPadding)) {
