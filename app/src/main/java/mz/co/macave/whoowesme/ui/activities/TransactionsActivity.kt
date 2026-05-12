@@ -120,6 +120,8 @@ fun TransactionsTopAppBar(title: String?, viewModel: TransactionsActivityViewMod
                 onClick = {
                     val intent = Intent(context, AddTransactionActivity::class.java).apply {
                         putExtra("debtId", viewModel.debtId.value)
+                        putExtra("debtAmount", viewModel.debtAmount.value)
+                        putExtra("paidAmount", viewModel.paidAmount.value)
                     }
                     context.startActivity(intent)
                 }
