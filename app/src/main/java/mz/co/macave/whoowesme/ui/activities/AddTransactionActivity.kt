@@ -31,23 +31,23 @@ class AddTransactionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val debtId = intent.getIntExtra("debtId", 0)
+
+        val db = DatabaseProvider.getDatabase(applicationContext)
+        val transactionDao = db.transactionDao()
+        val debtDao = db.debtDao()
+        val transactionRepository = TransactionRepository(transactionDao)
+        val debtRepository = DebtRepository(debtDao)
+        val factory = ViewModelFactory {
+            AddTransactionViewModel(
+                transactionRepository = transactionRepository,
+                debtRepository = debtRepository
+            )
+        }
+
         setContent {
 
-            val debtId = intent.getIntExtra("debtId", 0)
-            val debtAmount = intent.getDoubleExtra("debtAmount", 0.0)
-            val paidAmount = intent.getDoubleExtra("paidAmount", 0.0)
-
-            val db = DatabaseProvider.getDatabase(applicationContext)
-            val transactionDao = db.transactionDao()
-            val debtDao = db.debtDao()
-            val transactionRepository = TransactionRepository(transactionDao)
-            val debtRepository = DebtRepository(debtDao)
-            val factory = ViewModelFactory {
-                AddTransactionViewModel(
-                    transactionRepository = transactionRepository,
-                    debtRepository = debtRepository
-                )
-            }
             val viewModel: AddTransactionViewModel by viewModels { factory }
 
             viewModel.updateDebtId(debtId)
