@@ -65,16 +65,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val db = DatabaseProvider.getDatabase(applicationContext)
+        val debtDao = db.debtDao()
+        val repository = DebtRepository(debtDao)
+        val factory = ViewModelFactory { MainActivityViewModel(repository) }
+        val viewModel: MainActivityViewModel by viewModels { factory }
+
         setContent {
             WhoOwesMeTheme {
 
                 val context = LocalContext.current
                 val scope = rememberCoroutineScope()
-                val db = DatabaseProvider.getDatabase(applicationContext)
-                val debtDao = db.debtDao()
-                val repository = DebtRepository(debtDao)
-                val factory = ViewModelFactory { MainActivityViewModel(repository) }
-                val viewModel: MainActivityViewModel by viewModels { factory }
                 val snackBarHost = remember { SnackbarHostState() }
 
                 val launcher = rememberLauncherForActivityResult(
