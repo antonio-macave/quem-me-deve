@@ -41,6 +41,13 @@ class TransactionsActivityViewModel(
         _date.value = formatDate(newDate)
     }
 
+    fun updateDebtAmount(newDebtBalance: Double) {
+        _debtAmount.value = newDebtBalance
+    }
+
+    fun updatePaidAmount(newPaidAmount: Double) {
+        _paidAmount.value = newPaidAmount
+    }
 
     fun updateDebtorId(newDebtorId: Int) {
         _debtorId.value = newDebtorId
