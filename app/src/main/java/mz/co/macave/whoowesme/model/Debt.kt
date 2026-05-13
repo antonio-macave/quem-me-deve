@@ -11,6 +11,7 @@ data class Debt (
     val description: String,
     val additionalNotes: String,
     val amount: Double,
+    val paidAmount: Double,
     val dueTo: LocalDate,
     val debtorId: Int
 )
