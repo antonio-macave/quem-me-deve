@@ -90,6 +90,12 @@ class AddTransactionViewModel(
         _remainingBalance.value = remainingAmount
     }
 
+    fun getDebtData(debtId: Int) {
+        viewModelScope.launch {
+            _debt.value = debtRepository.findDebtsByDebtorId(intArrayOf(debtId)).first()
+        }
+    }
+
     fun calculateRemainingBalance(amount: Double) {
         val balance =
             when (transactionType.value) {
