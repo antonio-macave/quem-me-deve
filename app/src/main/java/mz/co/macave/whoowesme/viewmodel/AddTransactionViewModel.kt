@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.data.repository.TransactionRepository
+import mz.co.macave.whoowesme.model.Debt
 import mz.co.macave.whoowesme.model.Transaction
 import mz.co.macave.whoowesme.util.TransactionType
 
@@ -36,6 +37,9 @@ class AddTransactionViewModel(
 
     private val _debtAmount = MutableStateFlow(0.0)
     val debtAmount: StateFlow<Double> get() = _debtAmount.asStateFlow()
+
+    private val _debt = MutableStateFlow<Debt?>(null)
+    val debt: StateFlow<Debt?> get() = _debt.asStateFlow()
 
 
     private val _isTotalPayment = MutableStateFlow(false)
