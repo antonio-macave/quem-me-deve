@@ -53,12 +53,17 @@ class AddTransactionActivity : ComponentActivity() {
             viewModel.updateDebtId(debtId)
             val debt by viewModel.debt.collectAsState()
 
+            val okEnabled = (viewModel.transactionType.collectAsState().value != 0 || viewModel.transactionType.collectAsState().value != 1) &&
+                    viewModel.amount.collectAsState().value.isNotEmpty() &&
+                    viewModel.transactionDate.collectAsState().value != null
+
             WhoOwesMeTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
                         AppBar(
                             title = stringResource(R.string.title_activity_add_transaction),
+                            okEnabled = okEnabled,
                             onCancelListener = { finish() },
                             onOkListener = {
                                 val transaction = Transaction(
