@@ -59,7 +59,8 @@ class CreateDebtActivity : ComponentActivity() {
                                     additionalNotes = viewModel.additionalNotes.value,
                                     amount = viewModel.amount.value.toDouble(),
                                     dueTo = date!!.toLocalDate(),
-                                    debtorId = viewModel.selectedDebtor.value?.id ?: 0
+                                    debtorId = viewModel.selectedDebtor.value?.id ?: 0,
+                                    paidAmount = 0.0
                                 )
                                 viewModel.saveDebt(debt)
                                 finish()
