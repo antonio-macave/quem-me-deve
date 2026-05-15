@@ -277,10 +277,13 @@ fun SelectTransactionDate(viewModel: AddTransactionViewModel = viewModel()) {
 
     if (showDialog) {
 
+        val okEnabled = datePickerState.selectedDateMillis != null
+
         DatePickerDialog(
             onDismissRequest = { viewModel.updateShowDatePicker(false) },
             confirmButton = {
                 TextButton(
+                    enabled = okEnabled,
                     onClick = {
                         viewModel.updateSelectedDate(datePickerState.selectedDateMillis!!)
                         viewModel.updateShowDatePicker(false)
