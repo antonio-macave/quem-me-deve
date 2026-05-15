@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun AppBar(title: String, onOkListener: () -> Unit, onCancelListener: () -> Unit) {
+fun AppBar(title: String, okEnabled: Boolean, onOkListener: () -> Unit, onCancelListener: () -> Unit) {
     CenterAlignedTopAppBar(
         {
             Text(text = title)
@@ -27,7 +27,10 @@ fun AppBar(title: String, onOkListener: () -> Unit, onCancelListener: () -> Unit
             }
         },
         actions = {
-            IconButton(onClick = onOkListener) {
+            IconButton(
+                onClick = { onOkListener() },
+                enabled = okEnabled
+            ) {
                 Icon(imageVector = Icons.Default.Check, contentDescription = null)
             }
         },
