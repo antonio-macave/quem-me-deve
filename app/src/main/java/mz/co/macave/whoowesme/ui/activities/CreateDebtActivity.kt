@@ -62,6 +62,7 @@ class CreateDebtActivity : ComponentActivity() {
                                     debtorId = viewModel.selectedDebtor.value?.id ?: 0
                                 )
                                 viewModel.saveDebt(debt)
+                                finish()
                             }
                         )
                     }
