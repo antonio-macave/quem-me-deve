@@ -82,6 +82,36 @@ fun TransactionItem(transaction: Transaction) {
 
 
 @Composable
+fun DeleteSureDialog(
+    isDialogOpen: Boolean,
+    viewModel: TransactionsActivityViewModel,
+    transaction: Transaction,
+    onDismissRequest: () -> Unit
+) {
+    if (isDialogOpen) {
+        AlertDialog(
+            onDismissRequest = { onDismissRequest() },
+            confirmButton = {
+                TextButton( onClick = { viewModel.deleteTransaction(transaction) }) {
+                    Text(stringResource(R.string.yes))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { onDismissRequest() }) {
+                    Text(stringResource(android.R.string.cancel))
+                }
+            },
+            title = {
+                Text(
+                    text = stringResource(R.string.are_you_sure),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            },
+        )
+    }
+}
+
+@Composable
 fun TransactionContextMenu(
     menuExpanded: Boolean,
     viewModel: TransactionsActivityViewModel,
