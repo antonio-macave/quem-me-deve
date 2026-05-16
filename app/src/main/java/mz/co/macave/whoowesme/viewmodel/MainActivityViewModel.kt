@@ -44,6 +44,20 @@ class MainActivityViewModel(debtRepository: DebtRepository): ViewModel() {
         }
     }
 
+    fun getDebtStatus(dueTo: LocalDate): Int {
+        val now = LocalDate.now()
+        return when {
+            now.isAfter(dueTo) -> DebtStatus.OVERDUE.code
+            now.isBefore(dueTo) -> DebtStatus.PENDING.code
+            else -> DebtStatus.PAID.code
+        }
+    }
+
+    fun isPaymentOverDue(dueTo: LocalDate): Boolean {
+        val now = LocalDate.now()
+        return now.isAfter(dueTo)
+    }
+
     fun updateShowSortDebtsDialog(show: Boolean) {
         _showSortDebtsDialog.value = show
     }
