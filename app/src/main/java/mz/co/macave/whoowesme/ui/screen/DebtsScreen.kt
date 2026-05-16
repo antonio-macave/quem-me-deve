@@ -52,9 +52,13 @@ import mz.co.macave.whoowesme.util.toMzn
 import mz.co.macave.whoowesme.viewmodel.MainActivityViewModel
 import java.time.LocalDate
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun DebtItem(debt: Debt, onDebtClick: (Debt) -> Unit) {
-    Card(
+fun DebtItem(viewModel: MainActivityViewModel, debt: DebtCardItem, onDebtClick: (DebtCardItem) -> Unit) {
+    val progress = (debt.paidAmount / debt.amount).coerceIn(0.0, 1.0).toFloat()
+    val paymentOverdue = viewModel.isPaymentOverDue(debt.dueTo)
+
+    OutlinedCard (
         modifier = Modifier
             .padding(
                 horizontal = 16.dp,
@@ -67,15 +71,32 @@ fun DebtItem(debt: Debt, onDebtClick: (Debt) -> Unit) {
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                DebtStatus(debt.status)
+            NameAndDebtAmount(name = "${debt.debtorName} ${debt.debtorSurname}", amount = debt.amount)
+            Spacer(Modifier.height(4.dp))
+            if (debt.description.isNotEmpty()) {
+                Text(
+                    text = debt.description,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Spacer(Modifier.height(8.dp))
             }
-            Text(text = debt.amount.toMzn())
-            Text(text = debt.description)
-            Text(text = debt.status.toString())
+
+            PaymentProgressBar(
+                debtAmount = debt.amount,
+                paidAmount = debt.paidAmount
+            )
+            Spacer(Modifier.height(8.dp))
+            HorizontalDivider()
+            Spacer(Modifier.height(8.dp))
+            BottomInfo(
+                dueTo = debt.dueTo,
+                debtAmount = debt.amount,
+                paidAmount = debt.paidAmount,
+                paymentOverdue = paymentOverdue,
+                paymentProgress = progress
+            )
         }
     }
 }
