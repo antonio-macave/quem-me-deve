@@ -35,6 +35,7 @@ import androidx.compose.material3.ToggleFloatingActionButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -112,7 +113,6 @@ class MainActivity : ComponentActivity() {
 
                     val showSortDialog by viewModel.showSortDebtsDialog.collectAsStateWithLifecycle()
                     val debts by viewModel.debts.collectAsStateWithLifecycle(initialValue = emptyList())
-
                     var filteredList by remember { mutableStateOf(debts) }
 
                     LaunchedEffect(debts) {
@@ -131,9 +131,9 @@ class MainActivity : ComponentActivity() {
                             filteredList = it
                         }
                         Spacer(Modifier.height(8.dp))
-                        DebtsList(filteredList) { item ->
+                        DebtsList(viewModel, filteredList) { item ->
                             val intent = Intent(context, TransactionsActivity::class.java).apply {
-                                putExtra("debtId", item.id)
+                                putExtra("debtId", item.debtId)
                                 putExtra("debtorId", item.debtorId)
                                 putExtra("debtAmount", item.amount)
                                 putExtra("paidAmount", item.paidAmount)
