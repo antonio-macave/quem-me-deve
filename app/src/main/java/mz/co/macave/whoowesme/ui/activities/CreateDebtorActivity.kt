@@ -23,6 +23,7 @@ import mz.co.macave.whoowesme.ui.screen.AppBar
 import mz.co.macave.whoowesme.ui.screen.CreateDebtorContent
 import mz.co.macave.whoowesme.viewmodel.CreateDebtorViewModel
 import mz.co.macave.whoowesme.viewmodel.ViewModelFactory
+import androidx.compose.runtime.collectAsState
 
 class CreateDebtorActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +39,10 @@ class CreateDebtorActivity : ComponentActivity() {
             val viewModel: CreateDebtorViewModel by viewModels { factory }
             val snackbarHost = remember { SnackbarHostState() }
 
+            val okEnabled =
+                viewModel.name.collectAsState().value.isNotEmpty() &&
+                viewModel.surname.collectAsState().value.isNotEmpty()
+
             WhoOwesMeTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -45,6 +50,7 @@ class CreateDebtorActivity : ComponentActivity() {
                         AppBar(
                             title = stringResource(R.string.title_activity_create_debtor),
                             onCancelListener = { finish() },
+                            okEnabled = okEnabled,
                             onOkListener = {
                                 viewModel.saveDebtor(
                                     name = viewModel.name.value,
