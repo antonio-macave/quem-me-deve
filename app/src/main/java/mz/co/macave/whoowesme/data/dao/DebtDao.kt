@@ -37,8 +37,8 @@ interface DebtDao {
      @Query("SELECT * FROM debts WHERE id = :debtId")
      suspend fun findDebtById(debtId: Int): Debt
 
-    @Query("UPDATE debts SET paidAmount = :paidAmount WHERE id = :debtId")
-    suspend fun savePaidAmount(debtId: Int, paidAmount: Double)
+    @Query("UPDATE debts SET paidAmount = :paidAmount, amount = :newDebtAmount WHERE id = :debtId")
+    suspend fun savePaidAmount(debtId: Int, paidAmount: Double, newDebtAmount: Double)
 
     @Insert
     suspend fun insertAll(vararg debts: Debt)
