@@ -112,10 +112,7 @@ fun DebtorItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable(onClick = { viewModel.updateCardExpanded(debtorsWithDebts.debtor.id) }),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )
+            .clickable(onClick = { viewModel.updateCardExpanded(debtorsWithDebts.debtor.id) })
    ) {
         Row(
             modifier = Modifier
