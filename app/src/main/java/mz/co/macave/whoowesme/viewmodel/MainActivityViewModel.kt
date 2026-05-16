@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import mz.co.macave.whoowesme.data.repository.DebtRepository
-import mz.co.macave.whoowesme.model.Debt
+import mz.co.macave.whoowesme.model.DebtCardItem
 import mz.co.macave.whoowesme.util.DebtStatus
 import mz.co.macave.whoowesme.util.SortOption
 import java.time.LocalDate
@@ -21,10 +21,10 @@ class MainActivityViewModel(debtRepository: DebtRepository): ViewModel() {
     private val _overflowMenuExpanded = MutableStateFlow(false)
     val overflowMenuExpanded: StateFlow<Boolean> get() = _overflowMenuExpanded.asStateFlow()
 
-    val debts = debtRepository.getAllDebts()
+    val debts = debtRepository.findDebtsWithDebtorName()
 
 
-    fun sortDebts(debts: List<Debt>, sortBy: Int): List<Debt> {
+    fun sortDebts(debts: List<DebtCardItem>, sortBy: Int): List<DebtCardItem> {
         return when (sortBy) {
             SortOption.NAME.option -> debts.sortedBy { it.description }
             SortOption.DATE.option -> debts.sortedBy { it.dueTo }
@@ -33,7 +33,7 @@ class MainActivityViewModel(debtRepository: DebtRepository): ViewModel() {
         }
     }
 
-    fun filterDebts(debts: List<Debt>, all: Boolean, pending: Boolean, paid: Boolean, overdue: Boolean): List<Debt> {
+    fun filterDebts(debts: List<DebtCardItem>, all: Boolean, pending: Boolean, paid: Boolean, overdue: Boolean): List<DebtCardItem> {
         return debts.filter { debt ->
             when (debt.status) {
                 DebtStatus.PENDING.code -> pending
