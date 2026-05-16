@@ -168,9 +168,8 @@ fun DeleteSureDialog(
 @Composable
 fun TransactionContextMenu(
     menuExpanded: Boolean,
-    viewModel: TransactionsActivityViewModel,
-    transaction: Transaction,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    onDeleteClick: () -> Unit
 ) {
 
     DropdownMenu(
@@ -192,7 +191,7 @@ fun TransactionContextMenu(
         )
         DropdownMenuItem(
             onClick = {
-                viewModel.deleteTransaction(transaction)
+                onDeleteClick()
                 onDismissRequest()
             },
             leadingIcon = {
