@@ -57,4 +57,16 @@ class TransactionsActivityViewModel(
         _debtId.value = newDebtId
     }
 
+    fun deleteTransaction(transaction: Transaction) {
+        val amount = if (transaction.type == TransactionType.CREDIT.type) {
+            _paidAmount.value - transaction.amount
+        } else {
+            _paidAmount.value + transaction.amount
+        }
+        viewModelScope.launch {
+                    debtRepository.savePaidAmount(debtId = debtId.value, paidAmount = amount)
+                    transactionRepository.deleteTransaction(transaction)
+            }
+    }
+
 }
