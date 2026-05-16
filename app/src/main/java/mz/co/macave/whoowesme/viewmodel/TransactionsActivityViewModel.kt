@@ -23,6 +23,12 @@ class TransactionsActivityViewModel(
     private val _date = MutableStateFlow("")
     val date: StateFlow<String> get() = _date.asStateFlow()
 
+    private val _debtAmount = MutableStateFlow(0.0)
+    val debtAmount: StateFlow<Double> get() = _debtAmount.asStateFlow()
+
+    private val _paidAmount = MutableStateFlow(0.0)
+    val paidAmount: StateFlow<Double> get() = _paidAmount
+
     private val _debtorId = MutableStateFlow(0)
     val debtorId: StateFlow<Int> get() = _debtorId.asStateFlow()
 
