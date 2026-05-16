@@ -15,6 +15,10 @@ class DebtRepository(private val debtDao: DebtDao) {
         debtDao.savePaidAmount(debtId, paidAmount, newDebtAmount)
     }
 
+    suspend fun findDebtById(debtId: Int): Debt {
+        return debtDao.findDebtById(debtId)
+    }
+
     fun getAllDebts(): Flow<List<Debt>> {
         return debtDao.getAllDebts()
     }
