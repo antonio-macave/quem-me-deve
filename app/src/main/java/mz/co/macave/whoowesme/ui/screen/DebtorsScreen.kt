@@ -65,26 +65,6 @@ fun DebtsList(viewModel: MainActivityViewModel, debts: List<DebtCardItem>, onDeb
     }
 }
 
-@Composable
-fun DebtorSituation(balance: Double) {
-    val debtorSituation = if (balance >= 0) stringResource(R.string.debt_status_pending) else stringResource(R.string.debt_status_overdue)
-    Row(
-        modifier = Modifier
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(24.dp)
-            )
-            .padding(
-                horizontal = 12.dp,
-                vertical = 4.dp
-            )
-    ){
-        Text(
-            text = debtorSituation,
-            fontSize = 14.sp
-        )
-    }
-}
 
 @Composable
 fun Header(debtorName: String) {
