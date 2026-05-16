@@ -65,7 +65,7 @@ fun DebtItem(debt: Debt, onDebtClick: (Debt) -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(16.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
