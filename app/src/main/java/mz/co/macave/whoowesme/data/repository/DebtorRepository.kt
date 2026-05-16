@@ -27,6 +27,10 @@ class DebtorRepository(private val debtorDao: DebtorDao) {
         return debtorDao.getAllDebtors()
     }
 
+    fun getAllDebtorsWithDebts(): Flow<List<DebtorWithDebts>> {
+        return debtorDao.getAllDebtorsWithDebts()
+    }
+
     suspend fun findDebtorsById(debtorIds: IntArray): List<Debtor> {
         return debtorDao.loadAllByIds(debtorIds)
     }
