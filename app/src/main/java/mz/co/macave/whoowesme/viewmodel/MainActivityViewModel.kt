@@ -8,14 +8,12 @@ import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.model.Debt
 import mz.co.macave.whoowesme.util.DebtStatus
 import mz.co.macave.whoowesme.util.SortOption
+import java.time.LocalDate
 
 class MainActivityViewModel(debtRepository: DebtRepository): ViewModel() {
 
     private val _fabMenuExpanded = MutableStateFlow(false)
     val fabMenuExpanded: StateFlow<Boolean> get() = _fabMenuExpanded.asStateFlow()
-
-    private val _cardExpanded = MutableStateFlow<Int?>(null)
-    val cardExpanded: StateFlow<Int?> get() = _cardExpanded.asStateFlow()
 
     private val _showSortDebtsDialog = MutableStateFlow(false)
     val showSortDebtsDialog: StateFlow<Boolean> get() = _showSortDebtsDialog.asStateFlow()
@@ -55,9 +53,6 @@ class MainActivityViewModel(debtRepository: DebtRepository): ViewModel() {
         _fabMenuExpanded.value = expanded
     }
 
-    fun updateCardExpanded(id: Int) {
-        _cardExpanded.value = if (_cardExpanded.value == id) null else id
-    }
 
     fun updateOverflowMenuExpanded(expanded: Boolean) {
         _overflowMenuExpanded.value = expanded
