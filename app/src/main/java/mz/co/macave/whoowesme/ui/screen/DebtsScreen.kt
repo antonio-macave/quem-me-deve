@@ -159,10 +159,9 @@ fun PaymentProgressBar(debtAmount: Double, paidAmount: Double) {
 }
 
 @Composable
-fun DebtFilter(debts: List<Debt>, onClick: (List<Debt>) -> Unit) {
+fun DebtFilter(debts: List<DebtCardItem>, onClick: (List<DebtCardItem>) -> Unit) {
 
     val viewModel: MainActivityViewModel = viewModel()
-
     val scrollState = rememberScrollState()
 
     var pending by remember { mutableStateOf(true) }
