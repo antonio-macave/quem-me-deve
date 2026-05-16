@@ -108,7 +108,7 @@ fun DebtorItem(
     val visible by viewModel.cardExpanded.collectAsStateWithLifecycle()
     val totalDebt = viewModel.getTotalDebt(debtorsWithDebts)
 
-    Card(
+    OutlinedCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
