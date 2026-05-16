@@ -15,6 +15,9 @@ interface DebtorDao {
     @Query("SELECT * FROM debtors")
     fun getAllDebtors(): Flow<List<Debtor>>
 
+    @Query("SELECT * FROM debtors")
+    fun getAllDebtorsWithDebts(): Flow<List<DebtorWithDebts>>
+
     @Query("SELECT * FROM debtors WHERE id IN (:debtorIds)")
     suspend fun loadAllByIds(debtorIds: IntArray): List<Debtor>
 
