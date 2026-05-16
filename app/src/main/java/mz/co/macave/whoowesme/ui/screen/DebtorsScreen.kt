@@ -89,13 +89,13 @@ fun Header(debtorName: String) {
 @Composable
 fun DebtorsList(
     viewModel: DebtorsActivityViewModel = viewModel(),
-    debtors: List<Debtor>
+    debtorsWithDebts: List<DebtorWithDebts>
 ) {
     LazyColumn {
-        itemsIndexed(items = debtors) { index, item ->
+        itemsIndexed(items = debtorsWithDebts) { index, item ->
             DebtorItem(
                 viewModel = viewModel,
-                debtor = item
+                debtorsWithDebts = item
             )
         }
     }
@@ -105,7 +105,7 @@ fun DebtorsList(
 @Composable
 fun DebtorItem(
     viewModel: DebtorsActivityViewModel = viewModel(),
-    debtor: Debtor
+    debtorsWithDebts: DebtorWithDebts
 ) {
 
     val context = LocalContext.current
@@ -114,7 +114,7 @@ fun DebtorItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable(onClick = { viewModel.updateCardExpanded(debtor.id) }),
+            .clickable(onClick = { viewModel.updateCardExpanded(debtorsWithDebts.debtor.id) }),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         )
@@ -124,7 +124,7 @@ fun DebtorItem(
             .padding(16.dp)
             .fillMaxWidth()
         ) {
-            Header(debtor.name)
+            Header(debtorsWithDebts.debtor.name)
             Spacer(Modifier.width(8.dp))
             Column(
 
@@ -132,9 +132,8 @@ fun DebtorItem(
                 Row {
                     Column {
                         Text(
-                            text = "${debtor.name} ${debtor.surname}",
-                            style = MaterialTheme.typography.displaySmallEmphasized,
-                            fontSize = 20.sp
+                            text = "${debtorsWithDebts.debtor.name} ${debtorsWithDebts.debtor.surname}",
+                            style = MaterialTheme.typography.titleMedium,
                         )
 
                         Text(
@@ -148,7 +147,7 @@ fun DebtorItem(
                 DebtorSituation(200.00)
                 Spacer(Modifier.height(6.dp))
                 AnimatedVisibility(
-                    visible = visible == debtor.id,
+                    visible = visible == debtorsWithDebts.debtor.id,
                     enter = fadeIn() + expandVertically(),
                     exit = fadeOut() + shrinkVertically(),
                 ) {
@@ -158,8 +157,8 @@ fun DebtorItem(
                         },
                         onSecondaryClick = {
                             val intent = Intent(context, TransactionsActivity::class.java).apply {
-                                putExtra("debtorId", debtor.id)
-                                putExtra("debtorName", "${debtor.name} ${debtor.surname}")
+                                putExtra("debtorId", debtorsWithDebts.debtor.id)
+                                putExtra("debtorName", "${debtorsWithDebts.debtor.name} ${debtorsWithDebts.debtor.surname}")
                             }
                             context.startActivity(intent)
                         }
