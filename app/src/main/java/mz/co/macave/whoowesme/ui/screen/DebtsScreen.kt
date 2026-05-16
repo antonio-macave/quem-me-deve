@@ -155,13 +155,6 @@ fun PaymentProgressBar(debtAmount: Double, paidAmount: Double) {
             trackColor = ProgressIndicatorDefaults.linearTrackColor,
             strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
         )
-        Spacer(Modifier.height(8.dp))
-        Text(
-            text = "${(progress *100).toInt()}% Pago",
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.End,
-            style = MaterialTheme.typography.bodySmall
-        )
     }
 }
 
