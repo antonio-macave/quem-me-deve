@@ -61,8 +61,8 @@ class DebtorsActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        val list by viewModel.debtors.collectAsStateWithLifecycle()
-                        DebtorsList(viewModel, list)
+                        val debtors by viewModel.debtorsWithDebts.collectAsStateWithLifecycle()
+                        DebtorsList(viewModel, debtors)
                     }
                 }
             }
