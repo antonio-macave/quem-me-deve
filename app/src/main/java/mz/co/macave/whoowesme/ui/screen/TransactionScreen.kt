@@ -48,8 +48,6 @@ import mz.co.macave.whoowesme.viewmodel.TransactionsActivityViewModel
 import java.time.LocalDate
 
 @Composable
-fun TransactionItem(transaction: Transaction) {
-    Card(
 fun TransactionItem(viewModel: TransactionsActivityViewModel, transaction: Transaction) {
     var menuExpanded by remember { mutableStateOf(false) }
     var isConfirmationDialogOpen by remember { mutableStateOf(false) }
