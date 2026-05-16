@@ -241,6 +241,26 @@ fun DebtFilter(debts: List<Debt>, onClick: (List<Debt>) -> Unit) {
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+fun NameAndDebtAmount(name: String, amount: Double) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Bottom
+    ) {
+        Text(
+            text = name,
+            style = MaterialTheme.typography.labelMediumEmphasized
+        )
+        Text(
+            text = amount.toMzn(),
+            style = MaterialTheme.typography.titleMedium
+        )
+    }
+
+}
+
 @Composable
 fun BottomInfoContent(
     modifier: Modifier = Modifier,
