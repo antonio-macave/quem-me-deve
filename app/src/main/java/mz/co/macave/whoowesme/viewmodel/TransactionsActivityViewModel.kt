@@ -1,6 +1,7 @@
 package mz.co.macave.whoowesme.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -8,10 +9,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.launch
 import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.data.repository.DebtorRepository
 import mz.co.macave.whoowesme.data.repository.TransactionRepository
 import mz.co.macave.whoowesme.model.Transaction
+import mz.co.macave.whoowesme.util.TransactionType
 import mz.co.macave.whoowesme.util.formatDate
 
 class TransactionsActivityViewModel(
@@ -64,13 +67,18 @@ class TransactionsActivityViewModel(
     }
 
     fun deleteTransaction(transaction: Transaction) {
-        val amount = if (transaction.type == TransactionType.CREDIT.type) {
+        val newDebtAmount = if (transaction.type == TransactionType.CREDIT.type) {
+            _debtAmount.value - transaction.amount
+        } else {
+            _debtAmount.value + transaction.amount
+        }
+        val newPaidAmount = if (transaction.type == TransactionType.CREDIT.type) {
             _paidAmount.value - transaction.amount
         } else {
             _paidAmount.value + transaction.amount
         }
         viewModelScope.launch {
-                    debtRepository.savePaidAmount(debtId = debtId.value, paidAmount = amount)
+                    debtRepository.savePaidAmount(debtId = debtId.value, paidAmount = newPaidAmount, newDebtAmount = newDebtAmount)
                     transactionRepository.deleteTransaction(transaction)
             }
     }
