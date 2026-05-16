@@ -240,3 +240,77 @@ fun DebtFilter(debts: List<Debt>, onClick: (List<Debt>) -> Unit) {
         )
     }
 }
+
+@Composable
+fun BottomInfoContent(modifier: Modifier = Modifier, paymentOverdue: Boolean, title: String, content: String) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        if (paymentOverdue && title == stringResource(R.string.due_to)) {
+            Icon(
+                modifier = Modifier.size(16.dp),
+                imageVector = ImageVector.vectorResource(id = R.drawable.debt_status_overdue),
+                tint = MaterialTheme.colorScheme.error,
+                contentDescription = null
+            )
+        }
+
+        Column(
+            modifier = modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = title,
+                fontWeight = FontWeight.Light,
+                style = MaterialTheme.typography.labelSmall
+            )
+            Text(
+                text = content,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+    }
+}
+
+@Composable
+fun BottomInfo(
+    dueTo: LocalDate,
+    debtAmount: Double,
+    paidAmount: Double,
+    paymentProgress: Float,
+    paymentOverdue: Boolean
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Spacer(Modifier.height(8.dp))
+        BottomInfoContent(
+            modifier = Modifier.weight(1f),
+            title = stringResource(R.string.due_to),
+            paymentOverdue = paymentOverdue,
+            content = dueTo.formatLocalDate()
+        )
+        VerticalDivider(
+            modifier = Modifier.fillMaxHeight()
+        )
+        BottomInfoContent(
+            modifier = Modifier.weight(1f),
+            title = stringResource(R.string.remaining),
+            paymentOverdue = paymentOverdue,
+            content = (debtAmount - paidAmount).toMzn()
+        )
+        VerticalDivider()
+        BottomInfoContent(
+            modifier = Modifier.weight(1f),
+            title = stringResource(R.string.paid),
+            paymentOverdue = paymentOverdue,
+            content = "${(paymentProgress * 100).toInt()}%"
+        )
+    }
+}
