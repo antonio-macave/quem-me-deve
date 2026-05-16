@@ -113,7 +113,10 @@ fun DebtStatus(debtStatus: Int) {
             contentDescription = null
         )
         Spacer(Modifier.width(4.dp))
-        Text(text = debtStatusText)
+        Text(
+            text = debtStatusText,
+            style = MaterialTheme.typography.bodySmall
+        )
     }
 }
 
