@@ -33,4 +33,8 @@ class DebtorsActivityViewModel(debtorsRepository: DebtorRepository) : ViewModel(
     fun updateCardExpanded(id: Int) {
         _cardExpanded.value = if (_cardExpanded.value == id) null else id
     }
+
+    fun getTotalDebt(debtorWithDebts: DebtorWithDebts): Double {
+        return debtorWithDebts.debts.sumOf { it.amount - it.paidAmount }
+    }
 }
