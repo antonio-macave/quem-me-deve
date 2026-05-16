@@ -217,7 +217,7 @@ fun TransactionsList(
     if (transactions.isNotEmpty()) {
         LazyColumn {
             itemsIndexed(items = transactions) { _, item ->
-                TransactionItem(transaction = item)
+                TransactionItem(transaction = item, viewModel = viewModel)
             }
         }
     } else {
