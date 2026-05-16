@@ -40,9 +40,3 @@ fun AppBar(title: String, okEnabled: Boolean, onOkListener: () -> Unit, onCancel
         )
     )
 }
-
-@Preview
-@Composable
-fun OnPrev() {
-    AppBar("Criar Devedor", {}) { }
-}

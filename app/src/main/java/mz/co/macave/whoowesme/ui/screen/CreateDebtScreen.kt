@@ -325,12 +325,3 @@ fun AdditionalNotesField(viewModel: CreateDebtViewModel) {
         maxLines = 4
     )
 }
-
-@Preview
-@Composable
-fun CreateDebtPreviews() {
-    //AmountField()
-    //NameFields()
-    DescriptionField()
-    ExistingDebtorSelector {  }
-}

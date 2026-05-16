@@ -1,8 +1,6 @@
 package mz.co.macave.whoowesme.ui.screen
 
 import android.content.Intent
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -26,12 +24,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,7 +39,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -219,34 +215,4 @@ fun BottomButtons(onPrimaryClick: () -> Unit, onSecondaryClick: () -> Unit) {
             Text(text = stringResource(R.string.debt))
         }
     }
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview
-@Composable
-fun Previews() {
-    //BottomButtons(onPrimaryClick = { }) { }
-    val now = LocalDate.now()
-    val debt = Debt(
-        id = 1,
-        status = 0,
-        description = "Car",
-        additionalNotes = "5 prestações",
-        amount = 20000.0,
-        debtorId = 1,
-        dueTo = now
-    )
-
-
-    val debtor = Debtor(
-        id = 2,
-        name = "Name",
-        surname = "Surname",
-        contactNumber = "821234567",
-
-    )
-
-    DebtorItem(debtor = debtor)
-    //DebtorSituation(0.0)
-    //Header("Tonny")
 }
