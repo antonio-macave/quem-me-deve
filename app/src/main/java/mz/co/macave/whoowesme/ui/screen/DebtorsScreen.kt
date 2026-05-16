@@ -110,6 +110,8 @@ fun DebtorItem(
 
     val context = LocalContext.current
     val visible by viewModel.cardExpanded.collectAsStateWithLifecycle()
+    val totalDebt = viewModel.getTotalDebt(debtorsWithDebts)
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -135,12 +137,8 @@ fun DebtorItem(
                             text = "${debtorsWithDebts.debtor.name} ${debtorsWithDebts.debtor.surname}",
                             style = MaterialTheme.typography.titleMedium,
                         )
-
-                        Text(
-                            text = debtor.contactNumber,
-                            style = MaterialTheme.typography.bodyMedium,
-                            //color = if (debt.amount >= 0) GoodSituation else RedSituation
-                        )
+                        Spacer(Modifier.height(4.dp))
+                        TotalDebts(totalDebt)
                     }
                 }
                 Spacer(Modifier.height(6.dp))
