@@ -53,9 +53,13 @@ import mz.co.macave.whoowesme.viewmodel.MainActivityViewModel
 
 
 @Composable
-fun DebtsList(viewModel: MainActivityViewModel, debts: List<DebtCardItem>, onDebtClick: (DebtCardItem) -> Unit) {
+fun DebtsList(
+    viewModel: MainActivityViewModel,
+    debts: List<DebtCardItem>,
+    onDebtClick: (DebtCardItem) -> Unit
+) {
     LazyColumn {
-        itemsIndexed(items =  debts) { index, item ->
+        itemsIndexed(items = debts) { index, item ->
             DebtItem(viewModel, debt = debts[index]) { onDebtClick(item) }
         }
     }
@@ -113,11 +117,11 @@ fun DebtorItem(
             .fillMaxWidth()
             .padding(8.dp)
             .clickable(onClick = { viewModel.updateCardExpanded(debtorsWithDebts.debtor.id) })
-   ) {
+    ) {
         Row(
             modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
+                .padding(16.dp)
+                .fillMaxWidth()
         ) {
             Header(debtorsWithDebts.debtor.name)
             Spacer(Modifier.width(8.dp))
