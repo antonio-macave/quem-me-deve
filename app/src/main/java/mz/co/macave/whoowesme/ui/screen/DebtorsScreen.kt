@@ -57,11 +57,10 @@ import mz.co.macave.whoowesme.viewmodel.MainActivityViewModel
 
 
 @Composable
-fun DebtsList(debts: List<Debt>, onDebtClick: (Debt) -> Unit) {
-    val context = LocalContext.current
+fun DebtsList(viewModel: MainActivityViewModel, debts: List<DebtCardItem>, onDebtClick: (DebtCardItem) -> Unit) {
     LazyColumn {
         itemsIndexed(items =  debts) { index, item ->
-            DebtItem(debt = debts[index]) { onDebtClick(item) }
+            DebtItem(viewModel, debt = debts[index]) { onDebtClick(item) }
         }
     }
 }
