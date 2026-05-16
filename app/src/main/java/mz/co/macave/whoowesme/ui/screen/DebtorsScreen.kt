@@ -142,7 +142,6 @@ fun DebtorItem(
                     }
                 }
                 Spacer(Modifier.height(6.dp))
-                DebtorSituation(200.00)
                 Spacer(Modifier.height(6.dp))
                 AnimatedVisibility(
                     visible = visible == debtorsWithDebts.debtor.id,
