@@ -142,7 +142,12 @@ fun DebtFilter(debts: List<Debt>, onClick: (List<Debt>) -> Unit) {
 
     Row(
         modifier = Modifier
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(
+                top = 4.dp,
+                bottom = 0.dp,
+                start = 16.dp,
+                end = 16.dp
+            )
             .horizontalScroll(state = scrollState)
     ) {
         FilterChip(
