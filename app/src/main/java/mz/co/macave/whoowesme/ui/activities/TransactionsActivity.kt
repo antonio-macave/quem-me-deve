@@ -64,7 +64,6 @@ class TransactionsActivity : ComponentActivity() {
             }
             val viewModel: TransactionsActivityViewModel = viewModel(factory = factory)
 
-
             WhoOwesMeTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
