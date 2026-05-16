@@ -204,10 +204,13 @@ fun DueDate(viewModel: CreateDebtViewModel, onDialogRequestListener: () -> Unit)
 
     if (showDialog) {
         val datePickerState = rememberDatePickerState()
+        val okEnabled = datePickerState.selectedDateMillis != null
+
         DatePickerDialog(
             onDismissRequest = { onDialogRequestListener() },
             confirmButton = {
                 TextButton(
+                    enabled = okEnabled,
                     onClick = {
                         viewModel.pickDate(datePickerState.selectedDateMillis)
                         viewModel.updateShowDueDateDialog(false)
