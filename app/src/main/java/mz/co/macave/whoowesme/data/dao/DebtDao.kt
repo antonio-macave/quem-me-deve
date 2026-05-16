@@ -34,6 +34,9 @@ interface DebtDao {
     @Query("SELECT * FROM debts WHERE id IN (:debtIds)")
     suspend fun loadAllDebtsById(debtIds: IntArray): List<Debt>
 
+     @Query("SELECT * FROM debts WHERE id = :debtId")
+     suspend fun findDebtById(debtId: Int): Debt
+
     @Query("UPDATE debts SET paidAmount = :paidAmount WHERE id = :debtId")
     suspend fun savePaidAmount(debtId: Int, paidAmount: Double)
 
