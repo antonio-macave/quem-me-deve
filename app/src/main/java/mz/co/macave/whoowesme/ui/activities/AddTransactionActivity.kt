@@ -74,6 +74,7 @@ class AddTransactionActivity : ComponentActivity() {
                                     date = viewModel.transactionDate.value!!.toLocalDate()
                                 )
                                 viewModel.saveTransaction(transaction)
+                                finish()
                             }
                         )
                     }
