@@ -242,7 +242,12 @@ fun DebtFilter(debts: List<Debt>, onClick: (List<Debt>) -> Unit) {
 }
 
 @Composable
-fun BottomInfoContent(modifier: Modifier = Modifier, paymentOverdue: Boolean, title: String, content: String) {
+fun BottomInfoContent(
+    modifier: Modifier = Modifier,
+    paymentOverdue: Boolean,
+    title: String,
+    content: String
+) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
