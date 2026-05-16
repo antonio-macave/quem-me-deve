@@ -87,12 +87,15 @@ fun AddTransactionContent(viewModel: AddTransactionViewModel) {
         TotalPaymentSwitch(isTotalPayment) {
             val totalPaymentEnabled = !isTotalPayment
             viewModel.updateIsTotalPayment(totalPaymentEnabled)
+            val debt = viewModel.debt.value
             val amount = if (totalPaymentEnabled) {
-                (viewModel.debtAmount.value - viewModel.paidAmount.value).toString()
+                debt?.let {
+                    (it.amount - it.paidAmount).toString()
+                }
             } else {
                 ""
             }
-            viewModel.updateAmount(amount)
+            viewModel.updateAmount(amount ?: "0")
         }
     }
     Spacer(Modifier.height(16.dp))
