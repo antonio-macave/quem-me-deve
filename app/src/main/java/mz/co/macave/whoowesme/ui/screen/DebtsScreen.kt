@@ -100,7 +100,7 @@ fun DebtStatus(debtStatus: Int) {
     Row(
         modifier = Modifier
             .background(
-                color = MaterialTheme.colorScheme.surface,
+                color = if (debtStatus == DebtStatus.OVERDUE.code) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.primaryContainer,
                 shape = RoundedCornerShape(14.dp)
             )
             .padding(horizontal = 8.dp, vertical = 4.dp),
@@ -109,6 +109,7 @@ fun DebtStatus(debtStatus: Int) {
         Icon(
             modifier = Modifier.size(16.dp),
             imageVector = ImageVector.vectorResource(id = debtStatusIcon),
+            tint = if (debtStatus == DebtStatus.OVERDUE.code) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
             contentDescription = null
         )
         Spacer(Modifier.width(4.dp))
