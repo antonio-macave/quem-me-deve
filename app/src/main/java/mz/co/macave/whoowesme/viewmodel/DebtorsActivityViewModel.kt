@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import mz.co.macave.whoowesme.data.repository.DebtorRepository
+import mz.co.macave.whoowesme.model.DebtorWithDebts
 
 class DebtorsActivityViewModel(debtorsRepository: DebtorRepository) : ViewModel() {
 
@@ -20,6 +21,14 @@ class DebtorsActivityViewModel(debtorsRepository: DebtorRepository) : ViewModel(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
+
+    val debtorsWithDebts = debtorsRepository.getAllDebtorsWithDebts()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
+
 
     fun updateCardExpanded(id: Int) {
         _cardExpanded.value = if (_cardExpanded.value == id) null else id
