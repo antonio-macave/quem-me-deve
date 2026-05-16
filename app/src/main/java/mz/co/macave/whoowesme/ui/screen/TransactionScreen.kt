@@ -1,8 +1,6 @@
 package mz.co.macave.whoowesme.ui.screen
 
-import android.os.Build
 import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -42,7 +40,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.model.Transaction
@@ -50,7 +47,6 @@ import mz.co.macave.whoowesme.util.TransactionType
 import mz.co.macave.whoowesme.util.formatLocalDate
 import mz.co.macave.whoowesme.util.toMzn
 import mz.co.macave.whoowesme.viewmodel.TransactionsActivityViewModel
-import java.time.LocalDate
 
 @Composable
 fun TransactionItem(viewModel: TransactionsActivityViewModel, transaction: Transaction) {
