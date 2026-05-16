@@ -173,6 +173,24 @@ fun DebtInfo(debt: Debt) {
 
 }
 
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+fun TotalDebts(totalAmount: Double) {
+    Column(
+    ) {
+        Text(
+            text = "Total em dívida",
+            fontWeight = FontWeight.Light,
+            style = MaterialTheme.typography.labelSmall
+        )
+        Text(
+            text = totalAmount.toMzn(),
+            style = MaterialTheme.typography.labelMedium
+        )
+    }
+}
+
 @Composable
 fun BottomButtons(onPrimaryClick: () -> Unit, onSecondaryClick: () -> Unit) {
     Row(
