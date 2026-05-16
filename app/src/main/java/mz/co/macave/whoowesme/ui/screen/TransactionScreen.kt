@@ -82,6 +82,47 @@ fun TransactionItem(transaction: Transaction) {
 
 
 @Composable
+fun TransactionContextMenu(
+    menuExpanded: Boolean,
+    viewModel: TransactionsActivityViewModel,
+    transaction: Transaction,
+    onDismissRequest: () -> Unit
+) {
+
+    DropdownMenu(
+        expanded = menuExpanded,
+        onDismissRequest = { onDismissRequest() }
+    ) {
+
+        DropdownMenuItem(
+            onClick = {
+                onDismissRequest()
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = null
+                )
+            },
+            text = { Text(text = stringResource(R.string.edit)) }
+        )
+        DropdownMenuItem(
+            onClick = {
+                viewModel.deleteTransaction(transaction)
+                onDismissRequest()
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = null
+                )
+            },
+            text = { Text(text = stringResource(R.string.delete)) }
+        )
+    }
+}
+
+@Composable
 fun TransactionsList(
     viewModel: TransactionsActivityViewModel,
 ) {
