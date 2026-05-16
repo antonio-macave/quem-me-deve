@@ -121,9 +121,15 @@ class AddTransactionViewModel(
             TransactionType.CREDIT.ordinal -> _paidAmount.value - transaction.amount
             else -> _debtAmount.value
         }
+
+        val newDebtAmount = when (transaction.type) {
+            TransactionType.DEBIT.ordinal -> _debtAmount.value + transaction.amount
+            TransactionType.CREDIT.ordinal -> _debtAmount.value - transaction.amount
+            else -> _debtAmount.value
+        }
         viewModelScope.launch {
             transactionRepository.saveTransaction(transaction)
-            debtRepository.savePaidAmount(debtId = debtId.value!!, paidAmount = newPaidAmount)
+            debtRepository.savePaidAmount(debtId = debtId.value!!, paidAmount = newPaidAmount, newDebtAmount = newDebtAmount)
         }
     }
 
