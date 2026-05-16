@@ -41,17 +41,19 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.model.Debt
-import mz.co.macave.whoowesme.model.Debtor
+import mz.co.macave.whoowesme.model.DebtCardItem
+import mz.co.macave.whoowesme.model.DebtorWithDebts
 import mz.co.macave.whoowesme.ui.activities.TransactionsActivity
+import mz.co.macave.whoowesme.util.toMzn
 import mz.co.macave.whoowesme.viewmodel.DebtorsActivityViewModel
-import java.time.LocalDate
+import mz.co.macave.whoowesme.viewmodel.MainActivityViewModel
 
 
 @Composable
