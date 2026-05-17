@@ -29,14 +29,18 @@ class CreateDebtorActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+
+        val db = DatabaseProvider.getDatabase(applicationContext)
+        val dao = db.debtorDao()
+        val repository = DebtorRepository(dao)
+        val factory = ViewModelFactory { CreateDebtorViewModel(repository) }
+        val viewModel: CreateDebtorViewModel by viewModels { factory }
+
+
         setContent {
 
             val scope = rememberCoroutineScope()
-            val db = DatabaseProvider.getDatabase(applicationContext)
-            val dao = db.debtorDao()
-            val repository = DebtorRepository(dao)
-            val factory = ViewModelFactory { CreateDebtorViewModel(repository) }
-            val viewModel: CreateDebtorViewModel by viewModels { factory }
             val snackbarHost = remember { SnackbarHostState() }
 
             val okEnabled =
