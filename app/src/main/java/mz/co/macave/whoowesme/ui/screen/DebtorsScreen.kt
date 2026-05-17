@@ -120,6 +120,8 @@ fun DebtorItem(
 
     val context = LocalContext.current
     val visible by viewModel.cardExpanded.collectAsStateWithLifecycle()
+    var menuExpanded by remember { mutableStateOf(false) }
+    var isConfirmationDialogOpen by remember { mutableStateOf(false) }
     val totalDebt = viewModel.getTotalDebt(debtorsWithDebts)
 
     OutlinedCard(
@@ -136,7 +138,7 @@ fun DebtorItem(
             Header(debtorsWithDebts.debtor.name)
             Spacer(Modifier.width(8.dp))
             Column(
-
+                   modifier = Modifier.weight(0.9f)
             ) {
                 Row {
                     Column {
@@ -169,6 +171,39 @@ fun DebtorItem(
                     )
                 }
 
+            }
+            Box(
+                modifier = Modifier
+                    .padding(
+                        horizontal = 8.dp,
+                        vertical = 4.dp
+                    )
+                    .size(20.dp)
+                    .background(
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .clickable {
+                        menuExpanded = true
+                    }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = null,
+                )
+
+                DebtorContextMenu(
+                    menuExpanded = menuExpanded,
+                    onDismissRequest = { menuExpanded = false }
+                ) {
+                    isConfirmationDialogOpen = true
+                }
+            }
+            DeleteDebtorConfirmationDialog(
+                showDialog = isConfirmationDialogOpen,
+                onDismissRequest = { isConfirmationDialogOpen = false }
+            ) {
+                viewModel.deleteDebtor(debtorsWithDebts.debtor)
             }
         }
     }
