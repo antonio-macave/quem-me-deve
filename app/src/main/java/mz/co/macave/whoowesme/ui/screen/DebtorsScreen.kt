@@ -135,10 +135,10 @@ fun DebtorItem(
             .padding(8.dp)
             .clickable(onClick = { viewModel.updateCardExpanded(debtorsWithDebts.debtor.id) })
     ) {
-        Row(
+        Column(
             modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
+            .padding(16.dp)
+            .fillMaxWidth()
         ) {
             Row {
                 Header(debtorsWithDebts.debtor.name)
@@ -181,18 +181,19 @@ fun DebtorItem(
                         contentDescription = null,
                     )
 
-                DebtorContextMenu(
-                    menuExpanded = menuExpanded,
-                    onDismissRequest = { menuExpanded = false }
-                ) {
-                    isConfirmationDialogOpen = true
+                    DebtorContextMenu(
+                        menuExpanded = menuExpanded,
+                        onDismissRequest = { menuExpanded = false }
+                    ) {
+                        isConfirmationDialogOpen = true
+                    }
                 }
-            }
-            DeleteDebtorConfirmationDialog(
-                showDialog = isConfirmationDialogOpen,
-                onDismissRequest = { isConfirmationDialogOpen = false }
-            ) {
-                viewModel.deleteDebtor(debtorsWithDebts.debtor)
+                DeleteDebtorConfirmationDialog(
+                    showDialog = isConfirmationDialogOpen,
+                    onDismissRequest = { isConfirmationDialogOpen = false }
+                ) {
+                    viewModel.deleteDebtor(debtorsWithDebts.debtor)
+                }
             }
             Spacer(Modifier.height(8.dp))
             AnimatedVisibility(
