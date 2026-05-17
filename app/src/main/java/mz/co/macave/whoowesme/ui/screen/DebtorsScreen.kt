@@ -46,6 +46,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -217,18 +218,47 @@ fun DebtInfo(debt: Debt) {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun TotalDebts(totalAmount: Double) {
+fun TotalDebts(totalAmount: Double, debtsCount: Int) {
     Column(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = "Total em dívida",
-            fontWeight = FontWeight.Light,
-            style = MaterialTheme.typography.labelSmall
-        )
-        Text(
-            text = totalAmount.toMzn(),
-            style = MaterialTheme.typography.labelMedium
-        )
+
+        Spacer(Modifier.height(8.dp))
+
+        Row(
+            modifier = Modifier.height(IntrinsicSize.Min)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+            ) {
+                Text(
+                    text = "Total em dívida",
+                    fontWeight = FontWeight.Light,
+                    style = MaterialTheme.typography.labelSmall
+                )
+                Text(
+                    text = totalAmount.toMzn(),
+                    style = MaterialTheme.typography.labelMedium
+                )
+            }
+
+            VerticalDivider(
+                modifier = Modifier.fillMaxHeight().padding(4.dp)
+            )
+
+            Column(
+                modifier = Modifier.fillMaxHeight(),
+                verticalArrangement = Arrangement.Bottom
+            ) {
+                Text(
+                    text = pluralStringResource(R.plurals.debts_count, debtsCount, debtsCount),
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.Light,
+                )
+            }
+        }
     }
 }
 
