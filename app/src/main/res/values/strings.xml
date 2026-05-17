@@ -50,4 +50,18 @@
     <string name="contact_number">Contacto</string>
     <string name="debtor_created">Devedor criado.</string>
     <string name="title_activity_add_transaction">Adicionar Transação</string>
+
+
+    <plurals name="debts_count">
+        <item quantity="zero">Nenhuma dívida</item>
+        <item quantity="one">%d dívida</item>
+        <item quantity="other">%d dívidas</item>
+    </plurals>
+
+    <plurals name="transactions_count">
+        <item quantity="zero">Nenhuma transação</item>
+        <item quantity="one">%d transação</item>
+        <item quantity="other">%d transações</item>
+    </plurals>
+
 </resources>
