@@ -140,66 +140,46 @@ fun DebtorItem(
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
-            Header(debtorsWithDebts.debtor.name)
-            Spacer(Modifier.width(8.dp))
-            Column(
-                   modifier = Modifier.weight(0.9f)
-            ) {
-                Row {
-                    Column {
-                        Text(
-                            text = "${debtorsWithDebts.debtor.name} ${debtorsWithDebts.debtor.surname}",
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                        Spacer(Modifier.height(4.dp))
-                        TotalDebts(totalDebt)
-                    }
-                }
-                Spacer(Modifier.height(6.dp))
-                Spacer(Modifier.height(6.dp))
-                AnimatedVisibility(
-                    visible = visible == debtorsWithDebts.debtor.id,
-                    enter = fadeIn() + expandVertically(),
-                    exit = fadeOut() + shrinkVertically(),
+            Row {
+                Header(debtorsWithDebts.debtor.name)
+                Spacer(Modifier.width(8.dp))
+                Column(
+                    modifier = Modifier.weight(0.9f)
                 ) {
-                    BottomButtons(
-                        onPrimaryClick = {
-
-                        },
-                        onSecondaryClick = {
-                            val intent = Intent(context, TransactionsActivity::class.java).apply {
-                                putExtra("debtorId", debtorsWithDebts.debtor.id)
-                                putExtra("debtorName", "${debtorsWithDebts.debtor.name} ${debtorsWithDebts.debtor.surname}")
-                            }
-                            context.startActivity(intent)
-                        }
-                    )
-                }
-
-            }
-            Box(
-                modifier = Modifier
-                    .padding(
-                        horizontal = 8.dp,
-                        vertical = 4.dp
-                    )
-                    .size(20.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    .clickable {
-                        menuExpanded = true
-                    }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.MoreVert,
-                    contentDescription = null,
-                )
+                    Row {
+                        Column {
+                            Text(
+                                text = "${debtorsWithDebts.debtor.name} ${debtorsWithDebts.debtor.surname}",
+                                style = MaterialTheme.typography.titleMedium,
+                            )
+                            Spacer(Modifier.height(8.dp))
                             TotalDebts(
                                 totalAmount = totalDebt,
                                 debtsCount = debtsCount
                             )
+                        }
+                    }
+                    Spacer(Modifier.height(6.dp))
+                }
+                Box(
+                    modifier = Modifier
+                        .padding(
+                            horizontal = 8.dp,
+                            vertical = 4.dp
+                        )
+                        .size(20.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        .clickable {
+                            menuExpanded = true
+                        }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = null,
+                    )
 
                 DebtorContextMenu(
                     menuExpanded = menuExpanded,
@@ -213,6 +193,25 @@ fun DebtorItem(
                 onDismissRequest = { isConfirmationDialogOpen = false }
             ) {
                 viewModel.deleteDebtor(debtorsWithDebts.debtor)
+            }
+            Spacer(Modifier.height(8.dp))
+            AnimatedVisibility(
+                visible = visible == debtorsWithDebts.debtor.id,
+                enter = fadeIn() + expandVertically(),
+                exit = fadeOut() + shrinkVertically(),
+            ) {
+                BottomButtons(
+                    onPrimaryClick = {
+
+                    },
+                    onSecondaryClick = {
+                        val intent = Intent(context, TransactionsActivity::class.java).apply {
+                            putExtra("debtorId", debtorsWithDebts.debtor.id)
+                            putExtra("debtorName", "${debtorsWithDebts.debtor.name} ${debtorsWithDebts.debtor.surname}")
+                        }
+                        context.startActivity(intent)
+                    }
+                )
             }
         }
     }
