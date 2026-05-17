@@ -23,6 +23,10 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -32,6 +36,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -188,6 +193,43 @@ fun TotalDebts(totalAmount: Double) {
         Text(
             text = totalAmount.toMzn(),
             style = MaterialTheme.typography.labelMedium
+        )
+    }
+}
+
+
+@Composable
+fun DeleteDebtorConfirmationDialog(
+    showDialog: Boolean,
+    onDismissRequest: () -> Unit,
+    onConfirmation: () -> Unit
+) {
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { onDismissRequest() },
+            title = {
+                Text(
+                    text = stringResource(R.string.are_you_sure),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        onDismissRequest()
+                        onConfirmation()
+                    }
+                ) {
+                    Text(stringResource(R.string.yes))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { onDismissRequest() }
+                ) {
+                    Text(stringResource(android.R.string.cancel))
+                }
+            },
         )
     }
 }
