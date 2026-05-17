@@ -233,10 +233,9 @@ fun TotalDebts(totalAmount: Double, debtsCount: Int) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(
-            ) {
+            Column {
                 Text(
-                    text = "Total em dívida",
+                    text = stringResource(R.string.total_debt),
                     fontWeight = FontWeight.Light,
                     style = MaterialTheme.typography.labelSmall
                 )
