@@ -182,19 +182,34 @@ fun FabMenu(viewModel: MainActivityViewModel = viewModel(), onClick: (index: Int
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(viewModel: MainActivityViewModel, onActionClick: () -> Unit) {
+    val context = LocalContext.current
     TopAppBar(
-        title = { Text(text = stringResource(R.string.app_name)) },
+        title = {
+            Text(
+                text = stringResource(R.string.app_name),
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        },
         actions = {
             IconButton(onClick = { viewModel.updateShowSortDebtsDialog(true) }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.Sort,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
-            IconButton(onClick = onActionClick) {
+
+            IconButton(
+                onClick = {
+                    viewModel.updateOverflowMenuExpanded(false)
+                    val intent = Intent(context, DebtorsActivity::class.java)
+                    context.startActivity(intent)
+                }
+            ) {
                 Icon(
-                    imageVector = Icons.Default.MoreVert,
-                    contentDescription = stringResource(R.string.more_options)
+                    imageVector = Icons.Default.People,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
         },
