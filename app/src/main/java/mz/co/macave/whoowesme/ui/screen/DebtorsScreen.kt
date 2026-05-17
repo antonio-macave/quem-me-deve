@@ -11,8 +11,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,6 +39,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -124,6 +127,7 @@ fun DebtorItem(
     var menuExpanded by remember { mutableStateOf(false) }
     var isConfirmationDialogOpen by remember { mutableStateOf(false) }
     val totalDebt = viewModel.getTotalDebt(debtorsWithDebts)
+    val debtsCount = debtorsWithDebts.debts.size
 
     OutlinedCard(
         modifier = Modifier
@@ -192,6 +196,10 @@ fun DebtorItem(
                     imageVector = Icons.Default.MoreVert,
                     contentDescription = null,
                 )
+                            TotalDebts(
+                                totalAmount = totalDebt,
+                                debtsCount = debtsCount
+                            )
 
                 DebtorContextMenu(
                     menuExpanded = menuExpanded,
