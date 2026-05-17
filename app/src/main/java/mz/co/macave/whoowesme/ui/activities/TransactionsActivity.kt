@@ -94,7 +94,10 @@ fun TransactionsTopAppBar(title: String?, viewModel: TransactionsActivityViewMod
     TopAppBar(
         title = {
             if (title != null) {
-                Text(text = title)
+                Text(
+                    text = title,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
             }
         },
         navigationIcon = {
@@ -111,7 +114,8 @@ fun TransactionsTopAppBar(title: String?, viewModel: TransactionsActivityViewMod
             ) {
                 Icon(
                     imageVector = Icons.Default.PersonOutline,
-                    contentDescription = stringResource(R.string.profile)
+                    contentDescription = stringResource(R.string.profile),
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
 
@@ -127,7 +131,8 @@ fun TransactionsTopAppBar(title: String?, viewModel: TransactionsActivityViewMod
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(R.string.title_activity_add_transaction)
+                    contentDescription = stringResource(R.string.title_activity_add_transaction),
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
         },

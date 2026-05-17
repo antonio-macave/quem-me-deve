@@ -12,18 +12,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun AppBar(title: String, okEnabled: Boolean, onOkListener: () -> Unit, onCancelListener: () -> Unit) {
     CenterAlignedTopAppBar(
         {
-            Text(text = title)
+            Text(
+                text = title,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
         },
         navigationIcon = {
             IconButton(onClick = onCancelListener) {
-                Icon(imageVector = Icons.Default.Close, contentDescription = null)
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
+                )
             }
         },
         actions = {
@@ -31,7 +37,11 @@ fun AppBar(title: String, okEnabled: Boolean, onOkListener: () -> Unit, onCancel
                 onClick = { onOkListener() },
                 enabled = okEnabled
             ) {
-                Icon(imageVector = Icons.Default.Check, contentDescription = null)
+                Icon(
+                    imageVector = Icons.Default.Check,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
+                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(

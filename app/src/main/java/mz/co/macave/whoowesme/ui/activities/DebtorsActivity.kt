@@ -74,14 +74,20 @@ class DebtorsActivity : ComponentActivity() {
 @Composable
 fun DebtorsTopBar(title: String, onNavigationClick: () -> Unit) {
     TopAppBar(
-        title = { Text(text = title) },
+        title = {
+            Text(
+                text = title,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        },
         navigationIcon = {
             IconButton(
                 onClick = { onNavigationClick() }
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
         },
