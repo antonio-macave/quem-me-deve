@@ -218,12 +218,6 @@ fun DebtorItem(
     }
 }
 
-@Composable
-fun DebtInfo(debt: Debt) {
-
-}
-
-
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun TotalDebts(totalAmount: Double, debtsCount: Int) {
