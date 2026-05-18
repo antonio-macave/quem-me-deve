@@ -55,7 +55,10 @@ class CreateDebtorActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
                         AppBar(
-                            title = stringResource(R.string.title_activity_create_debtor),
+                            title = if (isEditing)
+                                stringResource(R.string.edit_debtor)
+                            else
+                                stringResource(R.string.title_activity_create_debtor),
                             onCancelListener = { finish() },
                             okEnabled = okEnabled,
                             onOkListener = {
