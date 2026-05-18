@@ -57,7 +57,6 @@ class CreateDebtorViewModel(val debtorRepository: DebtorRepository) : ViewModel(
             val debtor = Debtor(name = name, surname = surname, contactNumber = contactNumber)
             viewModelScope.launch {
                 debtorRepository.saveDebtor(debtor)
-                println("Debtor saved: $debtor")
             }
         }
     }
