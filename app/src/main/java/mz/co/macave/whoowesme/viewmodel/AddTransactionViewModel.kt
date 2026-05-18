@@ -11,6 +11,7 @@ import mz.co.macave.whoowesme.data.repository.TransactionRepository
 import mz.co.macave.whoowesme.model.Debt
 import mz.co.macave.whoowesme.model.Transaction
 import mz.co.macave.whoowesme.util.TransactionType
+import mz.co.macave.whoowesme.util.localDateToMillis
 
 class AddTransactionViewModel(
     val transactionRepository: TransactionRepository,
@@ -97,6 +98,16 @@ class AddTransactionViewModel(
     fun getDebtData(debtId: Int) {
         viewModelScope.launch {
             _debt.value = debtRepository.findDebtsByDebtorId(intArrayOf(debtId)).first()
+        }
+    }
+
+    fun loadTransaction(transactionId: Int) {
+        viewModelScope.launch {
+            val transaction = transactionRepository.findTransactionById(intArrayOf(transactionId)).first()
+            _amount.value = transaction.amount.toString()
+            _transactionType.value = transaction.type
+            _description.value = transaction.description
+            _transactionDate.value = localDateToMillis(transaction.date)
         }
     }
 
