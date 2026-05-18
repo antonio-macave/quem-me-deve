@@ -138,6 +138,24 @@ class AddTransactionViewModel(
             }
     }
 
+
+    fun save() {
+        val transaction = Transaction(
+            id = transactionId,
+            type = _transactionType.value,
+            amount = _amount.value.toDouble(),
+            date = _transactionDate.value!!.toLocalDate(),
+            description = _description.value,
+            debtId = _debtId.value!!
+        )
+
+        if (transactionId != -1) {
+            updateTransaction(transaction)
+        } else {
+            saveTransaction(transaction)
+        }
+    }
+
     fun saveTransaction(transaction: Transaction) {
         val newPaidAmount = when (transaction.type) {
             TransactionType.DEBIT.ordinal -> _paidAmount.value + transaction.amount
