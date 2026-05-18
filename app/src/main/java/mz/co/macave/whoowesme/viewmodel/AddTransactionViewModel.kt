@@ -12,6 +12,7 @@ import mz.co.macave.whoowesme.model.Debt
 import mz.co.macave.whoowesme.model.Transaction
 import mz.co.macave.whoowesme.util.TransactionType
 import mz.co.macave.whoowesme.util.localDateToMillis
+import mz.co.macave.whoowesme.util.toLocalDate
 
 class AddTransactionViewModel(
     val transactionRepository: TransactionRepository,
