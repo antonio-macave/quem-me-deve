@@ -64,7 +64,10 @@ class AddTransactionActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
                         AppBar(
-                            title = stringResource(R.string.title_activity_add_transaction),
+                            title = if (isEditing)
+                                stringResource(R.string.edit_transaction)
+                            else
+                                stringResource(R.string.title_activity_add_transaction),
                             okEnabled = okEnabled,
                             onCancelListener = { finish() },
                             onOkListener = {
