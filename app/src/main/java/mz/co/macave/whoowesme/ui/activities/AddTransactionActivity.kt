@@ -19,11 +19,9 @@ import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.data.DatabaseProvider
 import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.data.repository.TransactionRepository
-import mz.co.macave.whoowesme.model.Transaction
 import mz.co.macave.whoowesme.ui.activities.ui.theme.WhoOwesMeTheme
 import mz.co.macave.whoowesme.ui.screen.AddTransactionContent
 import mz.co.macave.whoowesme.ui.screen.AppBar
-import mz.co.macave.whoowesme.util.toLocalDate
 import mz.co.macave.whoowesme.viewmodel.AddTransactionViewModel
 import mz.co.macave.whoowesme.viewmodel.ViewModelFactory
 
