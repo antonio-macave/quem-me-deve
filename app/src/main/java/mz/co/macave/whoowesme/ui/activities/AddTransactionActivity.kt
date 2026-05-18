@@ -111,7 +111,7 @@ class AddTransactionActivity : ComponentActivity() {
                             .padding(innerPadding)
                             .padding(16.dp)
                     ) {
-                        AddTransactionContent(viewModel)
+                        AddTransactionContent(isEditing = isEditing, viewModel = viewModel)
                     }
                 }
             }
