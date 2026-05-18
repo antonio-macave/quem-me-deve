@@ -15,9 +15,14 @@ import androidx.compose.runtime.Composable
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun AppBar(title: String, okEnabled: Boolean, onOkListener: () -> Unit, onCancelListener: () -> Unit) {
+fun AppBar(
+    title: String,
+    okEnabled: Boolean,
+    onOkListener: () -> Unit,
+    onCancelListener: () -> Unit
+) {
     CenterAlignedTopAppBar(
-        {
+        title = {
             Text(
                 text = title,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
