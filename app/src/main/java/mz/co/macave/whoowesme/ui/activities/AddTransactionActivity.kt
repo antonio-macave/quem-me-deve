@@ -84,7 +84,7 @@ class AddTransactionActivity : ComponentActivity() {
                 ) { innerPadding ->
 
                     LaunchedEffect(debtId) {
-                        if (debtId != -1) {
+                        if (debtId != -1 && !isEditing) {
                             viewModel.getDebtData(debtId)
                         }
                     }
