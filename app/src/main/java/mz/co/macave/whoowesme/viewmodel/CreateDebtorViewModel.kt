@@ -14,6 +14,8 @@ import kotlin.collections.emptyList
 
 class CreateDebtorViewModel(val debtorRepository: DebtorRepository) : ViewModel() {
 
+    private var debtorId = -1
+
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> = _name.asStateFlow()
 
@@ -32,6 +34,10 @@ class CreateDebtorViewModel(val debtorRepository: DebtorRepository) : ViewModel(
         )
     fun updateName(newName: String) {
         _name.value = newName
+    }
+
+    fun updateDebtorId(newValue: Int) {
+        debtorId = newValue
     }
 
     fun updateSurname(newSurname: String) {
@@ -55,6 +61,22 @@ class CreateDebtorViewModel(val debtorRepository: DebtorRepository) : ViewModel(
             }
         }
     }
+
+    fun updateDebtor(debtor: Debtor) {
+        viewModelScope.launch {
+            debtorRepository.updateDebtor(debtor)
+        }
+    }
+
+    fun loadDebtor(debtorId: Int) {
+        viewModelScope.launch {
+            val debtor = debtorRepository.findDebtorsById(intArrayOf(debtorId))
+            _name.value = debtor.first().name
+            _surname.value = debtor.first().surname
+            _contactNumber.value = debtor.first().contactNumber
+        }
+    }
+
 
     fun save() {
         val debtor = Debtor(
