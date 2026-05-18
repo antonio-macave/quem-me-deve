@@ -18,6 +18,8 @@ class AddTransactionViewModel(
     val debtRepository: DebtRepository
 ) : ViewModel() {
 
+    private var transactionId = -1
+
     private val _amount = MutableStateFlow("")
     val amount: StateFlow<String> get() = _amount.asStateFlow()
 
@@ -58,6 +60,10 @@ class AddTransactionViewModel(
 
     fun updateDebtAmount(value: Double) {
         _debtAmount.value = value
+    }
+
+    fun updateTransactionId(newValue: Int) {
+        transactionId = newValue
     }
 
     fun updateRemainingBalance(value: Double) {
