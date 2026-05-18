@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -37,6 +38,8 @@ class CreateDebtorActivity : ComponentActivity() {
         val factory = ViewModelFactory { CreateDebtorViewModel(repository) }
         val viewModel: CreateDebtorViewModel by viewModels { factory }
 
+        val debtorId = intent.getIntExtra("debtorId", -1)
+        val isEditing = debtorId != -1
 
         setContent {
 
@@ -71,6 +74,17 @@ class CreateDebtorActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.padding(innerPadding)
                     ) {
+
+                        LaunchedEffect(debtorId) {
+                            viewModel.updateDebtorId(debtorId)
+                        }
+
+                        LaunchedEffect(debtorId) {
+                            if (debtorId != -1) {
+                                viewModel.loadDebtor(debtorId)
+                            }
+                        }
+
                         CreateDebtorContent(viewModel)
                     }
                 }
