@@ -68,11 +68,13 @@ import mz.co.macave.whoowesme.viewmodel.AddTransactionViewModel
 
 
 @Composable
-fun AddTransactionContent(viewModel: AddTransactionViewModel) {
+fun AddTransactionContent(isEditing: Boolean, viewModel: AddTransactionViewModel) {
     val transactionType by viewModel.transactionType.collectAsStateWithLifecycle()
     val isTotalPayment by viewModel.isTotalPayment.collectAsStateWithLifecycle()
 
-    CurrentDebtBalance(viewModel = viewModel)
+    if (!isEditing) {
+        CurrentDebtBalance(viewModel = viewModel)
+    }
     Spacer(Modifier.height(8.dp))
     TransactionTypeSelector(selectedOption = transactionType) { index ->
         viewModel.updateTransactionType(index)
