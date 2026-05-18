@@ -32,7 +32,9 @@ class AddTransactionActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val debtId = intent.getIntExtra("debtId", 0)
+        val debtId = intent.getIntExtra("debtId", -1)
+        val transactionId = intent.getIntExtra("transactionId", -1)
+        val isEditing = transactionId != -1
 
         val db = DatabaseProvider.getDatabase(applicationContext)
         val transactionDao = db.transactionDao()
