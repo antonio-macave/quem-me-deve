@@ -15,6 +15,10 @@ class DebtorRepository(private val debtorDao: DebtorDao) {
         debtorDao.delete(debtor)
     }
 
+    suspend fun updateDebtor(debtor: Debtor) {
+        return debtorDao.update(debtor)
+    }
+
     suspend fun findDebtorByNameAndSurname(name: String, surname: String): Debtor {
         return debtorDao.findByName(name, surname)
     }
