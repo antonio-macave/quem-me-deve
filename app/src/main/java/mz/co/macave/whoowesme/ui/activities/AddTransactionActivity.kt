@@ -69,14 +69,7 @@ class AddTransactionActivity : ComponentActivity() {
                             okEnabled = okEnabled,
                             onCancelListener = { finish() },
                             onOkListener = {
-                                val transaction = Transaction(
-                                    description = viewModel.description.value,
-                                    amount = viewModel.amount.value.toDouble(),
-                                    type = viewModel.transactionType.value,
-                                    debtId = viewModel.debtId.value!!,
-                                    date = viewModel.transactionDate.value!!.toLocalDate()
-                                )
-                                viewModel.saveTransaction(transaction)
+                                viewModel.save()
                                 finish()
                             }
                         )
