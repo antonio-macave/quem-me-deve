@@ -59,11 +59,7 @@ class CreateDebtorActivity : ComponentActivity() {
                             onCancelListener = { finish() },
                             okEnabled = okEnabled,
                             onOkListener = {
-                                viewModel.saveDebtor(
-                                    name = viewModel.name.value,
-                                    surname = viewModel.surname.value,
-                                    contactNumber = viewModel.contactNumber.value
-                                )
+                                viewModel.save()
                                 setResult(RESULT_OK)
                                 finish()
                             }

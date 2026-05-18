@@ -55,4 +55,18 @@ class CreateDebtorViewModel(val debtorRepository: DebtorRepository) : ViewModel(
             }
         }
     }
+
+    fun save() {
+        val debtor = Debtor(
+            id = debtorId,
+            name = name.value,
+            surname = surname.value,
+            contactNumber = contactNumber.value
+        )
+        if (debtorId != -1) {
+            updateDebtor(debtor)
+        } else {
+            saveDebtor()
+        }
+    }
 }
