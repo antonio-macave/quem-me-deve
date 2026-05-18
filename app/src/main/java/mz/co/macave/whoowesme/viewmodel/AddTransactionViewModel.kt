@@ -117,6 +117,12 @@ class AddTransactionViewModel(
         }
     }
 
+    fun updateTransaction(transaction: Transaction) {
+        viewModelScope.launch {
+            transactionRepository.updateTransaction(transaction)
+        }
+    }
+
     fun calculateRemainingBalance(amount: Double) {
         val balance =
             when (transactionType.value) {
