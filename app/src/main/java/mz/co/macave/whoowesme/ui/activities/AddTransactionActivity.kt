@@ -96,6 +96,16 @@ class AddTransactionActivity : ComponentActivity() {
                         }
                     }
 
+                    LaunchedEffect(transactionId) {
+                        viewModel.updateTransactionId(transactionId)
+                    }
+
+                    LaunchedEffect(transactionId) {
+                        if (transactionId != -1) {
+                            viewModel.loadTransaction(transactionId)
+                        }
+                    }
+
                     Column(
                         Modifier
                             .padding(innerPadding)
