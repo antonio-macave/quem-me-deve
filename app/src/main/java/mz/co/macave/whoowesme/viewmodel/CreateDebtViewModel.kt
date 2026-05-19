@@ -134,4 +134,45 @@ class CreateDebtViewModel(
         }
     }
 
+    fun save() {
+        val debt = Debt(
+            id = if (debtId == -1) 0 else debtId,
+            status = DebtStatus.PENDING.code,
+            description = _description.value,
+            additionalNotes = _additionalNotes.value,
+            amount = _amount.value.toDouble(),
+            dueTo = _dueToDate.value!!.toLocalDate(),
+            debtorId = _selectedDebtor.value?.id ?: 0,
+            paidAmount = 0.0
+        )
+        if (debtId == -1) {
+            saveDebt(debt)
+        } else {
+            updateDebt(debt)
+        }
+    }
+
+    fun loadDebt(debtId: Int, debtorId: Int) {
+        viewModelScope.launch {
+            val debtors = debtorsRepository.findDebtorById(debtorId)
+            _selectedDebtor.value = debtors
+
+            val debt = debtRepository.findDebtById(debtId)
+            _selectedDebtor.let {
+                _name.value = it.value?.name ?: ""
+                _surname.value = it.value?.surname ?: ""
+            }
+            _description.value = debt.description
+            _dueToDate.value = localDateToMillis(debt.dueTo)
+            _additionalNotes.value = debt.additionalNotes
+            _amount.value = debt.amount.toString()
+        }
+    }
+
+    fun updateDebt(debt: Debt) {
+        viewModelScope.launch {
+            debtRepository.updateDebt(debt)
+        }
+    }
+
 }
