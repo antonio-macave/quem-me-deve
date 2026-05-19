@@ -167,6 +167,24 @@ fun ExistingDebtorSelector(viewModel: CreateDebtViewModel) {
     }
 }
 
+
+@Composable
+fun FieldsHeader(title: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = 16.dp,
+                vertical = 4.dp
+            )
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodySmall
+        )
+    }
+}
+
 @Composable
 fun AmountField(viewModel: CreateDebtViewModel) {
     Row(
