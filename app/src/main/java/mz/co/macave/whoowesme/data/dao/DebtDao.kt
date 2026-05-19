@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import mz.co.macave.whoowesme.model.Debt
 import mz.co.macave.whoowesme.model.DebtCardItem
@@ -40,10 +41,15 @@ interface DebtDao {
     @Query("UPDATE debts SET paidAmount = :paidAmount, amount = :newDebtAmount WHERE id = :debtId")
     suspend fun savePaidAmount(debtId: Int, paidAmount: Double, newDebtAmount: Double)
 
+    @Update
+    suspend fun update(debt: Debt)
     @Insert
     suspend fun insertAll(vararg debts: Debt)
 
     @Delete
     suspend fun delete(debt: Debt)
+
+    @Query("DELETE FROM debts WHERE id = :debtId")
+    suspend fun deleteById(debtId: Int)
 
 }
