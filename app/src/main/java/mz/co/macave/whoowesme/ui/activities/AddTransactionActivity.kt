@@ -69,8 +69,11 @@ class AddTransactionActivity : ComponentActivity() {
                                 stringResource(R.string.edit_transaction)
                             else
                                 stringResource(R.string.title_activity_add_transaction),
-                            okEnabled = okEnabled,
                             okEnabled = saveButtonEnabled,
+                            okButtonText = if (isEditing)
+                                    stringResource(R.string.update)
+                                else
+                                    stringResource(R.string.save),
                             onCancelListener = { finish() },
                             onOkListener = {
                                 viewModel.save()
