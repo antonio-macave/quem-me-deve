@@ -53,8 +53,16 @@ class CreateDebtActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
                         AppBar(
-                            title = stringResource(R.string.title_activity_create_debt),
+                            title = if (isEditing)
+                                    stringResource(R.string.edit_debt)
+                                else
+                                    stringResource(R.string.title_activity_create_debt),
                             onCancelListener = { finish() },
+                            okEnabled = saveButtonEnabled,
+                            okButtonText = if (isEditing)
+                                stringResource(R.string.update)
+                            else
+                                stringResource(R.string.save),
                             onOkListener = {
                                 viewModel.save()
                                 finish()
