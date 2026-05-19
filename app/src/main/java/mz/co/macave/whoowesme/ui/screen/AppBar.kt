@@ -1,9 +1,8 @@
 package mz.co.macave.whoowesme.ui.screen
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -39,15 +38,11 @@ fun AppBar(
             }
         },
         actions = {
-            IconButton(
+            Button (
                 onClick = { onOkListener() },
                 enabled = okEnabled
             ) {
-                Icon(
-                    imageVector = Icons.Default.Check,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+                Text(text = okButtonText)
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
