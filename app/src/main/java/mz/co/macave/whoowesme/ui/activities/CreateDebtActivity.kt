@@ -31,6 +31,10 @@ class CreateDebtActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
+            val debtId = intent.getIntExtra("debtId", -1)
+            val debtorId = intent.getIntExtra("debtorId", -1)
+            val isEditing = debtId != -1 && debtorId != -1
+
             val db = DatabaseProvider.getDatabase(applicationContext)
             val debtDao = db.debtDao()
             val debtorDao = db.debtorDao()
@@ -39,6 +43,7 @@ class CreateDebtActivity : ComponentActivity() {
             val factory = ViewModelFactory {
                 CreateDebtViewModel(debtRepository, debtorRepository)
             }
+
             val viewModel: CreateDebtViewModel by viewModels { factory }
             val date by viewModel.dueToDate.collectAsStateWithLifecycle()
 
@@ -70,6 +75,19 @@ class CreateDebtActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.padding(innerPadding)
                     ) {
+
+                        LaunchedEffect(debtId) {
+                            if (debtId != -1) {
+                                viewModel.updateDebtId(debtId)
+                            }
+                        }
+
+                        LaunchedEffect(debtId) {
+                            if (debtId != -1) {
+                                viewModel.loadDebt(debtId, debtorId)
+                            }
+                        }
+
                         CreateDebt(viewModel)
                     }
                 }
