@@ -22,6 +22,7 @@ import mz.co.macave.whoowesme.data.repository.TransactionRepository
 import mz.co.macave.whoowesme.ui.activities.ui.theme.WhoOwesMeTheme
 import mz.co.macave.whoowesme.ui.screen.AddTransactionContent
 import mz.co.macave.whoowesme.ui.screen.AppBar
+import mz.co.macave.whoowesme.util.TransactionType
 import mz.co.macave.whoowesme.viewmodel.AddTransactionViewModel
 import mz.co.macave.whoowesme.viewmodel.ViewModelFactory
 
@@ -53,9 +54,11 @@ class AddTransactionActivity : ComponentActivity() {
             viewModel.updateDebtId(debtId)
             val debt by viewModel.debt.collectAsState()
 
-            val okEnabled = (viewModel.transactionType.collectAsState().value != 0 || viewModel.transactionType.collectAsState().value != 1) &&
-                    viewModel.amount.collectAsState().value.isNotEmpty() &&
-                    viewModel.transactionDate.collectAsState().value != null
+            val saveButtonEnabled = (viewModel.transactionType.collectAsState().value == TransactionType.CREDIT.type
+                    || viewModel.transactionType.collectAsState().value == TransactionType.DEBIT.type)
+                    && viewModel.amount.collectAsState().value.isNotEmpty()
+                    && viewModel.transactionDate.collectAsState().value != null
+                    && !viewModel.debtAmountError.collectAsState().value
 
             WhoOwesMeTheme {
                 Scaffold(
@@ -67,6 +70,7 @@ class AddTransactionActivity : ComponentActivity() {
                             else
                                 stringResource(R.string.title_activity_add_transaction),
                             okEnabled = okEnabled,
+                            okEnabled = saveButtonEnabled,
                             onCancelListener = { finish() },
                             onOkListener = {
                                 viewModel.save()
