@@ -21,6 +21,9 @@ class CreateDebtViewModel(
     val debtorsRepository: DebtorRepository,
 ) : ViewModel() {
 
+
+    private var debtId = -1
+
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> get() = _name.asStateFlow()
 
@@ -74,6 +77,10 @@ class CreateDebtViewModel(
 
     fun updateName(newValue: String) {
         _name.value = newValue
+    }
+
+    fun updateDebtId(newValue: Int) {
+        debtId = newValue
     }
 
     fun updateShowNewDebtorFields(newValue: Boolean) {
