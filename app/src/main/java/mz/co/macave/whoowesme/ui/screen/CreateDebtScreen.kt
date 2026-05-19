@@ -194,6 +194,8 @@ fun AmountField(viewModel: CreateDebtViewModel) {
     ) {
 
         val amountText by viewModel.amount.collectAsStateWithLifecycle()
+        val isError by viewModel.isAmountError.collectAsStateWithLifecycle()
+
         TextField(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -211,7 +213,16 @@ fun AmountField(viewModel: CreateDebtViewModel) {
             singleLine = true,
             label = { Text(text = stringResource(R.string.amount)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            suffix = { Text(text = "MZN") }
+            suffix = { Text(text = "MZN") },
+            isError = isError,
+            supportingText = {
+                if (isError) {
+                    Text(
+                        text = stringResource(R.string.invalid_amount),
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            }
         )
     }
 }
