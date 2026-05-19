@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 fun AppBar(
     title: String,
     okEnabled: Boolean,
+    okButtonText: String,
     onOkListener: () -> Unit,
     onCancelListener: () -> Unit
 ) {
