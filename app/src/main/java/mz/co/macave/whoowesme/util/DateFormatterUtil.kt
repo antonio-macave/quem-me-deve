@@ -39,6 +39,20 @@ fun formatDateFromMillis(millis: Long): String {
     return sdf.format(Date(millis))
 }
 
+fun localDateToMillis(localDate: LocalDate): Long {
+    return localDate
+        .atStartOfDay(ZoneId.systemDefault())
+        .toInstant()
+        .toEpochMilli()
+}
+
+fun millisToLocalDate(millis: Long): LocalDate {
+    return Instant
+        .ofEpochMilli(millis)
+        .atZone(ZoneId.systemDefault())
+        .toLocalDate()
+}
+
 fun Double.toMzn(): String {
     val numberFormat = NumberFormat.getNumberInstance(Locale.forLanguageTag("pt")).apply {
         maximumFractionDigits = 2
