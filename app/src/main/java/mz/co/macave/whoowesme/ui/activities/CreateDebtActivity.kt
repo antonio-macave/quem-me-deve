@@ -56,17 +56,7 @@ class CreateDebtActivity : ComponentActivity() {
                             title = stringResource(R.string.title_activity_create_debt),
                             onCancelListener = { finish() },
                             onOkListener = {
-
-                                val debt = Debt(
-                                    status = DebtStatus.PENDING.code,
-                                    description = viewModel.description.value,
-                                    additionalNotes = viewModel.additionalNotes.value,
-                                    amount = viewModel.amount.value.toDouble(),
-                                    dueTo = date!!.toLocalDate(),
-                                    debtorId = viewModel.selectedDebtor.value?.id ?: 0,
-                                    paidAmount = 0.0
-                                )
-                                viewModel.saveDebt(debt)
+                                viewModel.save()
                                 finish()
                             }
                         )
