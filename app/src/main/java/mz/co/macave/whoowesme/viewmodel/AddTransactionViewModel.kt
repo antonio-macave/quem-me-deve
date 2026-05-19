@@ -142,7 +142,7 @@ class AddTransactionViewModel(
 
     fun save() {
         val transaction = Transaction(
-            id = transactionId,
+            id = if (transactionId == -1) 0 else transactionId,
             type = _transactionType.value,
             amount = _amount.value.toDouble(),
             date = _transactionDate.value!!.toLocalDate(),
