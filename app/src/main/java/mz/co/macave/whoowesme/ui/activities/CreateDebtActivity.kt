@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -17,12 +19,9 @@ import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.data.DatabaseProvider
 import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.data.repository.DebtorRepository
-import mz.co.macave.whoowesme.model.Debt
 import mz.co.macave.whoowesme.ui.screen.AppBar
 import mz.co.macave.whoowesme.ui.screen.CreateDebt
 import mz.co.macave.whoowesme.ui.theme.WhoOwesMeTheme
-import mz.co.macave.whoowesme.util.DebtStatus
-import mz.co.macave.whoowesme.util.toLocalDate
 import mz.co.macave.whoowesme.viewmodel.CreateDebtViewModel
 import mz.co.macave.whoowesme.viewmodel.ViewModelFactory
 
