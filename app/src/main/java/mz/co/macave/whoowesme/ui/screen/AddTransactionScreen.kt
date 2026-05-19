@@ -152,6 +152,7 @@ fun TransactionTypeSelector(selectedOption: Int, onSelectedIndex: (Int) -> Unit)
 @Composable
 fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPayment: Boolean) {
     val amount by viewModel.amount.collectAsStateWithLifecycle()
+    val amountError by viewModel.debtAmountError.collectAsStateWithLifecycle()
     val remainingBalance by viewModel.remainingBalance.collectAsStateWithLifecycle()
     var isFocused by remember { mutableStateOf(false) }
     TextField(
@@ -165,7 +166,13 @@ fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPa
         onValueChange = {
             viewModel.updateAmount(it)
             if (it.isNotEmpty()) {
-                viewModel.calculateRemainingBalance(it.toDouble())
+                val amount = it.toDoubleOrNull()
+                if (amount != null) {
+                    if (amountError) viewModel.updateDebtAmountError(false)
+                    viewModel.calculateRemainingBalance(amount)
+                } else {
+                    viewModel.updateDebtAmountError(true)
+                }
             }
         },
         label = { Text(text = stringResource(R.string.amount)) },
@@ -176,14 +183,18 @@ fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPa
                 contentDescription = null
             )
         },
+        isError = amountError,
         supportingText = {
             AnimatedVisibility(visible = isFocused) {
                 Text(
-                    text = "${stringResource(R.string.remaining)}: ${remainingBalance.toMzn()}",
-                    color = if (remainingBalance > 0)
-                        TextFieldDefaults.colors().focusedTextColor
-                    else
-                        TextFieldDefaults.colors().errorSupportingTextColor
+                    text = if (!amountError)
+                                "${stringResource(R.string.remaining)}: ${remainingBalance.toMzn()}"
+                           else
+                                stringResource(R.string.invalid_amount),
+                    color = if (remainingBalance > 0 || !amountError)
+                                TextFieldDefaults.colors().focusedTextColor
+                            else
+                                TextFieldDefaults.colors().errorSupportingTextColor
                 )
             }
         },
