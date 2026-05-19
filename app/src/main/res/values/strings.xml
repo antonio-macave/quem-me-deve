@@ -35,6 +35,7 @@
     <string name="paid">Pago</string>
     <string name="edit">Editar</string>
     <string name="are_you_sure">Tem certeza?</string>
+    <string name="total_debt">Total em dívida</string>
     <string name="delete">Eliminar</string>
     <string name="paid_amount">Valor pago</string>
     <string name="yes">Sim</string>
@@ -46,6 +47,12 @@
     <string name="sort_by_option_date">Data</string>
     <string name="sort_by_option_amount">Valor</string>
     <string name="title_activity_create_debtor">Registar Devedor</string>
+    <string name="edit_debtor">Editar Devedor</string>
+    <string name="edit_debt">Editar Dívida</string>
+    <string name="edit_transaction">Editar Transação</string>
+    <string name="save">Gravar</string>
+    <string name="invalid_amount">Valor inválido</string>
+    <string name="update">Actualizar</string>
     <string name="optional">Opcional</string>
     <string name="contact_number">Contacto</string>
     <string name="debtor_created">Devedor criado.</string>
