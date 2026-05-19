@@ -18,7 +18,7 @@ import mz.co.macave.whoowesme.util.toLocalDate
 
 class CreateDebtViewModel(
     val debtRepository: DebtRepository,
-    debtorsRepository: DebtorRepository,
+    val debtorsRepository: DebtorRepository,
 ) : ViewModel() {
 
     private val _name = MutableStateFlow("")
