@@ -132,8 +132,7 @@ class AddTransactionViewModel(
     }
 
     fun calculateRemainingBalance(amount: Double) {
-        val balance =
-            when (transactionType.value) {
+        val balance = when (transactionType.value) {
                 TransactionType.CREDIT.type -> {
                     _remainingBalance.value = debtAmount.value - paidAmount.value - amount
                 }
