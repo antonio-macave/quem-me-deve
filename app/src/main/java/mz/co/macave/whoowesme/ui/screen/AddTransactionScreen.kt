@@ -53,9 +53,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -161,11 +159,7 @@ fun TransactionAmount(viewModel: AddTransactionViewModel = viewModel(), isFullPa
             .fillMaxWidth()
             .onFocusChanged {
                 isFocused = it.isFocused
-            }
-        ,
-        textStyle = TextStyle(
-            textAlign = TextAlign.End
-        ),
+            },
         value = amount,
         readOnly = isFullPayment, //If full payment, read-only
         onValueChange = {
