@@ -58,7 +58,11 @@ import mz.co.macave.whoowesme.viewmodel.CreateDebtViewModel
 
 @Composable
 fun CreateDebt(viewModel: CreateDebtViewModel) {
-    //NameFields()
+    FieldsHeader(stringResource(R.string.debtor))
+    ExistingDebtorSelector(viewModel = viewModel)
+    Spacer(Modifier.height(16.dp))
+
+    FieldsHeader(stringResource(R.string.debt))
     AmountField(viewModel)
     DueDate(viewModel) {  }
     DescriptionField(viewModel)
