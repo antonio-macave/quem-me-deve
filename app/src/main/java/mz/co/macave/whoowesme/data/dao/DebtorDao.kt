@@ -25,6 +25,9 @@ interface DebtorDao {
     @Query("SELECT * FROM debtors WHERE name LIKE :name OR surname LIKE :surname LIMIT 1")
     suspend fun findByName(name: String, surname: String): Debtor
 
+    @Query("SELECT * FROM debtors WHERE id = :debtorId LIMIT 1")
+    suspend fun findDebtorById(debtorId: Int): Debtor
+
     @Transaction
     @Query("SELECT * FROM debtors WHERE id = :debtorId")
     suspend fun getDebtorWithDebts(debtorId: Int): List<DebtorWithDebts>
