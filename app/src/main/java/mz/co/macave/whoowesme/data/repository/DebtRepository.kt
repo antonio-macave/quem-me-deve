@@ -23,6 +23,10 @@ class DebtRepository(private val debtDao: DebtDao) {
         return debtDao.getAllDebts()
     }
 
+    suspend fun updateDebt(debt: Debt) {
+        debtDao.update(debt)
+    }
+
     fun findDebtsWithDebtorName(): Flow<List<DebtCardItem>> {
         return debtDao.findDebtsWithDebtorName()
     }
@@ -34,6 +38,10 @@ class DebtRepository(private val debtDao: DebtDao) {
 
     suspend fun deleteDebt(debt: Debt) {
         debtDao.delete(debt)
+    }
+
+    suspend fun deleteById(debtId: Int) {
+        debtDao.deleteById(debtId)
     }
 
 }
