@@ -46,7 +46,7 @@ class CreateDebtorActivity : ComponentActivity() {
             val scope = rememberCoroutineScope()
             val snackbarHost = remember { SnackbarHostState() }
 
-            val okEnabled =
+            val saveButtonEnabled =
                 viewModel.name.collectAsState().value.isNotEmpty() &&
                 viewModel.surname.collectAsState().value.isNotEmpty()
 
@@ -60,7 +60,11 @@ class CreateDebtorActivity : ComponentActivity() {
                             else
                                 stringResource(R.string.title_activity_create_debtor),
                             onCancelListener = { finish() },
-                            okEnabled = okEnabled,
+                            okEnabled = saveButtonEnabled,
+                            okButtonText = if (isEditing)
+                                stringResource(R.string.update)
+                            else
+                                stringResource(R.string.save),
                             onOkListener = {
                                 viewModel.save()
                                 setResult(RESULT_OK)
