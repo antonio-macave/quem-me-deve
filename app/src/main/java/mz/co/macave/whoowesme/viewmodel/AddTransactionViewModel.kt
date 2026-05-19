@@ -42,6 +42,9 @@ class AddTransactionViewModel(
     private val _debtAmount = MutableStateFlow(0.0)
     val debtAmount: StateFlow<Double> get() = _debtAmount.asStateFlow()
 
+    private val _debtAmountError = MutableStateFlow(false)
+    val debtAmountError: StateFlow<Boolean> get() = _debtAmountError.asStateFlow()
+
     private val _debt = MutableStateFlow<Debt?>(null)
     val debt: StateFlow<Debt?> get() = _debt.asStateFlow()
 
@@ -61,6 +64,10 @@ class AddTransactionViewModel(
 
     fun updateDebtAmount(value: Double) {
         _debtAmount.value = value
+    }
+
+    fun updateDebtAmountError(value: Boolean) {
+        _debtAmountError.value = value
     }
 
     fun updateTransactionId(newValue: Int) {
