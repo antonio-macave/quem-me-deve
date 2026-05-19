@@ -12,6 +12,9 @@ import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.data.repository.DebtorRepository
 import mz.co.macave.whoowesme.model.Debt
 import mz.co.macave.whoowesme.model.Debtor
+import mz.co.macave.whoowesme.util.DebtStatus
+import mz.co.macave.whoowesme.util.localDateToMillis
+import mz.co.macave.whoowesme.util.toLocalDate
 
 class CreateDebtViewModel(
     val debtRepository: DebtRepository,
