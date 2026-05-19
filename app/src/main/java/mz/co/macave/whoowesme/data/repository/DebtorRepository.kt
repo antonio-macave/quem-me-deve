@@ -23,6 +23,10 @@ class DebtorRepository(private val debtorDao: DebtorDao) {
         return debtorDao.findByName(name, surname)
     }
 
+    suspend fun findDebtorById(debtorId: Int): Debtor {
+        return debtorDao.findDebtorById(debtorId)
+    }
+
     suspend fun getDebtorsWithDebts(debtorId: Int): List<DebtorWithDebts> {
         return debtorDao.getDebtorWithDebts(debtorId)
     }
