@@ -13,7 +13,7 @@ import mz.co.macave.whoowesme.model.DebtorWithDebts
 @Dao
 interface DebtorDao {
 
-    @Query("SELECT * FROM debtors")
+    @Query("SELECT * FROM debtors ORDER BY name ASC")
     fun getAllDebtors(): Flow<List<Debtor>>
 
     @Query("SELECT * FROM debtors")

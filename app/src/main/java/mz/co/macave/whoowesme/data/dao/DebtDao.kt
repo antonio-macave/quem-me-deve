@@ -29,6 +29,7 @@ interface DebtDao {
             debts.dueTo AS dueTo
         FROM debts
         INNER JOIN debtors ON debts.debtorId = debtors.id
+        ORDER BY dueTo ASC
         """)
     fun findDebtsWithDebtorName(): Flow<List<DebtCardItem>>
 

@@ -12,7 +12,7 @@ import mz.co.macave.whoowesme.model.Transaction
 interface TransactionDao {
 
     @androidx.room.Transaction
-    @Query("SELECT * FROM transactions WHERE debtId = :debtId")
+    @Query("SELECT * FROM transactions WHERE debtId = :debtId ORDER BY date DESC")
     fun loadAllTransactionsByDebtId(debtId: Int): Flow<List<Transaction>>
 
 
