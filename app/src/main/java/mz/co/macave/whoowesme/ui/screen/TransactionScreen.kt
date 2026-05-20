@@ -46,6 +46,7 @@ import mz.co.macave.whoowesme.viewmodel.TransactionsActivityViewModel
 fun TransactionItem(viewModel: TransactionsActivityViewModel, transaction: Transaction) {
     var menuExpanded by remember { mutableStateOf(false) }
     var isConfirmationDialogOpen by remember { mutableStateOf(false) }
+    val context = LocalContext.current
     OutlinedCard(
         modifier = Modifier
             .fillMaxWidth()
@@ -81,33 +82,24 @@ fun TransactionItem(viewModel: TransactionsActivityViewModel, transaction: Trans
                         )
                     }
                     Spacer(Modifier.width(4.dp))
-                    Box(
-                        modifier = Modifier
-                            .size(32.dp)
-                            .clip(RoundedCornerShape(14.dp))
-                            .background(MaterialTheme.colorScheme.surfaceVariant)
-                            .clickable { menuExpanded = true },
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.MoreVert,
-                            contentDescription = null,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
-                    TransactionContextMenu(
+                    ContextMenuButton(
                         menuExpanded = menuExpanded,
-                        onDismissRequest = { menuExpanded = false }
-                    ) {
-                        isConfirmationDialogOpen = true
-                    }
-                    DeleteSureDialog(
-                        isDialogOpen = isConfirmationDialogOpen,
-                        viewModel = viewModel,
-                        transaction = transaction
-                    ) {
-                        isConfirmationDialogOpen = false
-                    }
+                        isDeleteConfirmationDialogOpen = isConfirmationDialogOpen,
+                        onOpenDeleteConfirmationDialog = { isConfirmationDialogOpen = true },
+                        onDialogDismissRequest = { isConfirmationDialogOpen = false },
+                        onContextDismissRequest = { menuExpanded = false },
+                        onButtonClick = { menuExpanded = true },
+                        onEditClick = {
+                            val intent = Intent(context, AddTransactionActivity::class.java).apply {
+                                putExtra("transactionId", transaction.id)
+                                putExtra("debtId", transaction.debtId)
+                            }
+                            context.startActivity(intent)
+                        },
+                        onDeleteClick = {
+                            viewModel.deleteTransaction(transaction)
+                        }
+                    )
                 }
             }
 
