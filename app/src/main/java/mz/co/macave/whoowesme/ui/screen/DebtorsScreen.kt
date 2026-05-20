@@ -155,39 +155,23 @@ fun DebtorItem(
                     }
                     Spacer(Modifier.height(6.dp))
                 }
-                Box(
-                    modifier = Modifier
-                        .padding(
-                            horizontal = 8.dp,
-                            vertical = 4.dp
-                        )
-                        .size(20.dp)
-                        .background(
-                            color = MaterialTheme.colorScheme.surfaceVariant,
-                            shape = RoundedCornerShape(10.dp)
-                        )
-                        .clickable {
-                            menuExpanded = true
+                ContextMenuButton(
+                    menuExpanded = menuExpanded,
+                    isDeleteConfirmationDialogOpen = isConfirmationDialogOpen,
+                    onOpenDeleteConfirmationDialog = { isConfirmationDialogOpen = true },
+                    onDialogDismissRequest = { isConfirmationDialogOpen = false },
+                    onContextDismissRequest = { menuExpanded = false },
+                    onButtonClick = { menuExpanded = true },
+                    onEditClick = {
+                        val intent = Intent(context, CreateDebtorActivity::class.java).apply {
+                            putExtra("debtorId", debtorsWithDebts.debtor.id)
                         }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = null,
-                    )
-
-                    DebtorContextMenu(
-                        menuExpanded = menuExpanded,
-                        onDismissRequest = { menuExpanded = false }
-                    ) {
-                        isConfirmationDialogOpen = true
+                        context.startActivity(intent)
+                    },
+                    onDeleteClick = {
+                        viewModel.deleteDebtor(debtorsWithDebts.debtor)
                     }
-                }
-                DeleteDebtorConfirmationDialog(
-                    showDialog = isConfirmationDialogOpen,
-                    onDismissRequest = { isConfirmationDialogOpen = false }
-                ) {
-                    viewModel.deleteDebtor(debtorsWithDebts.debtor)
-                }
+                )
             }
             Spacer(Modifier.height(8.dp))
             AnimatedVisibility(
