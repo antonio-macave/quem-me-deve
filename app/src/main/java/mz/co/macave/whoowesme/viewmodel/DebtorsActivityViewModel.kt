@@ -40,4 +40,10 @@ class DebtorsActivityViewModel(val debtorsRepository: DebtorRepository) : ViewMo
     fun getTotalDebt(debtorWithDebts: DebtorWithDebts): Double {
         return debtorWithDebts.debts.sumOf { it.amount - it.paidAmount }
     }
+
+    fun deleteDebtor(debtor: Debtor) {
+        viewModelScope.launch {
+            debtorsRepository.deleteDebtor(debtor)
+        }
+    }
 }
