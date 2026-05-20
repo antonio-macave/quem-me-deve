@@ -26,20 +26,13 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -60,6 +53,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.model.DebtCardItem
 import mz.co.macave.whoowesme.model.DebtorWithDebts
+import mz.co.macave.whoowesme.ui.activities.CreateDebtorActivity
 import mz.co.macave.whoowesme.ui.activities.TransactionsActivity
 import mz.co.macave.whoowesme.util.toMzn
 import mz.co.macave.whoowesme.viewmodel.DebtorsActivityViewModel
@@ -137,8 +131,8 @@ fun DebtorItem(
     ) {
         Column(
             modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
+                .padding(16.dp)
+                .fillMaxWidth()
         ) {
             Row {
                 Header(debtorsWithDebts.debtor.name)
