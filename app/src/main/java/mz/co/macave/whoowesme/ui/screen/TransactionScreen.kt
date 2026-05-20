@@ -66,7 +66,37 @@ fun TransactionItem(viewModel: TransactionsActivityViewModel, transaction: Trans
             .padding(horizontal = 8.dp, vertical = 4.dp)
             .clickable{ }
     ) {
-        
+        TransactionHeader(
+            transactionType = transaction.type,
+            date = transaction.date.formatLocalDate()
+        ) {
+            Spacer(Modifier.weight(1f))
+            ContextMenuButton(
+                menuExpanded = menuExpanded,
+                isDeleteConfirmationDialogOpen = isConfirmationDialogOpen,
+                onOpenDeleteConfirmationDialog = { isConfirmationDialogOpen = true },
+                onDialogDismissRequest = { isConfirmationDialogOpen = false },
+                onContextDismissRequest = { menuExpanded = false },
+                onButtonClick = { menuExpanded = true },
+                onEditClick = {
+                    val intent = Intent(context, AddTransactionActivity::class.java).apply {
+                        putExtra("transactionId", transaction.id)
+                        putExtra("debtId", transaction.debtId)
+                    }
+                    context.startActivity(intent)
+                },
+                onDeleteClick = {
+                    viewModel.deleteTransaction(transaction)
+                }
+            )
+        }
+        TransactionAmount(
+            amount = transaction.amount,
+            transactionType = transaction.type
+        )
+        if (transaction.description.isNotEmpty()) {
+            TransactionDescription(transaction.description)
+        }
     }
 }
 
