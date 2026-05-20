@@ -13,7 +13,7 @@ import mz.co.macave.whoowesme.data.repository.DebtorRepository
 import mz.co.macave.whoowesme.model.Debtor
 import mz.co.macave.whoowesme.model.DebtorWithDebts
 
-class DebtorsActivityViewModel(debtorsRepository: DebtorRepository) : ViewModel() {
+class DebtorsActivityViewModel(val debtorsRepository: DebtorRepository) : ViewModel() {
 
     private val _cardExpanded = MutableStateFlow<Int?>(null)
     val cardExpanded: StateFlow<Int?> get() = _cardExpanded.asStateFlow()
