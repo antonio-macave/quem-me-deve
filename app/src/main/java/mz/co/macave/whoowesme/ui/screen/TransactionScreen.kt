@@ -64,6 +64,7 @@ fun TransactionItem(viewModel: TransactionsActivityViewModel, transaction: Trans
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp)
+            .clickable{ }
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
