@@ -148,6 +148,7 @@ fun ExistingDebtorSelector(viewModel: CreateDebtViewModel) {
             )
 
             ExposedDropdownMenu(
+                modifier = Modifier.wrapContentWidth(),
                 expanded = expanded,
                 onDismissRequest = { expanded = false }
             ) {
