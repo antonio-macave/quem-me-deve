@@ -279,3 +279,26 @@ fun TransactionAmount(transactionType: Int, amount: Double) {
         )
     }
 }
+
+@Composable
+fun TransactionDescription(description: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = 0.dp,
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 16.dp
+            )
+    ) {
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(16.dp))
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodySmall,
+        )
+    }
+}
