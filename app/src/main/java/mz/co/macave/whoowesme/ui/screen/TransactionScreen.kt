@@ -1,7 +1,6 @@
 package mz.co.macave.whoowesme.ui.screen
 
 import android.content.Intent
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -20,7 +19,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.ArrowUpward
-import androidx.compose.material.icons.filled.Today
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -34,10 +32,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.model.Transaction
@@ -177,7 +173,7 @@ fun TransactionHeader(
                 )
             }
             Spacer(Modifier.width(16.dp))
-            Column() {
+            Column {
                 Text(
                     text = when (transactionType) {
                         TransactionType.CREDIT.type -> stringResource(R.string.payment)
