@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.PersonOutline
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -106,19 +105,6 @@ fun TransactionsTopAppBar(title: String?, viewModel: TransactionsActivityViewMod
             }
         },
         actions = {
-
-            IconButton(
-                onClick = {
-
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.PersonOutline,
-                    contentDescription = stringResource(R.string.profile),
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-            }
-
             IconButton(
                 onClick = {
                     val intent = Intent(context, AddTransactionActivity::class.java).apply {
