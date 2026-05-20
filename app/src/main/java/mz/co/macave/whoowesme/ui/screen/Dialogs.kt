@@ -32,16 +32,25 @@ import mz.co.macave.whoowesme.util.SortOption
 import mz.co.macave.whoowesme.viewmodel.MainActivityViewModel
 
 @Composable
-fun SortByDialog(isOpen: Boolean, onDismiss: () -> Unit, onConfirmation: (Int) -> Unit) {
+fun SortByDialog(
+    viewModel: MainActivityViewModel,
+    isOpen: Boolean,
+    onDismiss: () -> Unit,
+    onConfirmation: (SortOption) -> Unit
+) {
     if (isOpen) {
         Dialog(onDismissRequest = onDismiss) {
-            SortByContent(onDismiss = onDismiss, onConfirmation = onConfirmation)
+            SortByContent(
+                viewModel = viewModel,
+                onDismiss = onDismiss,
+                onConfirmation = onConfirmation
+            )
         }
     }
 }
 
 @Composable
-fun SortByContent(onDismiss: () -> Unit, onConfirmation: (Int) -> Unit) {
+fun SortByContent(viewModel: MainActivityViewModel, onDismiss: () -> Unit, onConfirmation: (SortOption) -> Unit) {
     val options = SortOption.entries
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(SortOption.NAME) }
     Card(
