@@ -3,6 +3,8 @@ package mz.co.macave.whoowesme.ui.screen
 import android.content.Intent
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +18,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDownward
+import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.icons.filled.Today
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
@@ -37,6 +42,14 @@ import androidx.compose.ui.unit.dp
 import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.model.Transaction
 import mz.co.macave.whoowesme.ui.activities.AddTransactionActivity
+import mz.co.macave.whoowesme.ui.activities.ui.theme.ErrorContainerDark
+import mz.co.macave.whoowesme.ui.activities.ui.theme.ErrorContainerLight
+import mz.co.macave.whoowesme.ui.activities.ui.theme.OnErrorContainerDark
+import mz.co.macave.whoowesme.ui.activities.ui.theme.OnErrorContainerLight
+import mz.co.macave.whoowesme.ui.activities.ui.theme.OnSuccessContainerDark
+import mz.co.macave.whoowesme.ui.activities.ui.theme.OnSuccessContainerLight
+import mz.co.macave.whoowesme.ui.activities.ui.theme.SuccessContainerDark
+import mz.co.macave.whoowesme.ui.activities.ui.theme.SuccessContainerLight
 import mz.co.macave.whoowesme.util.TransactionType
 import mz.co.macave.whoowesme.util.formatLocalDate
 import mz.co.macave.whoowesme.util.toMzn
