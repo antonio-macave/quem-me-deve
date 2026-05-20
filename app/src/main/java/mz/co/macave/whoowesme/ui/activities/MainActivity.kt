@@ -122,10 +122,6 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding)
                             .fillMaxHeight()
                     ) {
-                        DebtFilter(debts) {
-                            filteredList = it
-                        }
-                        Spacer(Modifier.height(8.dp))
                         DebtsList(viewModel, filteredList) { item ->
                             val intent = Intent(context, TransactionsActivity::class.java).apply {
                                 putExtra("debtId", item.debtId)
