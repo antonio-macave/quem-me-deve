@@ -301,7 +301,6 @@ fun NameAndDebtAmount(modifier: Modifier = Modifier, name: String, amount: Doubl
             text = amount.toMzn(),
             style = MaterialTheme.typography.titleMedium
         )
-    }
 
     }
 }
