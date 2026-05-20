@@ -1,5 +1,6 @@
 package mz.co.macave.whoowesme.ui.screen
 
+import android.content.Intent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -46,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.model.DebtCardItem
+import mz.co.macave.whoowesme.ui.activities.CreateDebtActivity
 import mz.co.macave.whoowesme.util.DebtStatus
 import mz.co.macave.whoowesme.util.formatLocalDate
 import mz.co.macave.whoowesme.util.toMzn
