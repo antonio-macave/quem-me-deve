@@ -66,70 +66,7 @@ fun TransactionItem(viewModel: TransactionsActivityViewModel, transaction: Trans
             .padding(horizontal = 8.dp, vertical = 4.dp)
             .clickable{ }
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.CenterEnd
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .background(
-                                color = MaterialTheme.colorScheme.surfaceVariant,
-                                shape = RoundedCornerShape(14.dp)
-                            )
-                            .padding(horizontal = 8.dp, vertical = 4.dp)
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(16.dp),
-                            imageVector = Icons.Default.Today,
-                            contentDescription = null
-                        )
-                        Spacer(Modifier.width(6.dp))
-                        Text(
-                            text = transaction.date.formatLocalDate(),
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    }
-                    Spacer(Modifier.width(4.dp))
-                    ContextMenuButton(
-                        menuExpanded = menuExpanded,
-                        isDeleteConfirmationDialogOpen = isConfirmationDialogOpen,
-                        onOpenDeleteConfirmationDialog = { isConfirmationDialogOpen = true },
-                        onDialogDismissRequest = { isConfirmationDialogOpen = false },
-                        onContextDismissRequest = { menuExpanded = false },
-                        onButtonClick = { menuExpanded = true },
-                        onEditClick = {
-                            val intent = Intent(context, AddTransactionActivity::class.java).apply {
-                                putExtra("transactionId", transaction.id)
-                                putExtra("debtId", transaction.debtId)
-                            }
-                            context.startActivity(intent)
-                        },
-                        onDeleteClick = {
-                            viewModel.deleteTransaction(transaction)
-                        }
-                    )
-                }
-            }
-
-            IconAndDescription(
-                iconRes = R.drawable.outline_money_24,
-                description = when (transaction.type) {
-                    TransactionType.CREDIT.type -> "-${transaction.amount.toMzn()}"
-                    TransactionType.DEBIT.type -> "+${transaction.amount.toMzn()}"
-                    else -> transaction.amount.toMzn()
-                }
-            )
-            if (transaction.description.isNotEmpty()) {
-                Spacer(Modifier.height(4.dp))
-                IconAndDescription(R.drawable.description_24, transaction.description)
-            }
-        }
+        
     }
 }
 
