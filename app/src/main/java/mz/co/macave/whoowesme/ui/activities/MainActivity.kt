@@ -9,14 +9,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Sort
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -46,7 +43,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
@@ -54,7 +50,6 @@ import mz.co.macave.whoowesme.R
 import mz.co.macave.whoowesme.data.DatabaseProvider
 import mz.co.macave.whoowesme.data.repository.DebtRepository
 import mz.co.macave.whoowesme.model.fabMenuItems
-import mz.co.macave.whoowesme.ui.screen.DebtFilter
 import mz.co.macave.whoowesme.ui.screen.DebtsList
 import mz.co.macave.whoowesme.ui.screen.SortByDialog
 import mz.co.macave.whoowesme.ui.theme.WhoOwesMeTheme
