@@ -80,7 +80,35 @@ fun DebtItem(viewModel: MainActivityViewModel, debt: DebtCardItem, onDebtClick: 
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            NameAndDebtAmount(name = "${debt.debtorName} ${debt.debtorSurname}", amount = debt.amount)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                NameAndDebtAmount(
+                    modifier = Modifier.weight(1f),
+                    name = "${debt.debtorName} ${debt.debtorSurname}",
+                    amount = debt.amount
+                )
+                Spacer(Modifier.width(8.dp))
+                ContextMenuButton(
+                    menuExpanded = menuExpanded,
+                    isDeleteConfirmationDialogOpen = isDeleteConfirmationDialogOpen,
+                    onDialogDismissRequest  = { isDeleteConfirmationDialogOpen = false },
+                    onContextDismissRequest = { menuExpanded = false },
+                    onButtonClick = { menuExpanded = true },
+                    onOpenDeleteConfirmationDialog = { isDeleteConfirmationDialogOpen = true },
+                    onEditClick = {
+                        val intent = Intent(context, CreateDebtActivity::class.java).apply {
+                            putExtra("debtId", debt.debtId)
+                            putExtra("debtorId", debt.debtorId)
+                        }
+                        context.startActivity(intent)
+                    },
+                    onDeleteClick = {
+                        viewModel.deleteDebtById(debt.debtId)
+                    }
+                )
+            }
             Spacer(Modifier.height(4.dp))
             if (debt.description.isNotEmpty()) {
                 Text(
