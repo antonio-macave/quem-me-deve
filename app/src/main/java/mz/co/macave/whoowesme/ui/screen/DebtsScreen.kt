@@ -196,6 +196,34 @@ fun PaymentProgressBar(debtAmount: Double, paidAmount: Double) {
 }
 
 @Composable
+fun SortByButton(viewModel: MainActivityViewModel, debts: List<DebtCardItem>, onClick: (List<DebtCardItem>) -> Unit) {
+    val sortByOption by viewModel.sortByOption.collectAsStateWithLifecycle()
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = 16.dp,
+            ),
+        horizontalArrangement = Arrangement.End
+    ) {
+        TextButton(
+            onClick = { onClick(debts) }
+        ) {
+            Text(
+                text = when(sortByOption) {
+                    SortOption.AMOUNT -> stringResource(R.string.sort_by_option_amount)
+                    SortOption.DATE -> stringResource(R.string.sort_by_option_date)
+                    SortOption.NAME -> stringResource(R.string.sort_by_option_name)
+                }
+            )
+            Icon(
+                imageVector = Icons.Default.ArrowDropDown,
+                contentDescription = null
+            )
+        }
+    }
+}
+@Composable
 fun DebtFilter(debts: List<DebtCardItem>, onClick: (List<DebtCardItem>) -> Unit) {
 
     val viewModel: MainActivityViewModel = viewModel()
