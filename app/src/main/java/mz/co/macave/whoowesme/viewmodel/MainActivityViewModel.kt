@@ -10,7 +10,7 @@ import mz.co.macave.whoowesme.util.DebtStatus
 import mz.co.macave.whoowesme.util.SortOption
 import java.time.LocalDate
 
-class MainActivityViewModel(debtRepository: DebtRepository): ViewModel() {
+class MainActivityViewModel(val debtRepository: DebtRepository): ViewModel() {
 
     private val _fabMenuExpanded = MutableStateFlow(false)
     val fabMenuExpanded: StateFlow<Boolean> get() = _fabMenuExpanded.asStateFlow()
