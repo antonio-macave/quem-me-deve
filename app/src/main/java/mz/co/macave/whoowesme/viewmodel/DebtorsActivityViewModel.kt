@@ -7,7 +7,10 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+
 import mz.co.macave.whoowesme.data.repository.DebtorRepository
+import mz.co.macave.whoowesme.model.Debtor
 import mz.co.macave.whoowesme.model.DebtorWithDebts
 
 class DebtorsActivityViewModel(debtorsRepository: DebtorRepository) : ViewModel() {
