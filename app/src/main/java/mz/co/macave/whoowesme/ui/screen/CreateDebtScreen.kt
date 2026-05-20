@@ -201,9 +201,16 @@ fun AmountField(viewModel: CreateDebtViewModel) {
         TextField(
             modifier = Modifier
                 .fillMaxWidth(),
-            onValueChange = { text: String ->
-                val filteredValue = text.replace(".",",")
-                viewModel.updateAmount(filteredValue)
+            onValueChange = {
+                viewModel.updateAmount(it)
+                val amount = it.toDoubleOrNull()
+                if (amount != null) {
+                    if (isError) {
+                        viewModel.updateIsAmountError(false)
+                    }
+                } else {
+                    viewModel.updateIsAmountError(true)
+                }
             },
             leadingIcon = {
                 Icon(
