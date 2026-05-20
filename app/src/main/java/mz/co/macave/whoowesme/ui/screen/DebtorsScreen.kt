@@ -222,7 +222,8 @@ fun TotalDebts(totalAmount: Double, debtsCount: Int) {
         Spacer(Modifier.height(8.dp))
 
         Row(
-            modifier = Modifier.height(IntrinsicSize.Min)
+            modifier = Modifier
+                .height(IntrinsicSize.Min)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -240,7 +241,9 @@ fun TotalDebts(totalAmount: Double, debtsCount: Int) {
             }
 
             VerticalDivider(
-                modifier = Modifier.fillMaxHeight().padding(4.dp)
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(4.dp)
             )
 
             Column(
