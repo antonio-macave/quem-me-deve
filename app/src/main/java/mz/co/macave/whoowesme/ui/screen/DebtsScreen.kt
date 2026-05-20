@@ -58,8 +58,14 @@ import java.time.LocalDate
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun DebtItem(viewModel: MainActivityViewModel, debt: DebtCardItem, onDebtClick: (DebtCardItem) -> Unit) {
+
+    val context = LocalContext.current
+
     val progress = (debt.paidAmount / debt.amount).coerceIn(0.0, 1.0).toFloat()
     val paymentOverdue = viewModel.isPaymentOverDue(debt.dueTo)
+
+    var menuExpanded by remember { mutableStateOf(false) }
+    var isDeleteConfirmationDialogOpen by remember { mutableStateOf(false) }
 
     OutlinedCard (
         modifier = Modifier
