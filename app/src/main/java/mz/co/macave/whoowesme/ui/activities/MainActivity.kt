@@ -113,8 +113,8 @@ class MainActivity : ComponentActivity() {
                     LaunchedEffect(debts) {
                         filteredList = debts
                     }
-
-                    SortByDialog(showSortDialog, onDismiss = { viewModel.updateShowSortDebtsDialog(false) }) { option ->
+                    SortByDialog(viewModel,showSortDialog, onDismiss = { viewModel.updateShowSortDebtsDialog(false) }) { option ->
+                        viewModel.updateSortOption(option)
                         filteredList = viewModel.sortDebts(debts = filteredList, sortBy = option)
                     }
                     Column(
