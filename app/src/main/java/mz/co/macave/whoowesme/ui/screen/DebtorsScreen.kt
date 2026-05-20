@@ -67,6 +67,15 @@ fun DebtsList(
     onDebtClick: (DebtCardItem) -> Unit
 ) {
     LazyColumn {
+        item {
+            SortByButton(
+                viewModel = viewModel,
+                debts = debts,
+                onClick = {
+                    viewModel.updateShowSortDebtsDialog(true)
+                }
+            )
+        }
         itemsIndexed(items = debts) { index, item ->
             DebtItem(viewModel, debt = debts[index]) { onDebtClick(item) }
         }
