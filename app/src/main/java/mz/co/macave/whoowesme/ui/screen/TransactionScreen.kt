@@ -256,3 +256,26 @@ fun TransactionHeader(
         }
     }
 }
+
+@Composable
+fun TransactionAmount(transactionType: Int, amount: Double) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = if (transactionType == TransactionType.DEBIT.type) {
+                "+"
+            } else {
+                "-"
+            },
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = amount.toMzn(),
+            style = MaterialTheme.typography.bodyMedium,
+        )
+    }
+}
