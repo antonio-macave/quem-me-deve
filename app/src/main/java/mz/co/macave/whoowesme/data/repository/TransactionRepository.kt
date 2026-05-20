@@ -18,4 +18,12 @@ class TransactionRepository(private val transactionDao: TransactionDao) {
         return transactionDao.loadAllTransactionsByDebtId(debtId)
     }
 
+    suspend fun findTransactionById(transactionIds: IntArray): List<Transaction> {
+        return transactionDao.findTransactionById(transactionIds)
+    }
+
+    suspend fun updateTransaction(transaction: Transaction) {
+        transactionDao.update(transaction)
+    }
+
 }
