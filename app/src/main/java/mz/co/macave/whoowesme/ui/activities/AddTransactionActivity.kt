@@ -59,6 +59,7 @@ class AddTransactionActivity : ComponentActivity() {
                     && viewModel.amount.collectAsState().value.isNotEmpty()
                     && viewModel.transactionDate.collectAsState().value != null
                     && !viewModel.debtAmountError.collectAsState().value
+                    && viewModel.remainingBalance.collectAsState().value >= 0
 
             WhoOwesMeTheme {
                 Scaffold(
