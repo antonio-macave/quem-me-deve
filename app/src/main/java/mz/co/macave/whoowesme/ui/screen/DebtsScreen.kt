@@ -281,9 +281,9 @@ fun DebtFilter(debts: List<DebtCardItem>, onClick: (List<DebtCardItem>) -> Unit)
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun NameAndDebtAmount(name: String, amount: Double) {
+fun NameAndDebtAmount(modifier: Modifier = Modifier, name: String, amount: Double) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.Bottom
     ) {
@@ -297,6 +297,7 @@ fun NameAndDebtAmount(name: String, amount: Double) {
         )
     }
 
+    }
 }
 
 @Composable
