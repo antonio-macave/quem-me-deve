@@ -20,6 +20,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -52,7 +54,9 @@ fun SortByDialog(
 @Composable
 fun SortByContent(viewModel: MainActivityViewModel, onDismiss: () -> Unit, onConfirmation: (SortOption) -> Unit) {
     val options = SortOption.entries
-    val (selectedOption, onOptionSelected) = remember { mutableStateOf(SortOption.NAME) }
+    val activeOption by viewModel.sortByOption.collectAsStateWithLifecycle()
+    val (selectedOption, onOptionSelected) = remember { mutableStateOf(activeOption) }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -104,7 +108,7 @@ fun SortByContent(viewModel: MainActivityViewModel, onDismiss: () -> Unit, onCon
                 Spacer(Modifier.width(8.dp))
                 TextButton(
                     onClick = {
-                        onConfirmation(selectedOption.option)
+                        onConfirmation(selectedOption)
                         onDismiss()
                     }
                 ) { Text(text = stringResource(android.R.string.ok)) }
