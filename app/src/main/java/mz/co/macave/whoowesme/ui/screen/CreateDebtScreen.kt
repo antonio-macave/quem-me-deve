@@ -116,8 +116,8 @@ fun DebtorSituationSelector(viewModel: CreateDebtViewModel = viewModel(), onOpti
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExistingDebtorSelector(viewModel: CreateDebtViewModel) {
-
-    var text by remember { mutableStateOf("") }
+    val selectedDebtor by viewModel.selectedDebtor.collectAsStateWithLifecycle()
+    var text by remember { mutableStateOf("${selectedDebtor?.name} ${selectedDebtor?.surname}") }
     val suggestions by viewModel.debtors.collectAsStateWithLifecycle()
     var expanded by remember { mutableStateOf(false) }
 
@@ -132,7 +132,7 @@ fun ExistingDebtorSelector(viewModel: CreateDebtViewModel) {
                     .padding(horizontal = 16.dp, vertical = 8.dp)
                     .fillMaxWidth()
                     .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable, true),
-                value = text,
+                value = if (selectedDebtor != null) "${selectedDebtor?.name} ${selectedDebtor?.surname}" else "",
                 onValueChange = { text = it },
                 label = { Text(text = stringResource(R.string.debtor)) },
                 singleLine = true,
@@ -154,7 +154,7 @@ fun ExistingDebtorSelector(viewModel: CreateDebtViewModel) {
                     DropdownMenuItem(
                         modifier = Modifier.background(color = if ("${item.name} ${item.surname}" == text) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) else MaterialTheme.colorScheme.background),
                         text = { Text(text = "${item.name} ${item.surname}") },
-                        leadingIcon = { if ("${item.name} ${item.surname}" == text) { Icon(imageVector = Icons.Default.Check, contentDescription = null) } },
+                        leadingIcon = { if ("${item.name} ${item.surname}" == "${selectedDebtor?.name} ${selectedDebtor?.surname}") { Icon(imageVector = Icons.Default.Check, contentDescription = null) } },
                         onClick = {
                             text = "${item.name} ${item.surname}"
                             viewModel.updateSelectedDebtor(item)
