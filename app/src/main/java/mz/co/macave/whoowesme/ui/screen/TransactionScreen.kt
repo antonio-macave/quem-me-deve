@@ -172,3 +172,87 @@ fun IconAndDescription(@DrawableRes iconRes: Int, description: String) {
         )
     }
 }
+
+@Composable
+fun TransactionHeader(
+    transactionType: Int,
+    date: String,
+    contextMenuButton: @Composable () -> Unit = {},
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = 16.dp,
+                vertical = 8.dp
+            ),
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                modifier = Modifier
+                    .background(
+                        color = if (transactionType == TransactionType.CREDIT.type)
+                            if(isSystemInDarkTheme())
+                                SuccessContainerDark
+                            else
+                                SuccessContainerLight
+                        else
+                            if(isSystemInDarkTheme())
+                                ErrorContainerDark
+                            else
+                                ErrorContainerLight,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .padding(8.dp)
+            ) {
+                Icon(
+                    modifier = Modifier.size(12.dp),
+                    imageVector = if (transactionType == TransactionType.CREDIT.type)
+                        Icons.Default.ArrowDownward
+                    else
+                        Icons.Default.ArrowUpward,
+                    contentDescription = null,
+                    tint = if (transactionType == TransactionType.CREDIT.type)
+                        if(isSystemInDarkTheme())
+                            OnSuccessContainerDark
+                        else
+                            OnSuccessContainerLight
+                    else
+                        if(isSystemInDarkTheme())
+                            OnErrorContainerDark
+                        else
+                            OnErrorContainerLight
+                )
+            }
+            Spacer(Modifier.width(16.dp))
+            Column() {
+                Text(
+                    text = when (transactionType) {
+                        TransactionType.CREDIT.type -> stringResource(R.string.payment)
+                        TransactionType.DEBIT.type -> stringResource(R.string.addition)
+                        else -> ""
+                    },
+                    color = if (transactionType == TransactionType.CREDIT.type)
+                        if(isSystemInDarkTheme())
+                            OnSuccessContainerDark
+                        else
+                            OnSuccessContainerLight
+                    else
+                        if(isSystemInDarkTheme())
+                            OnErrorContainerDark
+                        else
+                            OnErrorContainerLight,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    text = date,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
+            contextMenuButton()
+        }
+    }
+}
