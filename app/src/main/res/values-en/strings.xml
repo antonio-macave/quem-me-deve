@@ -1,4 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Who Owes Me</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="amount">Amount</string>
+    <string name="transaction">Transaction</string>
+    <string name="due_date">Due to date</string>
+    <string name="due_to">Due to</string>
+    <string name="title_activity_create_debt">Add Debt</string>
+    <string name="description">Description (optional)</string>
+    <string name="additional_notes">Additional notes (optional)</string>
+    <string name="new_one">New</string>
+    <string name="no_debt">No debts!</string>
+    <string name="no_transactions">No transactions!</string>
+    <string name="debt_balance">Debt balance</string>
+    <string name="remaining">Remaning balance</string>
+    <string name="existing">Existing</string>
+    <string name="debtor">Client</string>
+    <string name="debt">Debt</string>
+    <string name="more_options">More options</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <string name="debtors">Clients</string>
+    <string name="transaction_type">Transaction type</string>
+    <string name="transaction_type_debit">Debit</string>
+    <string name="transaction_type_credit">Credit</string>
+    <string name="payment">Payment</string>
+    <string name="addition">Addition</string>
+    <string name="transaction_date">Transaction date</string>
+    <string name="full_payment">Full payment</string>
+    <string name="see_debts">See debts</string>
+    <string name="debt_status_overdue">Overdue</string>
+    <string name="debt_status_pending">Pending</string>
+    <string name="debt_status_paid">Paid</string>
+    <string name="paid">Paid</string>
+    <string name="edit">Edit</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="total_debt">Total debt</string>
+    <string name="delete">Delete</string>
+    <string name="paid_amount">Paid amount</string>
+    <string name="yes">Yes</string>
+    <string name="title_activity_transactions">Transactions</string>
+    <string name="title_activity_debtors">Clients</string>
+    <string name="all">All</string>
+    <string name="sort_by_title">Sort by</string>
+    <string name="sort_by_option_name">Client name</string>
+    <string name="sort_by_option_date">Due date</string>
+    <string name="sort_by_option_amount">Debt amount</string>
+    <string name="title_activity_create_debtor">New Client</string>
+    <string name="edit_debtor">Edit Client</string>
+    <string name="edit_debt">Edit Debt</string>
+    <string name="edit_transaction">Edit Transaction</string>
+    <string name="save">Save</string>
+    <string name="invalid_amount">Invalid amount</string>
+    <string name="update">Update</string>
+    <string name="optional">Optional</string>
+    <string name="contact_number">Contact</string>
+    <string name="debtor_created">Client saved.</string>
+    <string name="title_activity_add_transaction">Add Transaction</string>
+
+    <plurals name="debts_count">
+        <item quantity="zero">No debt</item>
+        <item quantity="one">%d debt</item>
+        <item quantity="other">%d debts</item>
+    </plurals>
+
+    <plurals name="transactions_count">
+        <item quantity="zero">No transaction</item>
+        <item quantity="one">%d transaction</item>
+        <item quantity="other">%d transactions</item>
+    </plurals>
+
 </resources>
