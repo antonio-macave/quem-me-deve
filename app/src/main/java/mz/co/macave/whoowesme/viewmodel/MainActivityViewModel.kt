@@ -20,6 +20,9 @@ class MainActivityViewModel(val debtRepository: DebtRepository): ViewModel() {
     private val _showSortDebtsDialog = MutableStateFlow(false)
     val showSortDebtsDialog: StateFlow<Boolean> get() = _showSortDebtsDialog.asStateFlow()
 
+    private val _sortByOption = MutableStateFlow(SortOption.DATE)
+    val sortByOption: StateFlow<SortOption> get() = _sortByOption.asStateFlow()
+
     private val _overflowMenuExpanded = MutableStateFlow(false)
     val overflowMenuExpanded: StateFlow<Boolean> get() = _overflowMenuExpanded.asStateFlow()
 
@@ -67,6 +70,10 @@ class MainActivityViewModel(val debtRepository: DebtRepository): ViewModel() {
 
     fun updateFabMenuExpanded(expanded: Boolean) {
         _fabMenuExpanded.value = expanded
+    }
+
+    fun updateSortOption(option: SortOption) {
+        _sortByOption.value = option
     }
 
 
