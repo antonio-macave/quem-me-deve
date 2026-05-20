@@ -28,7 +28,7 @@ class MainActivityViewModel(val debtRepository: DebtRepository): ViewModel() {
 
     fun sortDebts(debts: List<DebtCardItem>, sortBy: Int): List<DebtCardItem> {
         return when (sortBy) {
-            SortOption.NAME.option -> debts.sortedBy { it.description }
+            SortOption.NAME.option -> debts.sortedBy { it.debtorName }
             SortOption.DATE.option -> debts.sortedBy { it.dueTo }
             SortOption.AMOUNT.option -> debts.sortedBy { it.amount }
             else -> debts
