@@ -165,14 +165,13 @@ class AddTransactionViewModel(
 
     fun saveTransaction(transaction: Transaction) {
         val newPaidAmount = when (transaction.type) {
-            TransactionType.DEBIT.ordinal -> _paidAmount.value + transaction.amount
-            TransactionType.CREDIT.ordinal -> _paidAmount.value - transaction.amount
+            TransactionType.DEBIT.type -> _paidAmount.value + transaction.amount
+            TransactionType.CREDIT.type -> _paidAmount.value - transaction.amount
             else -> _debtAmount.value
         }
 
         val newDebtAmount = when (transaction.type) {
-            TransactionType.DEBIT.ordinal -> _debtAmount.value + transaction.amount
-            TransactionType.CREDIT.ordinal -> _debtAmount.value - transaction.amount
+            TransactionType.DEBIT.type -> _debtAmount.value + transaction.amount
             else -> _debtAmount.value
         }
         viewModelScope.launch {
