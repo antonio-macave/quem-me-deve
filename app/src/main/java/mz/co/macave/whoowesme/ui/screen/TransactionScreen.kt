@@ -190,7 +190,7 @@ fun TransactionHeader(
                             OnErrorContainerDark
                         else
                             OnErrorContainerLight,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.labelMedium,
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
