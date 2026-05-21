@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "mz.co.macave.whoowesme"
+    namespace = "mz.co.macave.quemmedeve"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "mz.co.macave.whoowesme"
+        applicationId = "mz.co.macave.quemmedeve"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

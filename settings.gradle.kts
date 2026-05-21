@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Who Owes Me"
+rootProject.name = "Quem Me Deve"
 include(":app")
  
