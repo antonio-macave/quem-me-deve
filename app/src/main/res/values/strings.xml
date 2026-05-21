@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Who Owes Me</string>
+    <string name="app_name">Quem Me Deve</string>
     <string name="name">Nome</string>
     <string name="surname">Apelido</string>
     <string name="amount">Montante</string>
