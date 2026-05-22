@@ -45,10 +45,7 @@ class CreateDebtActivity : ComponentActivity() {
             }
 
             val viewModel: CreateDebtViewModel by viewModels { factory }
-            val date by viewModel.dueToDate.collectAsStateWithLifecycle()
-            val saveButtonEnabled = date != null
-                    && viewModel.selectedDebtor.collectAsState().value != null
-                    && viewModel.description.collectAsState().value.isNotEmpty()
+            val saveButtonEnabled = viewModel.selectedDebtor.collectAsState().value != null
                     && viewModel.amount.collectAsState().value.isNotEmpty()
                     && viewModel.dueToDate.collectAsState().value != null
                     && !viewModel.isAmountError.collectAsState().value
