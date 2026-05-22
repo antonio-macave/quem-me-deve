@@ -128,16 +128,15 @@ fun DebtItem(viewModel: MainActivityViewModel, debt: DebtCardItem, onDebtClick: 
             }
 
             PaymentProgressBar(
-                debtAmount = debt.amount,
-                paidAmount = debt.paidAmount
+                progress = progress
             )
             Spacer(Modifier.height(8.dp))
             HorizontalDivider()
             Spacer(Modifier.height(8.dp))
             BottomInfo(
                 dueTo = debt.dueTo,
-                debtAmount = debt.amount,
-                paidAmount = debt.paidAmount,
+                debtAmount = debtAmount,
+                paidAmount = paidAmount,
                 paymentOverdue = paymentOverdue,
                 paymentProgress = progress
             )
