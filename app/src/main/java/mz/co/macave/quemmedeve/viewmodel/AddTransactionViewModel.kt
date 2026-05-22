@@ -176,7 +176,15 @@ class AddTransactionViewModel(
         }
         viewModelScope.launch {
             transactionRepository.saveTransaction(transaction)
-            debtRepository.savePaidAmount(debtId = debtId.value!!, paidAmount = newPaidAmount, newDebtAmount = newDebtAmount)
+            debtRepository.savePaidAmount(
+                debtId = debtId.value!!,
+                paidAmount = newPaidAmount,
+                newDebtAmount = newDebtAmount,
+                newDebtStatus = DebtStatusCalculator.calculate(
+                    paidAmount = newPaidAmount,
+                    debtAmount = newDebtAmount
+                )
+            )
         }
     }
 
