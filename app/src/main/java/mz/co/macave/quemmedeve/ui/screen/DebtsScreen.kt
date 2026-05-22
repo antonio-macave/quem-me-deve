@@ -107,6 +107,7 @@ fun DebtItem(viewModel: MainActivityViewModel, debt: DebtCardItem, onDebtClick: 
                         val intent = Intent(context, CreateDebtActivity::class.java).apply {
                             putExtra("debtId", debt.debtId)
                             putExtra("debtorId", debt.debtorId)
+                            putExtra("paidAmount", debt.paidAmount)
                         }
                         context.startActivity(intent)
                     },
