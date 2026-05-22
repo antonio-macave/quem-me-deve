@@ -52,13 +52,11 @@ class TransactionsActivity : ComponentActivity() {
             val debtorDao = db.debtorDao()
             val debtDao = db.debtDao()
             val transactionRepository = TransactionRepository(transactionDao)
-            val debtorRepository = DebtorRepository(debtorDao)
             val debtRepository = DebtRepository(debtDao)
             val factory = ViewModelFactory {
                 TransactionsActivityViewModel(
                     transactionRepository,
-                    debtRepository,
-                    debtorRepository
+                    debtRepository
                 )
             }
             val viewModel: TransactionsActivityViewModel = viewModel(factory = factory)
