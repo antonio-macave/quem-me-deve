@@ -132,7 +132,6 @@ class AddTransactionViewModel(
             transactionRepository.updateTransaction(transaction)
         }
     }
-
     fun calculateRemainingBalance(amount: Double) {
         val balance = when (transactionType.value) {
                 TransactionType.CREDIT.type -> {

@@ -53,7 +53,6 @@ class AddTransactionActivity : ComponentActivity() {
 
             viewModel.updateDebtId(debtId)
             val debt by viewModel.debt.collectAsState()
-
             val saveButtonEnabled = (viewModel.transactionType.collectAsState().value == TransactionType.CREDIT.type
                     || viewModel.transactionType.collectAsState().value == TransactionType.DEBIT.type)
                     && viewModel.amount.collectAsState().value.isNotEmpty()
