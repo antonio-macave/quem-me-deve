@@ -54,6 +54,8 @@ class CreateDebtViewModel(
     private val _selectedDebtor = MutableStateFlow<Debtor?>(null)
     val selectedDebtor: StateFlow<Debtor?> get() = _selectedDebtor.asStateFlow()
 
+    private val _paidAmount = MutableStateFlow(0.0)
+
 
     val debtors = debtorsRepository.getAllDebtors()
         .stateIn(
