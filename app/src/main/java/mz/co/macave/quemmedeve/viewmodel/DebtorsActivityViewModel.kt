@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -18,6 +19,9 @@ class DebtorsActivityViewModel(val debtorsRepository: DebtorRepository) : ViewMo
     private val _cardExpanded = MutableStateFlow<Int?>(null)
     val cardExpanded: StateFlow<Int?> get() = _cardExpanded.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> get() = _isLoading.asStateFlow()
+
     val debtors = debtorsRepository.getAllDebtors()
         .stateIn(
             scope = viewModelScope,
@@ -25,12 +29,9 @@ class DebtorsActivityViewModel(val debtorsRepository: DebtorRepository) : ViewMo
             initialValue = emptyList()
         )
 
-    val debtorsWithDebts = debtorsRepository.getAllDebtorsWithDebts()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
+    val debtorsWithDebts = debtorsRepository.getAllDebtorsWithDebts().onEach {
+        _isLoading.value = false
+    }
 
 
     fun updateCardExpanded(id: Int) {
