@@ -185,14 +185,12 @@ fun DebtStatus(debtStatus: Int) {
 }
 
 @Composable
-fun PaymentProgressBar(debtAmount: Double, paidAmount: Double) {
-    val progress = (paidAmount / debtAmount).coerceIn(0.0, 1.0).toFloat()
-    var currentProgress by remember { mutableFloatStateOf(progress) }
+fun PaymentProgressBar(progress: Float) {
     Column(
         modifier = Modifier.fillMaxWidth(),
     ) {
         LinearProgressIndicator(
-            progress = { currentProgress },
+            progress = { progress },
             modifier = Modifier.fillMaxWidth(),
             color = ProgressIndicatorDefaults.linearColor,
             trackColor = ProgressIndicatorDefaults.linearTrackColor,
