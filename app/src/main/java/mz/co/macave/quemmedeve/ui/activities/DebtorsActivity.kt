@@ -31,6 +31,8 @@ import mz.co.macave.quemmedeve.data.DatabaseProvider
 import mz.co.macave.quemmedeve.data.repository.DebtorRepository
 import mz.co.macave.quemmedeve.ui.activities.ui.theme.WhoOwesMeTheme
 import mz.co.macave.quemmedeve.ui.screen.DebtorsList
+import mz.co.macave.quemmedeve.ui.screen.EmptyListScreen
+import mz.co.macave.quemmedeve.ui.screen.LoadingScreen
 import mz.co.macave.quemmedeve.viewmodel.DebtorsActivityViewModel
 import mz.co.macave.quemmedeve.viewmodel.ViewModelFactory
 
@@ -61,8 +63,18 @@ class DebtorsActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        val debtors by viewModel.debtorsWithDebts.collectAsStateWithLifecycle()
-                        DebtorsList(viewModel, debtors)
+                        val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
+                        val debtors by viewModel.debtorsWithDebts.collectAsStateWithLifecycle(initialValue = emptyList())
+
+                        when {
+                            isLoading -> LoadingScreen()
+
+                            debtors.isEmpty() -> EmptyListScreen(
+                                description = stringResource(R.string.empty_list, stringResource(R.string.clients_lowercase))
+                            )
+
+                            else -> DebtorsList(viewModel, debtors)
+                        }
                     }
                 }
             }
