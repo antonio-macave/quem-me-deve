@@ -182,13 +182,6 @@ fun TopBar(viewModel: MainActivityViewModel, onActionClick: () -> Unit) {
             )
         },
         actions = {
-            IconButton(onClick = { viewModel.updateShowSortDebtsDialog(true) }) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.Sort,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-            }
 
             IconButton(
                 onClick = {
