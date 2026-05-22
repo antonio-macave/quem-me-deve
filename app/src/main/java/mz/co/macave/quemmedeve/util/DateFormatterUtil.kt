@@ -34,7 +34,7 @@ fun LocalDate.formatLocalDate(): String {
 }
 
 fun formatDateFromMillis(millis: Long): String {
-    val sdf = SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault())
+    val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     sdf.timeZone = TimeZone.getDefault()
     return sdf.format(Date(millis))
 }
