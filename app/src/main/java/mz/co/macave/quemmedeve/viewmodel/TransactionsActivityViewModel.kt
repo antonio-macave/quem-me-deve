@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import mz.co.macave.quemmedeve.data.repository.DebtRepository
 import mz.co.macave.quemmedeve.data.repository.TransactionRepository
@@ -28,6 +29,9 @@ class TransactionsActivityViewModel(
     private val _debtAmount = MutableStateFlow(0.0)
     val debtAmount: StateFlow<Double> get() = _debtAmount.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> get() = _isLoading.asStateFlow()
+
     private val _paidAmount = MutableStateFlow(0.0)
     val paidAmount: StateFlow<Double> get() = _paidAmount
 
@@ -40,8 +44,11 @@ class TransactionsActivityViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val transactions: Flow<List<Transaction>> = _debtId
         .flatMapLatest { debtId ->
+            _isLoading.value = true
             if (debtId == 0) flowOf(emptyList())
             else transactionRepository.getTransactionsByDebtId(debtId)
+        }.onEach {
+            _isLoading.value = false
         }
 
 
