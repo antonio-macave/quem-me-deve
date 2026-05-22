@@ -125,7 +125,7 @@ class CreateDebtViewModel(
             amount = _amount.value.toDouble(),
             dueTo = _dueToDate.value!!.toLocalDate(),
             debtorId = _selectedDebtor.value?.id ?: 0,
-            paidAmount = 0.0
+            paidAmount = if (debtId == -1) 0.0 else _paidAmount.value
         )
         if (debtId == -1) {
             saveDebt(debt)
@@ -148,6 +148,7 @@ class CreateDebtViewModel(
             _dueToDate.value = localDateToMillis(debt.dueTo)
             _additionalNotes.value = debt.additionalNotes
             _amount.value = debt.amount.toString()
+            _paidAmount.value = debt.paidAmount
         }
     }
 
