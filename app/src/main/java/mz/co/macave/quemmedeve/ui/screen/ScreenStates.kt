@@ -40,7 +40,7 @@ fun LoadingScreen() {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "A carregar...",
+                text = stringResource(R.string.loading),
                 style = MaterialTheme.typography.bodyMedium
             )
         }
