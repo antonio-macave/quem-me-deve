@@ -78,7 +78,18 @@ class TransactionsActivity : ComponentActivity() {
                     }
 
                     Column(Modifier.padding(innerPadding)) {
-                        TransactionsList(viewModel)
+                        val transactions by viewModel.transactions.collectAsStateWithLifecycle(initialValue = emptyList())
+                        val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
+                        when {
+                            isLoading -> LoadingScreen()
+
+                            transactions.isEmpty() -> EmptyListScreen(
+                                description = stringResource(R.string.empty_list, stringResource(R.string.transactions_lowercase))
+                            )
+
+                            else -> TransactionsList(viewModel)
+
+                        }
                     }
 
                 }
