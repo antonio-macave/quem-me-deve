@@ -34,7 +34,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -64,8 +63,11 @@ import java.time.LocalDate
 fun DebtItem(viewModel: MainActivityViewModel, debt: DebtCardItem, onDebtClick: (DebtCardItem) -> Unit) {
 
     val context = LocalContext.current
-
-    val progress = (debt.paidAmount / debt.amount).coerceIn(0.0, 1.0).toFloat()
+    val paidAmount = debt.paidAmount
+    val debtAmount = debt.amount
+    val progress = (paidAmount / debtAmount)
+        .coerceIn(0.0, 1.0)
+        .toFloat()
     val paymentOverdue = viewModel.isPaymentOverDue(debt.dueTo)
 
     var menuExpanded by remember { mutableStateOf(false) }
