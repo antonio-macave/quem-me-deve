@@ -19,8 +19,7 @@ import mz.co.macave.quemmedeve.util.formatDate
 
 class TransactionsActivityViewModel(
     val transactionRepository: TransactionRepository,
-    val debtRepository: DebtRepository,
-    val debtorRepository: DebtorRepository
+    val debtRepository: DebtRepository
 ) : ViewModel() {
 
     private val _date = MutableStateFlow("")
