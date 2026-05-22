@@ -199,6 +199,7 @@ fun PaymentProgressBar(progress: Float) {
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun SortByButton(viewModel: MainActivityViewModel, debts: List<DebtCardItem>, onClick: (List<DebtCardItem>) -> Unit) {
     val sortByOption by viewModel.sortByOption.collectAsStateWithLifecycle()
