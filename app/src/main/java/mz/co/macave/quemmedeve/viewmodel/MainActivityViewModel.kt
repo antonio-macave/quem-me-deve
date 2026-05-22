@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import mz.co.macave.quemmedeve.data.repository.DebtRepository
 import mz.co.macave.quemmedeve.model.DebtCardItem
@@ -23,10 +24,15 @@ class MainActivityViewModel(val debtRepository: DebtRepository): ViewModel() {
     private val _sortByOption = MutableStateFlow(SortOption.DATE)
     val sortByOption: StateFlow<SortOption> get() = _sortByOption.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> get() = _isLoading.asStateFlow()
+
     private val _overflowMenuExpanded = MutableStateFlow(false)
     val overflowMenuExpanded: StateFlow<Boolean> get() = _overflowMenuExpanded.asStateFlow()
 
-    val debts = debtRepository.findDebtsWithDebtorName()
+    val debts = debtRepository.findDebtsWithDebtorName().onEach {
+        _isLoading.value = false
+    }
 
 
     fun sortDebts(debts: List<DebtCardItem>, sortBy: SortOption): List<DebtCardItem> {
@@ -65,7 +71,6 @@ class MainActivityViewModel(val debtRepository: DebtRepository): ViewModel() {
     fun updateShowSortDebtsDialog(show: Boolean) {
         _showSortDebtsDialog.value = show
     }
-
 
     fun updateFabMenuExpanded(expanded: Boolean) {
         _fabMenuExpanded.value = expanded
