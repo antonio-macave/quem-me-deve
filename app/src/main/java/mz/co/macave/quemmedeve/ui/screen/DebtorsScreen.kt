@@ -1,11 +1,6 @@
 package mz.co.macave.quemmedeve.ui.screen
 
 import android.content.Intent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -180,25 +175,6 @@ fun DebtorItem(
                     },
                     onDeleteClick = {
                         viewModel.deleteDebtor(debtorsWithDebts.debtor)
-                    }
-                )
-            }
-            Spacer(Modifier.height(8.dp))
-            AnimatedVisibility(
-                visible = visible == debtorsWithDebts.debtor.id,
-                enter = fadeIn() + expandVertically(),
-                exit = fadeOut() + shrinkVertically(),
-            ) {
-                BottomButtons(
-                    onPrimaryClick = {
-
-                    },
-                    onSecondaryClick = {
-                        val intent = Intent(context, TransactionsActivity::class.java).apply {
-                            putExtra("debtorId", debtorsWithDebts.debtor.id)
-                            putExtra("debtorName", "${debtorsWithDebts.debtor.name} ${debtorsWithDebts.debtor.surname}")
-                        }
-                        context.startActivity(intent)
                     }
                 )
             }
