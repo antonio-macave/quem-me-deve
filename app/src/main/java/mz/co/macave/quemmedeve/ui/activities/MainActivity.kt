@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -51,6 +50,8 @@ import mz.co.macave.quemmedeve.data.DatabaseProvider
 import mz.co.macave.quemmedeve.data.repository.DebtRepository
 import mz.co.macave.quemmedeve.model.fabMenuItems
 import mz.co.macave.quemmedeve.ui.screen.DebtsList
+import mz.co.macave.quemmedeve.ui.screen.EmptyListScreen
+import mz.co.macave.quemmedeve.ui.screen.LoadingScreen
 import mz.co.macave.quemmedeve.ui.screen.SortByDialog
 import mz.co.macave.quemmedeve.ui.theme.WhoOwesMeTheme
 import mz.co.macave.quemmedeve.viewmodel.MainActivityViewModel
@@ -74,6 +75,7 @@ class MainActivity : ComponentActivity() {
                 val context = LocalContext.current
                 val scope = rememberCoroutineScope()
                 val snackBarHost = remember { SnackbarHostState() }
+                val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
 
                 val launcher = rememberLauncherForActivityResult(
                     contract = ActivityResultContracts.StartActivityForResult()
@@ -122,16 +124,27 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding)
                             .fillMaxHeight()
                     ) {
-                        DebtsList(viewModel, filteredList) { item ->
-                            val intent = Intent(context, TransactionsActivity::class.java).apply {
-                                putExtra("debtId", item.debtId)
-                                putExtra("debtorId", item.debtorId)
-                                putExtra("debtAmount", item.amount)
-                                putExtra("paidAmount", item.paidAmount)
+
+                        when {
+
+                            isLoading  -> LoadingScreen()
+                            debts.isEmpty() -> EmptyListScreen(
+                                description = stringResource(R.string.empty_list, stringResource(R.string.debts_lowercase))
+                            )
+                            else -> {
+                                DebtsList(viewModel, filteredList) { item ->
+                                    val intent =
+                                        Intent(context, TransactionsActivity::class.java).apply {
+                                            putExtra("debtId", item.debtId)
+                                            putExtra("debtorId", item.debtorId)
+                                            putExtra("debtAmount", item.amount)
+                                            putExtra("paidAmount", item.paidAmount)
+                                        }
+                                    context.startActivity(intent)
+                                }
                             }
-                            context.startActivity(intent)
+                            }
                         }
-                    }
                 }
             }
         }
