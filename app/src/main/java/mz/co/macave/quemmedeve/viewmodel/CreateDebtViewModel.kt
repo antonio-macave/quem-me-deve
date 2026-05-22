@@ -63,39 +63,19 @@ class CreateDebtViewModel(
         )
 
 
-    fun areAllFieldsFilled(): Boolean {
-        return false
-    }
-
     fun pickDate(date: Long?) {
         date?.let {
             _dueToDate.value = it
         }
     }
 
-    fun areDebtorDetailsFilled(): Boolean {
-        return name.value.isEmpty() && surname.value.isEmpty()
-    }
-
-
-    fun updateName(newValue: String) {
-        _name.value = newValue
-    }
 
     fun updateDebtId(newValue: Int) {
         debtId = newValue
     }
 
-    fun updateShowNewDebtorFields(newValue: Boolean) {
-        _showNewDebtorFields.value = newValue
-    }
-
     fun updateIsAmountError(newValue: Boolean) {
         _isAmountError.value = newValue
-    }
-
-    fun updateSurname(newValue: String) {
-        _surname.value = newValue
     }
 
     fun updateDescription(newValue: String) {
