@@ -66,20 +66,33 @@ class TransactionsActivityViewModel(
     }
 
     fun deleteTransaction(transaction: Transaction) {
-        val newDebtAmount = if (transaction.type == TransactionType.CREDIT.type) {
-            _debtAmount.value - transaction.amount
-        } else {
-            _debtAmount.value + transaction.amount
+        val newDebtAmount = when (transaction.type) {
+            TransactionType.DEBIT.type ->
+                _debtAmount.value - transaction.amount
+
+            else ->
+                _debtAmount.value
         }
-        val newPaidAmount = if (transaction.type == TransactionType.CREDIT.type) {
-            _paidAmount.value - transaction.amount
-        } else {
-            _paidAmount.value + transaction.amount
+
+        val newPaidAmount = when (transaction.type) {
+            TransactionType.CREDIT.type ->
+                _paidAmount.value - transaction.amount
+            else ->
+                _paidAmount.value
         }
+
         viewModelScope.launch {
-                    debtRepository.savePaidAmount(debtId = debtId.value, paidAmount = newPaidAmount, newDebtAmount = newDebtAmount)
-                    transactionRepository.deleteTransaction(transaction)
-            }
+            debtRepository.savePaidAmount(
+                debtId = debtId.value,
+                paidAmount = newPaidAmount,
+                newDebtAmount = newDebtAmount,
+                newDebtStatus = DebtStatusCalculator.calculate(
+                    paidAmount = newPaidAmount,
+                    debtAmount = newDebtAmount
+                )
+            )
+            transactionRepository.deleteTransaction(transaction)
+        }
     }
 
 }
