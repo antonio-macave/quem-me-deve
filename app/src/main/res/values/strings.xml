@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quem Me Deve</string>
+    <string name="app_name" translatable="false">Quem Me Deve</string>
     <string name="name">Nome</string>
     <string name="surname">Apelido</string>
     <string name="amount">Montante</string>
@@ -42,6 +42,12 @@
     <string name="title_activity_transactions">Transações</string>
     <string name="title_activity_debtors">Clientes</string>
     <string name="all">Todas</string>
+    <string name="loading">A carregar…</string>
+    <string name="nothing_found">Nada encontrado.</string>
+    <string name="empty_list">Ainda não existem %1$s.</string>
+    <string name="debts_lowercase">dívidas</string>
+    <string name="clients_lowercase">clientes</string>
+    <string name="transactions_lowercase">transações</string>
     <string name="sort_by_title">Ordenar por</string>
     <string name="sort_by_option_name">Nome do cliente</string>
     <string name="sort_by_option_date">Prazo de pagamento</string>
