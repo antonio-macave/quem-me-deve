@@ -65,10 +65,11 @@ fun DebtItem(viewModel: MainActivityViewModel, debt: DebtCardItem, onDebtClick: 
     val context = LocalContext.current
     val paidAmount = debt.paidAmount
     val debtAmount = debt.amount
+    val dueTo = debt.dueTo
     val progress = (paidAmount / debtAmount)
         .coerceIn(0.0, 1.0)
         .toFloat()
-    val paymentOverdue = viewModel.isPaymentOverDue(debt.dueTo)
+    val paymentOverdue = viewModel.isPaymentOverDue(dueTo)
 
     var menuExpanded by remember { mutableStateOf(false) }
     var isDeleteConfirmationDialogOpen by remember { mutableStateOf(false) }
