@@ -3,13 +3,14 @@ package mz.co.macave.quemmedeve.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import mz.co.macave.quemmedeve.data.repository.DebtRepository
 import mz.co.macave.quemmedeve.data.repository.TransactionRepository
@@ -29,9 +30,6 @@ class TransactionsActivityViewModel(
     private val _debtAmount = MutableStateFlow(0.0)
     val debtAmount: StateFlow<Double> get() = _debtAmount.asStateFlow()
 
-    private val _isLoading = MutableStateFlow(true)
-    val isLoading: StateFlow<Boolean> get() = _isLoading.asStateFlow()
-
     private val _paidAmount = MutableStateFlow(0.0)
     val paidAmount: StateFlow<Double> get() = _paidAmount
 
@@ -42,14 +40,29 @@ class TransactionsActivityViewModel(
     val debtId: StateFlow<Int> get() = _debtId.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val transactions: Flow<List<Transaction>> = _debtId
-        .flatMapLatest { debtId ->
-            _isLoading.value = true
-            if (debtId == 0) flowOf(emptyList())
-            else transactionRepository.getTransactionsByDebtId(debtId)
-        }.onEach {
-            _isLoading.value = false
-        }
+    val transactions: StateFlow<List<Transaction>> =
+        _debtId
+            .flatMapLatest { debtId ->
+                if (debtId == 0) {
+                    flowOf(emptyList())
+                } else {
+                    transactionRepository.getTransactionsByDebtId(debtId)
+                }
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList()
+            )
+
+    val isLoading: StateFlow<Boolean> =
+        transactions
+            .map { false }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = true
+            )
 
 
     fun updateDate(newDate: String) {
