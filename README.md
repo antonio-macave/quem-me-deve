@@ -1,6 +1,6 @@
-# Who Owes Me
+# Quem Me Deve
 
-**WhoOwesMe** helps you keep your finances organized: record debts, payments, and balances easily. Track who owes you, manage transactions, and maintain a clear history of all financial interactions.
+**Quem Me Deve** helps you keep your finances organized: record debts, payments, and balances easily. Track who owes you, manage transactions, and maintain a clear history of all financial interactions.
 
 ## Features
 
@@ -21,7 +21,7 @@
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/antonio-macave/who-owes-me.git
+    git clone https://github.com/antonio-macave/quem-me-deve.git
     ```
 2. Open the project in Android Studio.
 3. Build and run the app on your device or emulator.
