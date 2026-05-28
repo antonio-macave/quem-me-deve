@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "mz.co.macave.whoowesme"
+    namespace = "mz.co.macave.quemmedeve"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "mz.co.macave.whoowesme"
+        applicationId = "mz.co.macave.quemmedeve"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -31,6 +31,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -42,6 +43,7 @@ android {
 
 dependencies {
 
+    coreLibraryDesugaring(libs.desugar.jdk)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
